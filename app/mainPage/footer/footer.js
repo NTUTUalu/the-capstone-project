@@ -5,13 +5,15 @@ import Link from "next/link";
 export default function Footer() {
     return (
         <>
-        <div className="wrapper">
-            <h1>POULTRY PLUS<span>+</span></h1>
-            <div className="navLinks">
-            <Link href="/" className="text-green-400 text-lg font-semibold max-md:mr-3">   HOME </Link> <Link href="/" className="text-green-400 text-lg font-semibold max-md:mr-3">   ABOUT </Link> <Link href="/" className="text-green-400 text-lg font-semibold max-md:mr-3">   SUPPLIER OPPORTUNITY </Link> <Link href="/" className="text-green-400 text-lg font-semibold max-md:mr-3">        <Image
-                    src="/logo.png"
+        <div className="wrapper flex flex-col items-center mb-8 bg-pink- h-60 justify-evenly border-t border-slate-300">
+            <h1 className="font-semibold tracking-wide">POULTRY PLUS<span className="ml-0.5"><sup>+</sup></span></h1>
+            <div className="navLinks flex text-sm w-fit justify-around items-center tracking-wider font-medium text-slate-600">
+            <Link href="/" className="mr-3 max-md:mr-3">   HOME </Link> <Link href="/" className=" mr-3 max-md:mr-3">   ABOUT </Link> <Link href="/" className=" mr-3  max-md:mr-3">   SUPPLIER OPPORTUNITY </Link> 
+            <Link href="/" className="mr-3 max-md:mr-3">   SIGN IN </Link> 
+            <Link href="/" className=" max-md:mr-3 flex justify-between items-center">        <Image
+                    src="/4.png"
                     alt="Poultry plus logo"
-                    className=""
+                    className="mr-1"
                     width={25}
                     height={25}
                     priority
@@ -19,54 +21,56 @@ export default function Footer() {
            
               
             </div>
-            <div className="socialMedia">
+            <div className="socialMedia flex ">
             <Image
-                    src="/logo.png"
+                    src="/1.png"
                     alt="Poultry plus logo"
-                    className=""
+                    className="mr-2"
                     width={25}
                     height={25}
                     priority
                   />
                        <Image
-                    src="/logo.png"
+                    src="/2.png"
                     alt="Poultry plus logo"
-                    className=""
+                    className="mr-2"
                     width={25}
                     height={25}
                     priority
                   />
                        <Image
-                    src="/logo.png"
+                    src="/3.png"
                     alt="Poultry plus logo"
-                    className=""
+                    className="mr-2"
                     width={25}
                     height={25}
                     priority
                   />
                        <Image
-                    src="/logo.png"
+                    src="/5.png"
                     alt="Poultry plus logo"
-                    className=""
+                    className="mr-2"
                     width={25}
                     height={25}
                     priority
                   />
                        <Image
-                    src="/logo.png"
+                    src="/6.png"
                     alt="Poultry plus logo"
                     className=""
                     width={25}
                     height={25}
                     priority
                   />
+               
             </div>
-            <h3>Copyright      <Image
-                    src="/logo.png"
+            <h3 className="flex text-xs text-slate-400">Copyright      <Image
+                    src="/copyright.png"
                     alt="Poultry plus logo"
-                    className=""
-                    width={25}
-                    height={25}
+                    className="h-4 flex place-self-center
+                    mx-1 opacity-60"
+                    width={15}
+                    height={15}
                     priority
                   /> 2023 All right reserved | African 2-2 Inc.</h3>
         </div>
