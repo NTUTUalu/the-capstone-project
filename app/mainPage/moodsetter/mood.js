@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Mood() {
   return (
     <>
-      <div className="wrapper  flex w-full  h-fit px-20 pt-10 pb-10 bg-pink-300  max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center">
+      <div className="wrapper  flex w-full  h-fit px-20 pt-10 pb-10 bg-pink-3  max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center">
       
         <div className="left flex flex-col bg-blue-4 justify-center w-1/2  max-md:justify-start max-md:mt-0 max-md:pt-7 max-sm:w-full">
           <h4 className="text-amber-500 font-medium mb-1">FRESH PRODUCTS</h4>
