@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import On from "../footer/Onboardingfooter"
 
 export default function Dashboard() {
   return (
@@ -32,6 +33,7 @@ export default function Dashboard() {
 </div>
 <div className="middle bg-amber-4 h-full w-full">
 
+<On/>
 </div>
 <div className="bottom flex justify-center items-center bg-blue- h-16">
 <h3 className="flex w-fit h-fit text-xs bg-pink- text-slate-400">Copyright      <Image
