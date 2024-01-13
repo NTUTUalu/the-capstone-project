@@ -7,21 +7,24 @@ import MoodIcons from "./mainPage/moodIcons/moodIcons"
 import Mission from "./mainPage/Mission/mission";
 import Transportation from "./mainPage/transportation/transportation";
 import Banner from "./mainPage/MainBanner/Banner";
+import Products from "./mainPage/Products/products"
+import Dashboard from "./otherpages/Dashboard/dashboard"
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-     
+     <Dashboard/>
      {/* this is where we will have the nav and the footer wrapping the rest of the content */}
-     <Navigation/>
+     {/* <Navigation/>
      <MoodSetter/>
      <MoodIcons/>
      <Mission/>
      <Banner/>
      <Transportation/>
+     <Products/> */}
      {children}
-     <Footer/>
+     {/* <Footer/> */}
 
       </body>
     </html>
