@@ -1,4 +1,4 @@
-
+"use client";
 import './globals.css'
 import Navigation from "./mainPage/navigation/navigation"
 import Footer from "./mainPage/footer/footer"
@@ -9,12 +9,19 @@ import Transportation from "./mainPage/transportation/transportation";
 import Banner from "./mainPage/MainBanner/Banner";
 import Products from "./mainPage/Products/products"
 import Dashboard from "./otherpages/Dashboard/dashboard"
+// import Login from "./otherpages/login/login"
+import dynamic from "next/dynamic";
+
+const Login = dynamic(() => import("./otherpages/login/login"), {
+  ssr: false,
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-     <Dashboard/>
+     {/* <Dashboard/> */}
+     <Login/>
      {/* this is where we will have the nav and the footer wrapping the rest of the content */}
      {/* <Navigation/>
      <MoodSetter/>
