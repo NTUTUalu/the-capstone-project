@@ -15,13 +15,17 @@ import dynamic from "next/dynamic";
 const Login = dynamic(() => import("./otherpages/login/login"), {
   ssr: false,
 });
+const SignUp = dynamic(() => import("./otherpages/signup/signup"), {
+  ssr: false,
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
      {/* <Dashboard/> */}
-     <Login/>
+     {/* <Login/> */}
+     <SignUp/>
      {/* this is where we will have the nav and the footer wrapping the rest of the content */}
      {/* <Navigation/>
      <MoodSetter/>
