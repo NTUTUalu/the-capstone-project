@@ -6,7 +6,7 @@ import On from "../footer/Onboardingfooter"
 import "./swift"
 
 
-export default function Dashboard() {
+export default function Dashboard2() {
     return (
       <>
       <div className="wrapper flex w-full bg-pink-4 h-screen">
@@ -29,7 +29,11 @@ export default function Dashboard() {
     <li role="presentation" class="flex-grow text-center">
       <Link
         href="#tabs-home03"
+<<<<<<< HEAD
         class="my-2 font-semibold tracking-wide block border-x-0 border-b-2 border-t-0 border-transparent px-2 pb-3.5 pt-4 text-xs uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+=======
+        class="my-2  block tracking-wide border-x-0 border-b-2 border-t-0 border-transparent px-3 pb-3.5 pt-4 text-xs uppercase leading-tight text-neutral-500 font-semibold hover:isolate hover:border-transparent hover:bg-amber-50 focus:isolate focus:border-transparent data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+>>>>>>> origin/main
         data-te-toggle="pill"
         data-te-target="#tabs-home03"
         data-te-nav-active
@@ -41,7 +45,11 @@ export default function Dashboard() {
     <li role="presentation" class="flex-grow text-center">
       <Link
         href="#tabs-profile03"
+<<<<<<< HEAD
         class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-semibold tracking-wide uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+=======
+        class="my-2 block border-x-0 tracking-wide border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+>>>>>>> origin/main
         data-te-toggle="pill"
         data-te-target="#tabs-profile03"
         role="tab"
@@ -63,7 +71,7 @@ export default function Dashboard() {
   
   </div>
   <div className="middle bg-amber-4 h-full w-full">
-  <div class="my-2 bg-blue-400 h-full">
+  <div class="my-2 bg-blue-4 px-4 h-full">
     <div
       class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
       id="tabs-home03"
@@ -77,7 +85,10 @@ export default function Dashboard() {
       id="tabs-profile03"
       role="tabpanel"
       aria-labelledby="tabs-profile-tab03">
-      Tab 2 content
+      <div>
+        <t className="h-fit w-full text-amber-500 font-semibold tracking-wider">Opportunities</t>
+        <div className="bottom bg"></div>
+      </div>
     </div>
     
   </div>

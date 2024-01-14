@@ -8,7 +8,7 @@ import Mission from "./mainPage/Mission/mission";
 import Transportation from "./mainPage/transportation/transportation";
 import Banner from "./mainPage/MainBanner/Banner";
 import Products from "./mainPage/Products/products"
-import Dashboard from "./otherpages/Dashboard/dashboard"
+// import Dashboard from "./otherpages/Dashboard/dashboard"
 // import Login from "./otherpages/login/login"
 import dynamic from "next/dynamic";
 
@@ -22,6 +22,9 @@ const SignUp = dynamic(() => import("./otherpages/signup/signup"), {
 const Dashboard2 = dynamic(() => import("./otherpages/Dashboard/dashboard2"), {
   ssr: false,
 });
+const Dashboard = dynamic(() => import("./otherpages/Dashboard/dashboard2"), {
+  ssr: false,
+});
 
 
 export default function RootLayout({ children }) {
@@ -31,7 +34,7 @@ export default function RootLayout({ children }) {
      {/* <Dashboard/> */}
      {/* <Login/> */}
      {/* <SignUp/> */}
-     <Dashboard2/>
+     <Dashboard/>
      {/* this is where we will have the nav and the footer wrapping the rest of the content */}
      {/* <Navigation/>
      <MoodSetter/>
