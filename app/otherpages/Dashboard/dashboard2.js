@@ -70,54 +70,62 @@ export default function Dashboard2() {
       role="tabpanel"
       aria-labelledby="tabs-home-tab03"
       data-te-tab-active>
+
+
+
       <div className="h-full w-full">
-        <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Opportunities</div>
-        <div className="bottom bg-blue-3 h-full flex">
-          
-          <div className=" flex justify-center items-start w-20 p-2">
-            <div className="bg-blue-900 p-2 rounded-full flex justify-center items-center">
-              <Image
-                src="/cash.png"
-                alt="Vercel Logo"
-                className="dark:invert "
-                width={30}
-                height={30}
-                priority
-              /></div>
-            </div>
-            <div className="bg-yellow-2 w-full pr-10 p-2">
-<h2 className="font-bold tracking-wide text-amber-800">Greenwhich Hotel</h2>
-<h4 className="text-slate-300 text-xs tracking wider opacity-70">5 hours ago</h4>
-<p className="mt-2 text-slate-300 text-base tracking-wide">Attention Agricultural Suppliers,<br/><br/>
-
-Greenwich Hotel, located at [Address], is actively seeking premium agricultural product providers. If your offerings align with our commitment to quality and sustainability, contact our procurement team at [Telephone Number] to explore collaboration opportunities. Elevate the standard of hospitality with us.</p>
-<h2 className="mb-2 mt-1 font-semibold text-slate-500">Request:</h2>
-<div className="ml-8 bg-blue-3 w-80 flex">
-  <div className="w-2/5 bg-yellow-3 flex flex-col">
-  <h3 className="text-slate-300 ">Product type :</h3>
-  <h3 className="text-slate-300 ">Quantity :</h3>
-  <h3 className="text-slate-300 ">Bid :</h3>
-  <h3 className="text-slate-300 ">Deadline :</h3></div>
-  <div className="w-3/5 bg-yellow-1 flex flex-col"><h3 className="text-slate-300 ">Irish Potatoes</h3>
-  <h3 className="text-slate-300  ">45 Kg</h3>
-  <h3 className="text-slate-300  ">RWF 5,000 per kg</h3>
-  <h3 className="text-slate-300 ">22nd February, 5pm</h3></div>
-</div>
-
-            </div>
-          
-        </div>
+        <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Find Transport</div>
+        
+        
       </div>
+
+
     </div>
     <div
       class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
       id="tabs-profile03"
       role="tabpanel"
       aria-labelledby="tabs-profile-tab03">
-      <div>
-        <div className="h-fit w-full text-amber-500 font-semibold tracking-wider">Opportunities</div>
-        <div className="bottom bg"></div>
+      
+      <div className="h-full w-full">
+        <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Opportunities</div>
+        <div className="bottom bg-blue-3 h-full flex">
+          
+          <div className=" flex justify-center items-start w-20 p-2">
+            <div className="bg-blue-950 p-2 rounded-full flex justify-center items-center">
+              <Image
+                src="/bed2.png"
+                alt="Vercel Logo"
+                className="dark:invert "
+                width={25}
+                height={30}
+                priority
+              /></div>
+            </div>
+            <div className="bg-yellow-2 w-full pr-10 p-2">
+<h2 className="font-bold tracking-wide text-amber-900">Greenwhich Hotel</h2>
+<h4 className="text-slate-600 text-xs tracking wider opacity-90">5 hours ago</h4>
+<p className="mt-2 text-slate-500 font-medium text-base tracking-wide">Attention Agricultural Suppliers,<br/><br/>
+
+Greenwich Hotel, located at [Address], is actively seeking premium agricultural product providers. If your offerings align with our commitment to quality and sustainability, contact our procurement team at [Telephone Number] to explore collaboration opportunities. Elevate the standard of hospitality with us.</p>
+<h2 className="mb-2 mt-1 font-semibold text-slate-500">Request:</h2>
+<div className="ml-8 bg-blue-3 w-80 flex">
+  <div className="w-2/5 bg-yellow-3 text-slate-500 flex flex-col">
+  <h3 className="">Product type :</h3>
+  <h3 className=" ">Quantity :</h3>
+  <h3 className=" ">Bid :</h3>
+  <h3 className=" ">Deadline :</h3></div>
+  <div className="w-3/5 bg-yellow-1 text-amber-900 flex flex-col"><h3 className=" ">Irish Potatoes</h3>
+  <h3 className=" ">45 Kg</h3>
+  <h3 className=" ">RWF 5,000 per kg</h3>
+  <h3 className=" ">22nd February, 5pm</h3></div>
+</div>
+
+            </div>
+          
+        </div>
       </div>
+
     </div>
     
   </div>
