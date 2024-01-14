@@ -1,12 +1,90 @@
 "use client";
-
+import { Button } from 'antd';
 import Link from "next/link";
 import Image from "next/image";
 import On from "../footer/Onboardingfooter"
-import "./swift"
-
+import "./swift";
+import 'antd'
+import {Table} from 'antd';
 
 export default function Dashboard2() {
+  
+// const { Table } = antd;
+const columns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    filters: [
+      {
+        text: "Joe",
+        value: "Joe"
+      },
+      {
+        text: "Category 1",
+        value: "Category 1"
+      },
+      {
+        text: "Category 2",
+        value: "Category 2"
+      }
+    ],
+    filterMode: "tree",
+    filterSearch: true,
+    onFilter: (value, record) => record.name.startsWith(value),
+    width: "30%"
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    sorter: (a, b) => a.age - b.age
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+    filters: [
+      {
+        text: "London",
+        value: "London"
+      },
+      {
+        text: "New York",
+        value: "New York"
+      }
+    ],
+    onFilter: (value, record) => record.address.startsWith(value),
+    filterSearch: true,
+    width: "40%"
+  }
+];
+const data = [
+  {
+    key: "1",
+    name: "John Brown",
+    age: 32,
+    address: "New York No. 1 Lake Park"
+  },
+  {
+    key: "2",
+    name: "Jim Green",
+    age: 42,
+    address: "London No. 1 Lake Park"
+  },
+  {
+    key: "3",
+    name: "Joe Black",
+    age: 32,
+    address: "Sydney No. 1 Lake Park"
+  },
+  {
+    key: "4",
+    name: "Jim Red",
+    age: 32,
+    address: "London No. 2 Lake Park"
+  }
+];
+const onChange = (pagination, filters, sorter, extra) => {
+  console.log("params", pagination, filters, sorter, extra);
+};
     return (
       <>
       <div className="wrapper flex w-full bg-pink-4 h-screen">
@@ -75,7 +153,9 @@ export default function Dashboard2() {
 
       <div className="h-full w-full">
         <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Find Transport</div>
-        
+        <div className="bg-pink-100 flex w-full p-x">
+        <Table className="w-full" columns={columns} dataSource={data} onChange={onChange} />
+        </div>
         
       </div>
 

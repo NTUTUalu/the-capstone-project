@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import On from "../footer/Onboardingfooter"
+import On from "../footer/Onboardingfooter";
+
 
 export default function Dashboard() {
   return (
@@ -33,6 +34,7 @@ export default function Dashboard() {
       aria-controls="tabs-home03"
       aria-selected="true"
       >Find Transport</Link>
+      
   </li>
   <li role="presentation" class="flex-grow text-center">
     <Link
