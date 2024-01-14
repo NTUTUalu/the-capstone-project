@@ -153,7 +153,8 @@ const onChange = (pagination, filters, sorter, extra) => {
 
       <div className="h-full w-full">
         <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Find Transport</div>
-        <div className="bg-pink-100 flex w-full p-x">
+        <div className="bg-pink-100 flex flex-col w-full px-20">
+          <h1 className='w-full bg-blue-300 text-center my-8 text-lg tracking-wide font-semibold'>Find Suitable Transportation</h1>
         <Table className="w-full" columns={columns} dataSource={data} onChange={onChange} />
         </div>
         
