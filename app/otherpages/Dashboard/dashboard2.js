@@ -11,7 +11,7 @@ export default function Dashboard2() {
       <>
       <div className="wrapper flex w-full bg-pink-4 h-screen">
   <div className="left h-full w-48 bg-yellow-900 flex flex-col">
-  <div className="top h-full w-full flex flex-col">
+  <div className="top h-full w-full flex flex-col pt-4">
   <Link href="#" className="bg-pink-3 flex justify-center mb-8">
                   <Image
                       src="/logo.png"
@@ -23,42 +23,34 @@ export default function Dashboard2() {
                     />
                 </Link>
                 <ul
-    class="mr-4 flex list-none flex-col flex-wrap pl-0"
-    role="tablist"
-    data-te-nav-ref>
-    <li role="presentation" class="flex-grow text-center">
-      <Link
-        href="#tabs-home03"
-<<<<<<< HEAD
-        class="my-2 font-semibold tracking-wide block border-x-0 border-b-2 border-t-0 border-transparent px-2 pb-3.5 pt-4 text-xs uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-=======
-        class="my-2  block tracking-wide border-x-0 border-b-2 border-t-0 border-transparent px-3 pb-3.5 pt-4 text-xs uppercase leading-tight text-neutral-500 font-semibold hover:isolate hover:border-transparent hover:bg-amber-50 focus:isolate focus:border-transparent data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
->>>>>>> origin/main
-        data-te-toggle="pill"
-        data-te-target="#tabs-home03"
-        data-te-nav-active
-        role="tab"
-        aria-controls="tabs-home03"
-        aria-selected="true"
-        >Find Transport</Link>
-    </li>
-    <li role="presentation" class="flex-grow text-center">
-      <Link
-        href="#tabs-profile03"
-<<<<<<< HEAD
-        class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-semibold tracking-wide uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-=======
-        class="my-2 block border-x-0 tracking-wide border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
->>>>>>> origin/main
-        data-te-toggle="pill"
-        data-te-target="#tabs-profile03"
-        role="tab"
-        aria-controls="tabs-profile03"
-        aria-selected="false"
-        >Opportunities</Link>
-    </li>
-    
-  </ul>
+  class="mr-4 flex list-none flex-col flex-wrap pl-0"
+  role="tablist"
+  data-te-nav-ref>
+  <li role="presentation" class="flex-grow text-center">
+    <Link
+      href="#tabs-home03"
+      class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-2 pb-3.5 pt-4 text-xs uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent font-semibold tracking-wide data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+      data-te-toggle="pill"
+      data-te-target="#tabs-home03"
+      data-te-nav-active
+      role="tab"
+      aria-controls="tabs-home03"
+      aria-selected="true"
+      >Find Transport</Link>
+  </li>
+  <li role="presentation" class="flex-grow text-center">
+    <Link
+      href="#tabs-profile03"
+      class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent font-semibold tracking-wide data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+      data-te-toggle="pill"
+      data-te-target="#tabs-profile03"
+      role="tab"
+      aria-controls="tabs-profile03"
+      aria-selected="false"
+      >Opportunities</Link>
+  </li>
+  
+</ul>            
   </div>
   <div className="bottom flex bg-blue-1 justify-center w-full h-28">
   
