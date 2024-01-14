@@ -65,12 +65,49 @@ export default function Dashboard2() {
   <div className="middle bg-amber-4 h-full w-full">
   <div class="my-2 bg-blue-4 px-4 h-full">
     <div
-      class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+      class="hidden h-full bg-green-4 opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
       id="tabs-home03"
       role="tabpanel"
       aria-labelledby="tabs-home-tab03"
       data-te-tab-active>
-      Tab 1 content
+      <div className="h-full w-full">
+        <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Opportunities</div>
+        <div className="bottom bg-blue-3 h-full flex">
+          
+          <div className=" flex justify-center items-start w-20 p-2">
+            <div className="bg-blue-900 p-2 rounded-full flex justify-center items-center">
+              <Image
+                src="/cash.png"
+                alt="Vercel Logo"
+                className="dark:invert "
+                width={30}
+                height={30}
+                priority
+              /></div>
+            </div>
+            <div className="bg-yellow-2 w-full pr-10 p-2">
+<h2 className="font-bold tracking-wide text-amber-800">Greenwhich Hotel</h2>
+<h4 className="text-slate-300 text-xs tracking wider opacity-70">5 hours ago</h4>
+<p className="mt-2 text-slate-300 text-base tracking-wide">Attention Agricultural Suppliers,<br/><br/>
+
+Greenwich Hotel, located at [Address], is actively seeking premium agricultural product providers. If your offerings align with our commitment to quality and sustainability, contact our procurement team at [Telephone Number] to explore collaboration opportunities. Elevate the standard of hospitality with us.</p>
+<h2 className="mb-2 mt-1 font-semibold text-slate-500">Request:</h2>
+<div className="ml-8 bg-blue-3 w-80 flex">
+  <div className="w-2/5 bg-yellow-3 flex flex-col">
+  <h3 className="text-slate-300 ">Product type :</h3>
+  <h3 className="text-slate-300 ">Quantity :</h3>
+  <h3 className="text-slate-300 ">Bid :</h3>
+  <h3 className="text-slate-300 ">Deadline :</h3></div>
+  <div className="w-3/5 bg-yellow-1 flex flex-col"><h3 className="text-slate-300 ">Irish Potatoes</h3>
+  <h3 className="text-slate-300  ">45 Kg</h3>
+  <h3 className="text-slate-300  ">RWF 5,000 per kg</h3>
+  <h3 className="text-slate-300 ">22nd February, 5pm</h3></div>
+</div>
+
+            </div>
+          
+        </div>
+      </div>
     </div>
     <div
       class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
@@ -78,7 +115,7 @@ export default function Dashboard2() {
       role="tabpanel"
       aria-labelledby="tabs-profile-tab03">
       <div>
-        <t className="h-fit w-full text-amber-500 font-semibold tracking-wider">Opportunities</t>
+        <div className="h-fit w-full text-amber-500 font-semibold tracking-wider">Opportunities</div>
         <div className="bottom bg"></div>
       </div>
     </div>
