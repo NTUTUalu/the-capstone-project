@@ -18,8 +18,35 @@ export default function Dashboard() {
                     priority
                   />
               </Link>
-              <h3 className="bg-pink-6 h-8 w-full flex text-white font-semibold tracking-wide items-center pl-2 border-l-4 border-amber-500">Find Transport</h3>
-              <h3 className="bg-pink-6 h-8 w-full flex text-white font-semibold tracking-wide items-center pl-2 border-l-4 border-amber-500">Opportunities</h3>
+              <ul
+  class="mr-4 flex list-none flex-col flex-wrap pl-0"
+  role="tablist"
+  data-te-nav-ref>
+  <li role="presentation" class="flex-grow text-center">
+    <Link
+      href="#tabs-home03"
+      class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+      data-te-toggle="pill"
+      data-te-target="#tabs-home03"
+      data-te-nav-active
+      role="tab"
+      aria-controls="tabs-home03"
+      aria-selected="true"
+      >Find Transport</Link>
+  </li>
+  <li role="presentation" class="flex-grow text-center">
+    <Link
+      href="#tabs-profile03"
+      class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+      data-te-toggle="pill"
+      data-te-target="#tabs-profile03"
+      role="tab"
+      aria-controls="tabs-profile03"
+      aria-selected="false"
+      >Opportunities</Link>
+  </li>
+  
+</ul>
 </div>
 <div className="bottom flex bg-blue-1 justify-center w-full h-28">
 
@@ -32,7 +59,24 @@ export default function Dashboard() {
 
 </div>
 <div className="middle bg-amber-4 h-full w-full">
-
+<div class="my-2">
+  <div
+    class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+    id="tabs-home03"
+    role="tabpanel"
+    aria-labelledby="tabs-home-tab03"
+    data-te-tab-active>
+    Tab 1 content
+  </div>
+  <div
+    class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+    id="tabs-profile03"
+    role="tabpanel"
+    aria-labelledby="tabs-profile-tab03">
+    Tab 2 content
+  </div>
+  
+</div>
 <On/>
 </div>
 <div className="bottom flex justify-center items-center bg-blue- h-16">

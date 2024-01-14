@@ -3,16 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import On from "../footer/Onboardingfooter"
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 export default function Login() {
-  useEffect(() => {
-    const init = async () => {
-      const { Tooltip, initTE } = await import("tw-elements");
-      initTE({ Tooltip });
-    };
-    init();
-  }, []);
+  // useEffect(() => {
+  //   const init = async () => {
+  //     const { Tooltip, initTE } = await import("tw-elements");
+  //     initTE({ Tooltip });
+  //   };
+  //   init();
+  // }, []);
   return (
     <>
     <div className="wrapper flex w-full bg-blue-5 h-screen">

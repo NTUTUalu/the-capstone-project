@@ -19,13 +19,19 @@ const SignUp = dynamic(() => import("./otherpages/signup/signup"), {
   ssr: false,
 });
 
+const Dashboard2 = dynamic(() => import("./otherpages/Dashboard/dashboard2"), {
+  ssr: false,
+});
+
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
      {/* <Dashboard/> */}
      {/* <Login/> */}
-     <SignUp/>
+     {/* <SignUp/> */}
+     <Dashboard2/>
      {/* this is where we will have the nav and the footer wrapping the rest of the content */}
      {/* <Navigation/>
      <MoodSetter/>
