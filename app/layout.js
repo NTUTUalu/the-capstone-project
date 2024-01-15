@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
      {/* <Dashboard/> */}
      {/* <Login/> */}
      {/* <SignUp/> */}
-     <Dashboard/>
+     {/* <Dashboard/> */}
      {/* this is where we will have the nav and the footer wrapping the rest of the content */}
      {/* <Navigation/>
      <MoodSetter/>
@@ -43,6 +43,7 @@ export default function RootLayout({ children }) {
      <Banner/>
      <Transportation/>
      <Products/> */}
+     <Products/>
      {children}
      {/* <Footer/> */}
 
