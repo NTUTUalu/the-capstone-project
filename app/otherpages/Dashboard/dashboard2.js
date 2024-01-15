@@ -5,86 +5,127 @@ import Image from "next/image";
 import On from "../footer/Onboardingfooter"
 import "./swift";
 import 'antd'
-import {Table} from 'antd';
+import {Table, Pagination} from 'antd';
 
 export default function Dashboard2() {
   
 // const { Table } = antd;
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
-    filters: [
-      {
-        text: "Joe",
-        value: "Joe"
-      },
-      {
-        text: "Category 1",
-        value: "Category 1"
-      },
-      {
-        text: "Category 2",
-        value: "Category 2"
-      }
-    ],
-    filterMode: "tree",
-    filterSearch: true,
-    onFilter: (value, record) => record.name.startsWith(value),
-    width: "30%"
+    title: 'Transport Type',
+    dataIndex: 'transport_Type',
+    sorter: (a, b) => a.transport_Type.localeCompare(b.transport_Type),
+    width: '20%',
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    sorter: (a, b) => a.age - b.age
+    title: 'Delivery Provinces',
+    dataIndex: 'delivery_provinces',
+    filters: [
+      { text: 'Kigali', value: 'Kigali' },
+      { text: 'Nyagatare', value: 'Nyagatare' },
+      { text: 'Bugesera', value: 'Bugesera' },
+      { text: 'Kibuye', value: 'Kibuye' },
+      { text: 'Nyarugenge', value: 'Nyarugenge' },
+      { text: 'Ngoma', value: 'Ngoma' },
+      { text: 'Eastern Province', value: 'Eastern Province' },
+      { text: 'Southern Province', value: 'Southern Province' },
+      { text: 'Western Province', value: 'Western Province' },
+      { text: 'Kicukiro', value: 'Kicukiro' },
+    ],
+    onFilter: (value, record) => record.delivery_provinces.startsWith(value),
+    filterSearch: true,
+    width: '30%',
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    filters: [
-      {
-        text: "London",
-        value: "London"
-      },
-      {
-        text: "New York",
-        value: "New York"
-      }
-    ],
-    onFilter: (value, record) => record.address.startsWith(value),
-    filterSearch: true,
-    width: "40%"
-  }
+    title: 'Name',
+    dataIndex: 'name',
+    sorter: (a, b) => a.name.localeCompare(b.name),
+    width: '30%',
+  },
+  {
+    title: 'Contact',
+    dataIndex: 'contact',
+    width: '20%',
+  },
 ];
+
 const data = [
   {
     key: "1",
+    transport_Type: "Tuk-tuk",
+    delivery_provinces: "Kigali",
     name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park"
+    contact: "+250 780 000 000"
   },
   {
     key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park"
+    transport_Type: "Tuk-tuk",
+    delivery_provinces: "Kigali",
+    name: "John Brown",
+    contact: "+250 780 000 000"
   },
   {
     key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park"
+    transport_Type: "Tuk-tuk",
+    delivery_provinces: "Kigali",
+    name: "John Brown",
+    contact: "+250 780 000 000"
   },
   {
     key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park"
-  }
+    transport_Type: "Motor",
+    delivery_provinces: "Eastern Province",
+    name: "John Brown",
+    contact: "+250 780 000 000"
+  },
+  {
+    key: "5",
+    transport_Type: "Motor",
+    delivery_provinces: "Eastern Province",
+    name: "John Brown",
+    contact: "+250 780 000 000"
+  },
+  {
+    key: "6",
+    transport_Type: "Pick Up Truck",
+    delivery_provinces: "Kicukiro",
+    name: "John Brown",
+    contact: "+250 780 000 000"
+  },
+  {
+    key: "7",
+    transport_Type: "Pick Up Truck",
+    delivery_provinces: "Western Province",
+    name: "John Brown",
+    contact: "+250 780 000 000"
+  },
+  {
+    key: "8",
+    transport_Type: "Pick Up Truck",
+    delivery_provinces: "Nyagatare",
+    name: "John Brown",
+    contact: "+250 780 000 000"
+  },
+  {
+    key: "9",
+    transport_Type: "Motor",
+    delivery_provinces: "Kibuye",
+    name: "John Brown",
+    contact: "+250 780 000 000"
+  },
+  {
+    key: "10",
+    transport_Type: "Motor",
+    delivery_provinces: "Nyarugenge",
+    name: "John Brown",
+    contact: "+250 780 000 000"
+  },
+  
 ];
 const onChange = (pagination, filters, sorter, extra) => {
   console.log("params", pagination, filters, sorter, extra);
 };
+const pageSize = 11;
     return (
       <>
       <div className="wrapper flex w-full bg-pink-4 h-screen">
