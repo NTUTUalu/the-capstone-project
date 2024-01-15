@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "antd": "^5.13.0",
+    "antd": "^5.13.1",
     "next": "14.0.4",
-    "react": "^18",
+    "react": "^18.2.0",
     "react-dom": "^18",
     "react-sticky-box": "^2.0.5",
     "tw-elements": "^1.1.0"

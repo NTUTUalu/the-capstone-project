@@ -54,70 +54,49 @@ const data = [
     key: "1",
     transport_Type: "Tuk-tuk",
     delivery_provinces: "Kigali",
-    name: "John Brown",
+    name: "Ally Brown",
     contact: "+250 780 000 000"
   },
   {
     key: "2",
     transport_Type: "Tuk-tuk",
     delivery_provinces: "Kigali",
-    name: "John Brown",
-    contact: "+250 780 000 000"
-  },
-  {
-    key: "3",
-    transport_Type: "Tuk-tuk",
-    delivery_provinces: "Kigali",
-    name: "John Brown",
+    name: "Brian Aya",
     contact: "+250 780 000 000"
   },
   {
     key: "4",
     transport_Type: "Motor",
     delivery_provinces: "Eastern Province",
-    name: "John Brown",
+    name: "Alice Dier",
     contact: "+250 780 000 000"
   },
   {
     key: "5",
     transport_Type: "Motor",
     delivery_provinces: "Eastern Province",
-    name: "John Brown",
+    name: "Patrick Musa",
     contact: "+250 780 000 000"
   },
   {
     key: "6",
     transport_Type: "Pick Up Truck",
     delivery_provinces: "Kicukiro",
-    name: "John Brown",
-    contact: "+250 780 000 000"
-  },
-  {
-    key: "7",
-    transport_Type: "Pick Up Truck",
-    delivery_provinces: "Western Province",
-    name: "John Brown",
+    name: "Alex Lenza",
     contact: "+250 780 000 000"
   },
   {
     key: "8",
     transport_Type: "Pick Up Truck",
     delivery_provinces: "Nyagatare",
-    name: "John Brown",
+    name: "Ed Naya",
     contact: "+250 780 000 000"
   },
   {
     key: "9",
     transport_Type: "Motor",
     delivery_provinces: "Kibuye",
-    name: "John Brown",
-    contact: "+250 780 000 000"
-  },
-  {
-    key: "10",
-    transport_Type: "Motor",
-    delivery_provinces: "Nyarugenge",
-    name: "John Brown",
+    name: "Raba Africa",
     contact: "+250 780 000 000"
   },
   
@@ -194,8 +173,8 @@ const pageSize = 11;
 
       <div className="h-full w-full">
         <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Find Transport</div>
-        <div className="bg-pink-100 flex flex-col w-full px-20">
-          <h1 className='w-full bg-blue-300 text-center my-8 text-lg tracking-wide font-semibold'>Find Suitable Transportation</h1>
+        <div className=" bg-amber-8 flex flex-col w-full px-20">
+          <h1 className='w-full bg-blue-3 text-center my-8 text-lg tracking-wide font-semibold'>Find Suitable Transportation</h1>
         <Table className="w-full" columns={columns} dataSource={data} onChange={onChange} />
         </div>
         
