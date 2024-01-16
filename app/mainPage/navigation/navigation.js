@@ -1,11 +1,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import x from "../../otherpages/signup/signup"
 
 export default function Navigation() {
     return (
         <>
-        <div className="bg-pink-3 flex px-10 pt-7 pb-5 h-fit border-b border-slate-300">
+        <div className="bg-pink-3 flex px-10 pt-7 w-full pb-5 h-fit border-b border-slate-300">
             <div className="bg-blue-3 w-full flex">
                 <div className="logo">
                 <Link href="#" className="">
@@ -26,7 +27,7 @@ export default function Navigation() {
                     <Link href="/" className=" mr-4 max-md:mr-3">   ABOUT </Link>
                     <Link href="/" className="mr-4 max-md:mr-3">   OUR PRODUCTS </Link>
                     <Link href="/" className=" mr-4 max-md:mr-3">   FIND TRANSPORT </Link>
-                    <Link href="/" className="bg-amber-500 px-7 py-1 rounded-3xl font-semibold max-md:mr-3">   <button className="text-white">SIGN UP</button> </Link>
+                    <Link href="../../otherpages/login/login" className="bg-amber-500 px-7 py-1 rounded-3xl font-semibold max-md:mr-3">   <button className="text-white">SIGN UP</button> </Link>
                     
                     </div>
                 </div>

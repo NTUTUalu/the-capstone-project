@@ -12,7 +12,7 @@ export default function Mood() {
           We are committed to helping businesses gain access to the best Agri-suppliers and  transportation choices
           </h1>
           <p className="w-4/6 text-slate-500 font-normal mb-6 max-md:w-5/6 max-md:font-semibold max-sm:w-full">
-          Sign up or login to access transportation choices or find Agri-suppliers near you.
+          Sign up or <span className="underline-offset-1">login</span> to access transportation choices or find Agri-suppliers near you.
           </p>
           <Link href="/" className="border border-amber-500 px-7 py-1 w-32 rounded-3xl font-normal max-md:mr-3">   <button className="text-black">SIGN UP</button> </Link>
         </div>

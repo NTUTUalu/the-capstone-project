@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import On from "../footer/Onboardingfooter"
 import "./swift";
-import 'antd'
 import {Table, Pagination} from 'antd';
 
 export default function Dashboard2() {

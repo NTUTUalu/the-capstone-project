@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
      <Banner/>
      <Transportation/>
      <Products/> */}
-     <Products/>
+     {/* <Products/> */}
      {children}
      {/* <Footer/> */}
 

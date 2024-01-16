@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import On from "../footer/Onboardingfooter"
+import OnboardingFooter from "../footer/Onboardingfooter"
 
 import { useEffect } from "react";
 
@@ -94,7 +94,7 @@ export default function SignUp() {
 </div>
 
 </div>
-<On/>
+<OnboardingFooter/>
 </div>
     </div>
     </>
