@@ -6,8 +6,9 @@ export default function OnboardingFooter() {
     <>
       <div className="bg-pink-3 flex px- pt- pb- h-fit border-t border-yellow-800">
         <div className="logo flex justify-center items-center pl-5">
-        <h1 className="font-semibold tracking-wide  text-yellow-900 px-1">POULTRY PLUS<span className="ml-0.5"><sup>+</sup></span></h1>
-          <Link href="#" className="">
+          <Link href="/">
+        <h1 className="font-semibold tracking-wide  text-yellow-900 px-1">POULTRY PLUS<span className="ml-0.5"><sup>+</sup></span></h1></Link>
+          <Link href="/" className="">
             <Image
               src="/logo.png"
               alt="Poultry plus logo"

@@ -8,7 +8,7 @@ export default function Navigation() {
       <div className="bg-pink-3 flex px-10 pt-7 w-full pb-5 h-fit border-b border-slate-300">
         <div className="bg-blue-3 w-full flex">
           <div className="logo">
-            <Link href="#" className="">
+            <Link href="/" className="">
               <Image
                 src="/logo.png"
                 alt="Poultry plus logo"
@@ -39,7 +39,7 @@ export default function Navigation() {
                 {" "}
                 OUR PRODUCTS{" "}
               </Link>
-              <Link href="/" className=" mr-4 max-md:mr-3">
+              <Link href="/login" className=" mr-4 max-md:mr-3">
                 {" "}
                 FIND TRANSPORT{" "}
               </Link>
