@@ -8,8 +8,8 @@ export default function Footer() {
         <div className="wrapper flex flex-col items-center mb-8 bg-pink- h-60 justify-evenly border-t w-full bg-pink-4 border-slate-300">
             <h1 className="font-semibold tracking-wide">POULTRY PLUS<span className="ml-0.5"><sup>+</sup></span></h1>
             <div className="navLinks flex text-sm w-fit justify-around items-center tracking-wider font-medium text-slate-600">
-            <Link href="/" className="mr-3 max-md:mr-3">   HOME </Link> <Link href="/" className=" mr-3 max-md:mr-3">   ABOUT </Link> <Link href="/" className=" mr-3  max-md:mr-3">   SUPPLIER OPPORTUNITY </Link> 
-            <Link href="/" className="mr-3 max-md:mr-3">   SIGN IN </Link> 
+            <Link href="/" className="mr-3 max-md:mr-3">   HOME </Link> <Link href="/#about" className=" mr-3 max-md:mr-3">   ABOUT </Link> <Link href="/login" className=" mr-3  max-md:mr-3">   SUPPLIER OPPORTUNITIES </Link> 
+            <Link href="/login" className="mr-3 max-md:mr-3">   SIGN IN </Link> 
             <Link href="/" className=" max-md:mr-3 flex justify-between items-center">        <Image
                     src="/4.png"
                     alt="Poultry plus logo"

@@ -13,6 +13,7 @@ import Products from "./components/Products/products";
 // import Dashboard from "./otherpages/Dashboard/dashboard"
 // import Login from "./otherpages/login/login"
 import dynamic from "next/dynamic";
+import RegisterInterest from  "./registerInterest/page";
 
 const Login = dynamic(() => import("./login/page"), {
   ssr: false,
@@ -27,7 +28,7 @@ const SignUp = dynamic(() => import("./signup/page"), {
 // const Dashboard = dynamic(() => import("./Dashboard/page"), {
 //   ssr: false,
 // });
-import Productdescription from "./components/productDescription/productDescription";
+// import Productdescription from "./components/productDescription/productDescription";
 
 export default function Home() {
   return (
@@ -43,6 +44,7 @@ export default function Home() {
       <Products />
       <Footer />
       {/* <Productdescription/> */}
+     
     </main>
   );
 }

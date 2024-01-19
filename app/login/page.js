@@ -88,7 +88,7 @@ export default function Login() {
                     Forgot Password
                   </Link>
                   <Link
-                    href="#"
+                    href="/"
                     className="text-white text-xs font-normal tracking-wider w-full opacity-30 bg-pink-2 text-center transition duration-150 ease-in-out hover:text-slate-300 focus:text-slate-300 active:text-slate-300 underline"
                   >
                     Home

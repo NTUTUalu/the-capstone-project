@@ -31,11 +31,11 @@ export default function Navigation() {
                 {" "}
                 HOME{" "}
               </Link>
-              <Link href="/" className=" mr-4 max-md:mr-3">
+              <Link href="/#about" className=" mr-4 max-md:mr-3">
                 {" "}
                 ABOUT{" "}
               </Link>
-              <Link href="/" className="mr-4 max-md:mr-3">
+              <Link href="/#products" className="mr-4 max-md:mr-3">
                 {" "}
                 OUR PRODUCTS{" "}
               </Link>

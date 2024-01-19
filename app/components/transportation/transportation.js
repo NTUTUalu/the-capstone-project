@@ -18,7 +18,7 @@ export default function Transportation() {
           </div>
         </div>
         <div className="left flex flex-col bg-blue-4 justify-center w-1/2  max-md:justify-start max-md:mt-0 max-md:pt-7 max-sm:w-full">
-          <h4 className="text-slate-400 font-medium mb-1">
+          <h4 className="text-slate-400 font-medium mb-1" >
             Our Transportation Partnership
           </h4>
           <h1 className="text-slate-950 font-bold text-2xl w-5/6  mb-3 max-md:text-3xl max-md:w-full  max-sm:text-2xl max-sm:w-5/6">

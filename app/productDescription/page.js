@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import Navigation from "../navigation/navigation";
-import Footer from "../footer/footer";
-import MoodSetter from "../moodsetter/mood";
+import Navigation from "../components/navigation/navigation";
+import Footer from "../components/footer/footer";
+import MoodSetter from "../components/moodsetter/mood";
 // import MoodIcons from "./mainPage/moodIcons/moodIcons"
 // import Mission from "./mainPage/Mission/mission";
 // import Transportation from "./mainPage/transportation/transportation";
