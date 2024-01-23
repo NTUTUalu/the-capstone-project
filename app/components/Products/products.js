@@ -3,7 +3,20 @@ import Image from "next/image";
 import { Tabs,TabPane, Card } from 'antd';
 const { Meta } = Card;
 import Card2 from "./pcard"
+
+
 export default function Products() {
+ 
+
+  const showDescription = () =>  {
+return (
+  <>
+  
+  </>
+)
+  };
+
+
   const onChange = (key) => {
     console.log(key);
   };
@@ -13,7 +26,7 @@ export default function Products() {
       label: 'FRESH EGGS',
       children: (
         <div className="flex grid-col-5 gap-8 ">
-          <Card2 key={1} image={"/whiteeggs.png"} title={"WHITE EGGS"}  cost={1000} time={15}/>,
+          <Card2 key={1} onClick={showDescription} image={"/whiteeggs.png"} title={"WHITE EGGS"}  cost={1000} time={15}/>,
           <Card2 key={2} image={"/brown eggs.png"} title={"BROWN EGGS"}  cost={1200} time={20}/>,
                
   
@@ -24,7 +37,7 @@ export default function Products() {
       key: '2',
       label: 'CHICKEN DEALS',
       children: (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center ">
           <Image
       src="/nochicken.png"
       alt="Vercel Logo"
@@ -82,7 +95,7 @@ export default function Products() {
         <h1 className="font-bold text-center text-2xl bg-pink-6 w-full" id="products">Our products</h1>
     </div>
       <div className="wrapper  flex w-full  h-screen px-20 pt-10 pb-10 bg-pink-3  max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center bg-amber-4">
-      <Tabs defaultActiveKey="1" items={items} onChange={onChange} className="bg-pink-3 w-full h-auto " />
+      <Tabs defaultActiveKey="1" items={items} onChange={onChange} className={`bg-pink-3 w-full h-auto `} />
   
 
 
