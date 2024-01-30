@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Tabs,TabPane, Card } from 'antd';
 const { Meta } = Card;
 import Card2 from "./pcard"
+import { useRouter } from 'next/navigation'
+
 
 
 export default function Products() {

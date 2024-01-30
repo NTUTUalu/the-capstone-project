@@ -3,8 +3,9 @@ import Image from "next/image";
 // import { Button } from 'antd';
 import {  Card } from 'antd';
 const { Meta } = Card;
+import { useRouter } from 'next/navigation'
 
-export default function Card2({key, image,title,cost,time}) {
+export default function Card2({key, image,title,cost,time, onClick}) {
   return (
     <>
  
@@ -14,6 +15,7 @@ export default function Card2({key, image,title,cost,time}) {
       src={image}
       alt="Vercel Logo"
       className="dark:invert rounded-3xl w"
+      onClick={onClick}
       width={110}
       height={25}
       priority

@@ -12,15 +12,10 @@ import Banner from "./components/MainBanner/Banner";
 import Products from "./components/Products/products";
 // import Dashboard from "./otherpages/Dashboard/dashboard"
 // import Login from "./otherpages/login/login"
-import dynamic from "next/dynamic";
+
 import RegisterInterest from  "./registerInterest/page";
 
-const Login = dynamic(() => import("./login/page"), {
-  ssr: false,
-});
-const SignUp = dynamic(() => import("./signup/page"), {
-  ssr: false,
-});
+
 
 // const Dashboard2 = dynamic(() => import("./components/Dashboard/dashboard2"), {
 //   ssr: false,

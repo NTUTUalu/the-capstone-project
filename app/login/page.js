@@ -1,20 +1,19 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import On from "../components/onboardingfooter/Onboardingfooter";
-import "./swift"
-
-// import { useEffect } from "react";
+import On from "../components/onboardingfooter/Onboardingfooter"; //importing a 
+// import "./swift"
+// const { Input, initTE } = await import("tw-elements");
+import {Input, initTE} from "tw-elements";
+import { useEffect,useState } from "react";
 
 
 export default function Login() {
-  // useEffect(() => {
-  //   const init = async () => {
-  //     const { Input, initTE } = await import("tw-elements");
-  //     initTE({ Input });
-  //   };
-  //   init();
-  // }, []);
+  initTE({ Input });
+  useEffect(() => {
+    // initTE({ Input });
+  }, []);
+  
   return (
     <>
       <div className="wrapper flex w-full bg-blue-5 h-screen">
@@ -37,7 +36,7 @@ export default function Login() {
                   />
                   <label
                     for="exampleInputEmail2"
-                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-slate-50 peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-white"
+                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-white"
                   >
                     Mobile Number
                   </label>
@@ -53,7 +52,7 @@ export default function Login() {
                   />
                   <label
                     for="exampleInputPassword2"
-                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-slate-50 peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-white"
+                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200  ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-white"
                   >
                     Password
                   </label>

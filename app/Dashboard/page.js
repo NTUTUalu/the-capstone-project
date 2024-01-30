@@ -6,8 +6,14 @@ import On from "../components/onboardingfooter/Onboardingfooter";
 import "./swift";
 import { Table, Pagination } from "antd";
 
+import {useState} from "react";
+
+
+
 export default function Dashboard2() {
-  // const { Table } = antd;
+
+  const [activeTab, setActiveTab] = useState("transport");
+
   const columns = [
     {
       title: "Transport Type",
@@ -123,9 +129,9 @@ export default function Dashboard2() {
               data-te-nav-ref
             >
               <li role="presentation" class="flex-grow text-center">
-                <Link
-                  href="#tabs-home03"
-                  class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-2 pb-3.5 pt-4 text-xs uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent font-semibold tracking-wide data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                <button
+                  onClick={()=>setActiveTab("transport")}
+                  class={`my-2 block border-x-0 border-b-2 border-t-0  px-2 pb-3.5 pt-4 text-xs uppercase leading-tight  hover:isolate     ${activeTab === "transport"? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400" : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"}`}
                   data-te-toggle="pill"
                   data-te-target="#tabs-home03"
                   data-te-nav-active
@@ -134,12 +140,12 @@ export default function Dashboard2() {
                   aria-selected="true"
                 >
                   Find Transport
-                </Link>
+                </button>
               </li>
               <li role="presentation" class="flex-grow text-center">
-                <Link
-                  href="#tabs-profile03"
-                  class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent font-semibold tracking-wide data-[te-nav-active]:border-amber-500 data-[te-nav-active]:text-amber-500 dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                <button
+                  onClick={()=>setActiveTab("opportunities")}
+                  class={`my-2 block border-x-0 border-b-2 border-t-0  px-2 pb-3.5 pt-4 text-xs uppercase leading-tight       ${activeTab === "opportunities"? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400" : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"}`}
                   data-te-toggle="pill"
                   data-te-target="#tabs-profile03"
                   role="tab"
@@ -147,7 +153,7 @@ export default function Dashboard2() {
                   aria-selected="false"
                 >
                   Opportunities
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -167,8 +173,8 @@ export default function Dashboard2() {
           <div className="top bg-white border-b-2 border-slate-100 w-full h-10"></div>
           <div className="middle bg-amber-4 h-full w-full">
             <div class="my-2 bg-blue-4 px-4 h-full">
-              <div
-                class="hidden h-full bg-green-4 opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+              {activeTab==="transport" && <div
+                class="h-full bg-green-4 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                 id="tabs-home03"
                 role="tabpanel"
                 aria-labelledby="tabs-home-tab03"
@@ -190,9 +196,9 @@ export default function Dashboard2() {
                     />
                   </div>
                 </div>
-              </div>
-              <div
-                class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+              </div>}
+              {activeTab==="opportunities" && <div
+                class=" transition-opacity duration-150 ease-linear "
                 id="tabs-profile03"
                 role="tabpanel"
                 aria-labelledby="tabs-profile-tab03"
@@ -253,7 +259,7 @@ export default function Dashboard2() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>}
             </div>
           </div>
           <div className="bottom flex justify-center items-center bg-blue- h-16">
