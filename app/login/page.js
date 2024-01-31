@@ -32,7 +32,7 @@ export default function Login() {
                     class="peer block min-h-[auto] w-full text-amber-400 rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 placeholder-up"
                     id="exampleInputEmail2"
                     aria-describedby="emailHelp"
-                    placeholder="Mobile Number"
+                   
                   />
                   <label
                     for="exampleInputEmail2"
@@ -48,7 +48,7 @@ export default function Login() {
                     type="password"
                     class="peer block min-h-[auto] w-full text-amber-400 rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none border-b border-amber-500  transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="exampleInputPassword2"
-                    placeholder="Password"
+                    
                   />
                   <label
                     for="exampleInputPassword2"
