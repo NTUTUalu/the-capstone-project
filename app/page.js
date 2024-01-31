@@ -13,7 +13,7 @@ import Products from "./components/Products/products";
 // import Dashboard from "./otherpages/Dashboard/dashboard"
 // import Login from "./otherpages/login/login"
 
-import RegisterInterest from  "./registerInterest/page";
+import RegisterInterest from  "./signupSupplier/page";
 
 
 

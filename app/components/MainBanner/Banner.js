@@ -52,7 +52,7 @@ export default function Banner() {
           
           <p className="w-full p-5 bg-pink-4 text-2xl text-center justify-center text-slate-500 font-normal mb-6 max-md:w-5/6 max-md:font-semibold max-sm:w-full">
           Are you a business or farmer eager to supply other enterprises? <Link
-            href="/signup"
+            href="/signupSupplier"
             className=""
           >
            <span className="underline-offset-2 font-semibold decoration-slate-700 underline">Sign up</span>

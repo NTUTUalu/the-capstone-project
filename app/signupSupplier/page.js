@@ -23,7 +23,7 @@ export default function RegisterInterest() {
               <form className="flex flex-col">
                 {/* <!--E-mail input--> */}
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
-                  Register Interest
+                  Sign Up
                 </h3>
                 <div class="relative mb-6 w-60" data-te-input-wrapper-init>
                   <input
@@ -111,7 +111,7 @@ export default function RegisterInterest() {
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
-                  Register Interest
+                  Sign Up
                 </button>
 
                 {/* <!--Remember me checkbox--> */}
