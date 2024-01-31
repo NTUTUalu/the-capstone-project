@@ -73,7 +73,7 @@ export default function Login() {
                 <div class="mb-6 flex items-center justify-between">
                   {/* <!--Forgot password link--> */}
                   <Link
-                    href="/signup"
+                    href="/decision"
                     className="text-white text-xs tracking-wider w-full bg-pink-2 text-right transition duration-150 ease-in-out hover:text-slate-300 focus:text-slate-300 active:text-slate-300"
                   >
                     Sign Up
