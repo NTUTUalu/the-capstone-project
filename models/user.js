@@ -1,14 +1,14 @@
-const { default: Password } = require('antd/es/input/Password');
+// const { default: Password } = require('antd/es/input/Password');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    mobileNumber: Number,
-    password: Mixed,
-    confirmPassword: Mixed,
+    mobileNumber: String,
+    password: String,
+    confirmPassword: String,
 });
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User; 

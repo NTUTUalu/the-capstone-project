@@ -1,8 +1,7 @@
 const express = require('express');
-
 const router = express.Router();
 
-//import model
+//import mongodb user model
 const User = require("../models/user");
 
 //password handler
@@ -19,21 +18,21 @@ router.post("./signupSupplier/page", (req,res) => {
 })
 
 //client signup
-router.post("./signupClient/page", (req,res) => {
+router.post("/signupClient/page", (req,res) => {
     let {mobileNumber, password, confirmPassword} = req.body;
     //next we trim white spaces
-
+    console.log("executed")
     mobileNumber = mobileNumber.trim();
     password = password.trim();
     confirmPassword = confirmPassword.trim();
 
-    if (mobileNumber === "" || password=== "" ||confirmPassword === "" ) {
+    if (mobileNumber == "" || password == "" || confirmPassword == "" ) {
         
-        res.json({
+        return res.status(400).json({
             status: "Failed",
             message: "One of the fields is empty"
         });
-    }else if (mobileNumber.length < 10) {
+    }else if (mobileNumber.length < 9) {
         res.json({
             status: "Failed",
             message: "Invalid mobile number entered"
