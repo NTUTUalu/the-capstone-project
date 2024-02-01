@@ -21,7 +21,7 @@ router.post("./signupSupplier/page", (req,res) => {
 router.post("/signupClient/page", (req,res) => {
     let {mobileNumber, password, confirmPassword} = req.body;
     //next we trim white spaces
-    console.log("executed")
+  
     mobileNumber = mobileNumber.trim();
     password = password.trim();
     confirmPassword = confirmPassword.trim();
@@ -104,8 +104,56 @@ router.post("/signupClient/page", (req,res) => {
 })
 
 //Login
-router.post("./login/page", (req,res) => {
+router.post("/login/page", (req,res) => {
+    let {mobileNumber, password} = req.body;
+    //next we trim white spaces
+  
+    mobileNumber = mobileNumber.trim();
+    password = password.trim();
 
+    if (mobileNumber == "" || password == "") {
+        res.json({
+            status: "Failed",
+            message: "Invalid login credentials"
+        })
+    }else {
+        //if noon of the variables is empty we begin with login process
+        User.find({mobileNumber}).then(data=> {
+            if (data.length) {
+                //if user exists
+                const hashedPassword = data[0].password;
+                bcrypt.compare(password, hashedPassword).then(result => {
+                    if (result) {
+                        res.json({
+                            status: "Success",
+                            message: "Signin successful",
+                            data: data
+                        })
+                    } else {
+                        res.json({
+                            status: "Failed",
+                            message: "Invalid password entered!"
+                        })
+                    }
+                }).catch(err => {
+                    res.json({
+                        status: "Failed",
+                        message: "Ann error occured while comparing passwords"
+                    })
+                })
+            } else {
+                res.json({
+                    status: "Failed",
+                    message: "Invalid credentials entered"
+                })
+            }
+        }).catch(err => {
+            res.json({
+                status: "Failed",
+                message: "An error occured while checking for an existing user"
+            })
+        })
+    }
 })
 
 
