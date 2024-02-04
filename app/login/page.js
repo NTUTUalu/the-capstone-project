@@ -2,17 +2,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import On from "../components/onboardingfooter/Onboardingfooter"; //importing a 
-// import "./swift"
-// const { Input, initTE } = await import("tw-elements");
-import {Input, initTE} from "tw-elements";
+
 import { useEffect,useState } from "react";
 
-
 export default function Login() {
-  initTE({ Input });
-  useEffect(() => {
-    // initTE({ Input });
-  }, []);
+
   
   return (
     <>
@@ -29,7 +23,7 @@ export default function Login() {
                 <div class="relative mb-6" data-te-input-wrapper-init>
                   <input
                     type="email"
-                    class="peer block min-h-[auto] w-full text-amber-400 rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 placeholder-up"
+                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="exampleInputEmail2"
                     aria-describedby="emailHelp"
                    
@@ -73,7 +67,7 @@ export default function Login() {
                 <div class="mb-6 flex items-center justify-between">
                   {/* <!--Forgot password link--> */}
                   <Link
-                    href="/decision"
+                    href="/signupDecision"
                     className="text-white text-xs tracking-wider w-full bg-pink-2 text-right transition duration-150 ease-in-out hover:text-slate-300 focus:text-slate-300 active:text-slate-300"
                   >
                     Sign Up

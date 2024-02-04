@@ -6,54 +6,49 @@ import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
 import { useEffect } from "react";
 
 export default function RegisterInterest() {
-  useEffect(() => {
-    const init = async () => {
-      const { Tooltip, initTE } = await import("tw-elements");
-      initTE({ Tooltip });
-    };
-    init();
-  }, []);
+ 
   return (
     <>
-      <div className="wrapper flex w-full bg-blue-5 h-screen">
+      <div className="wrapper flex w-full bg-blue-5 min-h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
-            {/* <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com -->  */}
-            <div class="block w-fit h-fit rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
-              <form className="flex flex-col">
-                {/* <!--E-mail input--> */}
+            <div class="block w-fit h-fit rounded-3xl min-w-72 bg-yellow-900 my-10 px-6 py-3 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
+              <form className="flex flex-col bg-pink-4">
+            
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
-                  Sign Up
+                  Supplier Signup
                 </h3>
-                <div class="relative mb-6 w-60 text-sm" data-te-input-wrapper-init>
+
+                <div className="bg-yellow-3 grid grid-rows-1 grid-cols-2 gap-4  py-2 w-full h-fit items-center">
+                <div class="relative mb- w-60 text-sm" data-te-input-wrapper-init>
                   <input
                     type="email"
-                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none tracking-wider transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="exampleInputEmail2"
-                    aria-describedby="emailHelp"
+                 
                    
                   />
                   <label
                     for="exampleInputEmail2"
-                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 "
                   >
                     Business Name
                   </label>
                 </div>
-                <div class="relative mb-6 w-60" data-te-input-wrapper-init>
-                  <input
-                    type="email"
-                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleInputEmail2"
-                    aria-describedby="emailHelp"
+                  <div class="relative mb- w-60" data-te-input-wrapper-init>
+                    <input
+                      type="email"
+                      class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                      id="exampleInputEmail2"
                    
-                  />
-                  <label
-                    for="exampleInputEmail2"
-                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                  >
-                    Mobile Number
-                  </label>
+                    />
+                    <label
+                      for="exampleInputEmail2"
+                      class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                    >
+                      Mobile Number
+                    </label>
+                  </div>
                 </div>
 
                 <label className="text-white font-normal text-sm tracking-wider opacity-40 ml-3">
@@ -160,7 +155,7 @@ export default function RegisterInterest() {
                   name="location"
                   className=" flex mb-6 p-1  w-56 bg-slate-200 opacity-40 text-sm ml-3 rounded-md"
                 >
-                  <option value="">Bank Name</option>
+                  <option value="">Select Bank Name</option>
 
                   <option value="volvo">Equity</option>
                   <option value="saab">I & M </option>
@@ -172,9 +167,9 @@ export default function RegisterInterest() {
                 <div class="relative mb-6 w-60" data-te-input-wrapper-init>
                   <input
                     type="email"
-                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="exampleInputEmail2"
-                    aria-describedby="emailHelp"
+                    
                   />
                   <label
                     for="exampleInputEmail2"
@@ -223,7 +218,7 @@ export default function RegisterInterest() {
                   </Link>
                 </div>
 
-                {/* <!--Register link--> */}
+      
               </form>
             </div>
           </div>

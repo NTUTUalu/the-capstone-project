@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
-// import "../login/swift";
+
 
 import { useEffect } from "react";
 
@@ -13,19 +13,18 @@ export default function SignUp() {
       <div className="wrapper flex w-full bg-blue-5 h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
-            {/* <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com -->  */}
+           
             <div class="block max-w-sm rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
               <form>
-                {/* <!--E-mail input--> */}
+                
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
                   Sign Up
                 </h3>
                 <div class="relative mb-6" data-te-input-wrapper-init>
                   <input
                     type="email"
-                    class="peer block min-h-[auto] w-full text-amber-400 rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="exampleInputEmail2"
-                    aria-describedby="emailHelp"
                     
                   />
                   <label
@@ -36,11 +35,11 @@ export default function SignUp() {
                   </label>
                 </div>
 
-                {/* <!--Password input--> */}
+           
                 <div class="relative mb-6" data-te-input-wrapper-init>
                   <input
                     type="password"
-                    class="peer block min-h-[auto] w-full text-amber-400 rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none border-b border-amber-500  transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="exampleInputPassword2"
                   
                   />
@@ -54,7 +53,7 @@ export default function SignUp() {
                 <div class="relative mb-6" data-te-input-wrapper-init>
                   <input
                     type="password"
-                    class="peer block min-h-[auto] w-full text-amber-400 rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none border-b border-amber-500  transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="exampleInputPassword2"
                     
                   />
@@ -66,7 +65,6 @@ export default function SignUp() {
                   </label>
                 </div>
 
-                {/* <!--Sign in button--> */}
 
                 <button
                   type="submit"
@@ -88,7 +86,7 @@ export default function SignUp() {
                   </Link>
                 </div>
 
-                {/* <!--Register link--> */}
+            
               </form>
             </div>
           </div>
