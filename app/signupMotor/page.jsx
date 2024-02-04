@@ -3,9 +3,65 @@ import Link from "next/link";
 import Image from "next/image";
 import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function MotorSignup() {
+
+  const [name, setName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [error, setError] = useState("");
+
+  //we will use router to go to another page after successful signup
+  const router = useRouter();
+  
+  //using useEffect to display error for limited time
+  useEffect(() => {
+    if (error) {
+      const timeoutId = setTimeout(() => {
+        setError("");
+      }, 6000);
+
+      return () => clearTimeout(timeoutId); // Cleanup function
+    }
+  }, [error]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!name || !mobileNumber) {
+      setError("All fields must be filled!");
+
+      return;
+    }
+
+    if (isNaN(mobileNumber)) {
+      setError("Account number should have digits only");
+
+      return;
+    }
+
+    if (mobileNumber.length > 10) {
+      setError("Your Rwandan number should be 9 digits long");
+
+      return;
+    }
+    
+
+    if (mobileNumber.length < 9 && mobileNumber.length > 7) {
+      setError("Enter full Rwandan Number");
+
+      return;
+    }
+
+    try {
+    } catch (error) {}
+  };
+
+  // console.log("mobile number", mobileNumber);
+  //   console.log("password", password);
+  //   console.log("confirmPassword", confirmPassword);
+
  
   return (
     <>
@@ -14,35 +70,39 @@ export default function MotorSignup() {
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
            
             <div class="block w-80 h-fit rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 my-10 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
-              <form className="flex flex-col ">
-                {/* <!--E-mail input--> */}
+              <form className="flex flex-col  "autocomplete="off"
+                onSubmit={handleSubmit} >
+            
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
-                  Transport Sign Up
+                  Register Transport 
                 </h3>
-                <div class="relative mb-6 w-60 text-sm" data-te-input-wrapper-init>
+                <div class="relative mb-6 w-60 text-sm" >
                   <input
-                    type="email"
+                    type="text"
                     class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleInputEmail2"
-                    aria-describedby="emailHelp"
-                   
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    maxlength="12"
+                 
                   />
                   <label
-                    for="exampleInputEmail2"
+                   
                     class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                   >Names
                   </label>
                 </div>
-                <div class="relative mb-6 w-60" data-te-input-wrapper-init>
+                <div class="relative mb-6 w-60 text-sm" >
                   <input
-                    type="email"
+                    type="text"
                     class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleInputEmail2"
-                    aria-describedby="emailHelp"
+                    onChange={(e) => setMobileNumber(e.target.value)}
+                    required
+                    maxlength="12"
+                
                    
                   />
                   <label
-                    for="exampleInputEmail2"
+                    
                     class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                   >
                     Mobile Number
@@ -50,9 +110,9 @@ export default function MotorSignup() {
                 </div>
            
                 <select
-                  id="cars"
+                 
                   default=""
-                  name="location"
+                  
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm rounded-md"
                 >
                   <option value="">Delivery Provinces</option>
@@ -68,9 +128,9 @@ export default function MotorSignup() {
                   <option value="fiat">Kicukiro</option>
                 </select>
                 <select
-                  id="cars"
+                
                   default=""
-                  name="location"
+                
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm  rounded-md"
                 >
                   <option value="">Transport Type</option>
@@ -81,9 +141,9 @@ export default function MotorSignup() {
                 </select>
               
                 <select
-                  id="cars"
+                 
                   default=""
-                  name="location"
+                  
                   placeholder="delivery status"
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 rounded-md text-sm"
                 >
@@ -96,15 +156,19 @@ export default function MotorSignup() {
                 <button
                   type="submit"
                   class="inline-block w-full rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
-                  data-te-ripple-init
-                  data-te-ripple-color="light"
+                 
                 >
                   Sign Up
                 </button>
+                {error && (
+                  <div className="bg-red-500 flex text-wrap text-white w-full max-w-80 tracking-wider text-xs py-1 px-3 rounded-md mt-2">
+                    {error}
+                  </div>
+                )}
 
-                {/* <!--Remember me checkbox--> */}
+             
                 <div class="mb-6 flex items-center justify-between">
-                  {/* <!--Forgot password link--> */}
+                  
                   <Link
                     href="/"
                     className="text-white text-xs tracking-wider w-full bg-pink-2 text-right"

@@ -49,7 +49,7 @@ export default function Decision() {
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
-                  Signup As Customer
+                  PROCEED TO Signup
                 </Link>
                 <p className="text-white text-sm opacity-60 my-1">Or</p>
                 <Link
@@ -58,7 +58,7 @@ export default function Decision() {
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
-                  Signup As Supplier
+                  BECOME A Supplier
                 </Link>
                 </div>
 

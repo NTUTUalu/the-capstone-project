@@ -3,49 +3,110 @@ import Link from "next/link";
 import Image from "next/image";
 import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterInterest() {
- 
+  const [businessName, setBusinessName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [error, setError] = useState("");
+
+  //we will use router to go to another page after successful signup
+  const router = useRouter();
+
+  //using useEffect to display error for limited time
+  useEffect(() => {
+    if (error) {
+      const timeoutId = setTimeout(() => {
+        setError("");
+      }, 6000);
+
+      return () => clearTimeout(timeoutId); // Cleanup function
+    }
+  }, [error]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!mobileNumber || !mobileNumber || !accountNumber) {
+      setError("All fields must be filled!");
+
+      return;
+    }
+
+    if (isNaN(mobileNumber)) {
+      setError("Mobile number is incorrect!");
+
+      return;
+    }
+
+    if (isNaN(accountNumber)) {
+      setError("Account number should have digits only");
+
+      return;
+    }
+
+    if (mobileNumber.length > 10) {
+      setError("Your Rwandan number should be 9 characters long");
+
+      return;
+    }
+
+  
+
+    if (mobileNumber.length < 9 && mobileNumber.length > 7) {
+      setError("Enter full Rwandan Number");
+
+      return;
+    }
+
+    try {
+    } catch (error) {}
+  };
+
   return (
     <>
       <div className="wrapper flex w-full bg-blue-5 min-h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
             <div class="block w-fit h-fit rounded-3xl min-w-72 bg-yellow-900 my-10 px-6 py-3 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
-              <form className="flex flex-col bg-pink-4">
-            
+              <form
+                className="flex flex-col bg-pink-4"
+                autocomplete="off"
+                onSubmit={handleSubmit}
+              >
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
-                  Supplier Signup
+                  Become A Supplier
                 </h3>
 
                 <div className="bg-yellow-3 grid grid-rows-1 grid-cols-2 gap-4  py-2 w-full h-fit items-center">
-                <div class="relative mb- w-60 text-sm" data-te-input-wrapper-init>
-                  <input
-                    type="email"
-                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleInputEmail2"
-                 
-                   
-                  />
-                  <label
-                    for="exampleInputEmail2"
-                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 "
-                  >
-                    Business Name
-                  </label>
-                </div>
-                  <div class="relative mb- w-60" data-te-input-wrapper-init>
+                  <div class="relative mb- w-60 text-sm">
                     <input
-                      type="email"
+                      type="text"
                       class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      id="exampleInputEmail2"
-                   
+                      
+                      onChange={(e) => setBusinessName(e.target.value)}
+                      required
+                      maxlength="35"
                     />
                     <label
                       for="exampleInputEmail2"
-                      class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                      class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 "
                     >
+                      Business Name
+                    </label>
+                  </div>
+                  <div class="relative mb- w-60 text-sm">
+                    <input
+                      type="text"
+                      class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                  
+                      onChange={(e) => setMobileNumber(e.target.value)}
+                      required
+                      maxlength="12"
+                    />
+                    <label class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
                       Mobile Number
                     </label>
                   </div>
@@ -59,8 +120,7 @@ export default function RegisterInterest() {
                   <div className="flex">
                     <input
                       type="checkbox"
-                      id="option1"
-                      name="options[yyy]"
+                    
                       value="option1"
                       className="h-3 w-3 mr-1"
                     />
@@ -69,8 +129,7 @@ export default function RegisterInterest() {
                   <div className="flex w-fit">
                     <input
                       type="checkbox"
-                      id="option2"
-                      name="options[]"
+                     
                       value="option2"
                       className="h-3 w-3 mr-1"
                     />
@@ -80,8 +139,7 @@ export default function RegisterInterest() {
                   <div className="flex ">
                     <input
                       type="checkbox"
-                      id="option2"
-                      name="options[]"
+                    
                       value="option2"
                       className="h-3 w-3 mr-1"
                     />
@@ -90,8 +148,7 @@ export default function RegisterInterest() {
                   <div className="flex">
                     <input
                       type="checkbox"
-                      id="option2"
-                      name="options[]"
+                      
                       value="option2"
                       className="h-3 w-3 mr-1"
                     />
@@ -100,8 +157,7 @@ export default function RegisterInterest() {
                   <div className="flex ">
                     <input
                       type="checkbox"
-                      id="option1"
-                      name="options[yyy]"
+              
                       value="option1"
                       className="h-3 w-3 mr-1"
                     />
@@ -110,8 +166,7 @@ export default function RegisterInterest() {
                   <div className="flex w-fit">
                     <input
                       type="checkbox"
-                      id="option2"
-                      name="options[]"
+                    
                       value="option2"
                       className="h-3 w-3 mr-1"
                     />
@@ -122,7 +177,6 @@ export default function RegisterInterest() {
                     <input
                       type="checkbox"
                       id="option2"
-                      name="options[]"
                       value="option2"
                       className="h-3 w-3 mr-1"
                     />
@@ -131,8 +185,7 @@ export default function RegisterInterest() {
                   <div className="flex">
                     <input
                       type="checkbox"
-                      id="option2"
-                      name="options[]"
+                    
                       value="option2"
                       className="h-3 w-3 mr-1"
                     />
@@ -141,8 +194,7 @@ export default function RegisterInterest() {
                   <div className="flex ">
                     <input
                       type="checkbox"
-                      id="option1"
-                      name="options[yyy]"
+                    
                       value="option1"
                       className="h-3 w-3 mr-1"
                     />
@@ -150,9 +202,9 @@ export default function RegisterInterest() {
                   </div>
                 </div>
                 <select
-                  id="cars"
+             
                   default=""
-                  name="location"
+                 
                   className=" flex mb-6 p-1  w-56 bg-slate-200 opacity-40 text-sm ml-3 rounded-md"
                 >
                   <option value="">Select Bank Name</option>
@@ -164,24 +216,20 @@ export default function RegisterInterest() {
                   <option value="volvo">Eco Bank</option>
                   <option value="saab">Access Bank</option>
                 </select>
-                <div class="relative mb-6 w-60" data-te-input-wrapper-init>
+                <div class="relative mb-6 w-60 text-sm">
                   <input
-                    type="email"
+                    type="text"
                     class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleInputEmail2"
-                    
+                    onChange={(e) => setAccountNumber(e.target.value)}
+                    maxlength="16"
                   />
-                  <label
-                    for="exampleInputEmail2"
-                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                  >
+                  <label class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
                     Account Number
                   </label>
                 </div>
                 <select
-                  id="cars"
+                  
                   default=""
-                  name="location"
                   placeholder="select location"
                   className=" flex mb-6 p-1  w-56 bg-slate-200 opacity-40 ml-3 rounded-md text-sm"
                 >
@@ -201,15 +249,16 @@ export default function RegisterInterest() {
                 <button
                   type="submit"
                   class="inline-block w-56 rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
-                  data-te-ripple-init
-                  data-te-ripple-color="light"
                 >
                   Sign Up
                 </button>
+                {error && (
+                  <div className="bg-red-500 flex text-wrap text-white w-full max-w-80 tracking-wider text-xs py-1 px-3 rounded-md mt-2">
+                    {error}
+                  </div>
+                )}
 
-                {/* <!--Remember me checkbox--> */}
                 <div class="mb-6 flex items-center justify-between">
-                  {/* <!--Forgot password link--> */}
                   <Link
                     href="/"
                     className="text-white text-xs tracking-wider w-full bg-pink-2 text-right"
@@ -217,8 +266,6 @@ export default function RegisterInterest() {
                     Home
                   </Link>
                 </div>
-
-      
               </form>
             </div>
           </div>
