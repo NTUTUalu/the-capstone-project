@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
+// import Image from "next/image";
+// import Link from "next/link";
 import "./globals.css";
 import Navigation from "./components/navigation/navigation";
 import Footer from "./components/footer/footer";

@@ -3,7 +3,6 @@ import { Button } from "antd";
 import Link from "next/link";
 import Image from "next/image";
 import On from "../components/onboardingfooter/Onboardingfooter";
-import "./swift";
 import { Table, Pagination } from "antd";
 
 import {useState} from "react";

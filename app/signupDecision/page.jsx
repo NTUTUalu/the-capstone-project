@@ -4,8 +4,6 @@ import Image from "next/image";
 import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
 
 
-import { useEffect } from "react";
-
 export default function Decision() {
 
   return (
