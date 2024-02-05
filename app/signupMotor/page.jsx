@@ -7,14 +7,16 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function MotorSignup() {
-
   const [name, setName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+  const [province, setProvince] = useState("");
+  const [transportType, setTransportType] = useState("");
+  const [availabilityStatus, setAvailabilityStatus] = useState("");
   const [error, setError] = useState("");
 
   //we will use router to go to another page after successful signup
   const router = useRouter();
-  
+
   //using useEffect to display error for limited time
   useEffect(() => {
     if (error) {
@@ -35,6 +37,12 @@ export default function MotorSignup() {
       return;
     }
 
+    if (!province || !transportType || !availabilityStatus) {
+      setError("One of the drop-down options is not selected!");
+
+      return;
+    }
+
     if (isNaN(mobileNumber)) {
       setError("Account number should have digits only");
 
@@ -46,7 +54,6 @@ export default function MotorSignup() {
 
       return;
     }
-    
 
     if (mobileNumber.length < 9 && mobileNumber.length > 7) {
       setError("Enter full Rwandan Number");
@@ -62,101 +69,91 @@ export default function MotorSignup() {
   //   console.log("password", password);
   //   console.log("confirmPassword", confirmPassword);
 
- 
   return (
     <>
       <div className="wrapper flex w-full bg-blue-5 h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
-           
             <div class="block w-80 h-fit rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 my-10 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
-              <form className="flex flex-col  "autocomplete="off"
-                onSubmit={handleSubmit} >
-            
+              <form
+                className="flex flex-col  "
+                autocomplete="off"
+                onSubmit={handleSubmit}
+              >
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
-                  Register Transport 
+                  Register Transport
                 </h3>
-                <div class="relative mb-6 w-60 text-sm" >
+                <div class="relative mb-6 w-60 text-sm">
                   <input
                     type="text"
                     class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     onChange={(e) => setName(e.target.value)}
                     required
                     maxlength="12"
-                 
                   />
-                  <label
-                   
-                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                  >Names
+                  <label class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
+                    Names
                   </label>
                 </div>
-                <div class="relative mb-6 w-60 text-sm" >
+                <div class="relative mb-6 w-60 text-sm">
                   <input
                     type="text"
                     class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     onChange={(e) => setMobileNumber(e.target.value)}
                     required
                     maxlength="12"
-                
-                   
                   />
-                  <label
-                    
-                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                  >
+                  <label class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
                     Mobile Number
                   </label>
                 </div>
-           
+
                 <select
-                 
+                  value={province}
                   default=""
-                  
+                  onChange={(e) => setProvince(e.target.value)}
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm rounded-md"
                 >
                   <option value="">Delivery Provinces</option>
-                  <option value="volvo">Kigali </option>
-                  <option value="saab">Nyagatare </option>
-                  <option value="fiat">Bugesera</option>
-                  <option value="volvo">Kibuye</option>
-                  <option value="saab">Nyarugenge</option>
-                  <option value="fiat">Ngoma</option>
-                  <option value="volvo">Eastern Province</option>
-                  <option value="saab">Southern Province</option>
-                  <option value="fiat">Western Province</option>
-                  <option value="fiat">Kicukiro</option>
+                  <option value="Kigali">Kigali </option>
+                  <option value="Nyagatare">Nyagatare </option>
+                  <option value="Bugesera">Bugesera</option>
+                  <option value="Kibuye">Kibuye</option>
+                  <option value="Nyarugenge">Nyarugenge</option>
+                  <option value="Ngoma">Ngoma</option>
+                  <option value="Eastern Province">Eastern Province</option>
+                  <option value="Southern Province">Southern Province</option>
+                  <option value="Western Province">Western Province</option>
+                  <option value="Kicukiro">Kicukiro</option>
                 </select>
                 <select
-                
+                  value={transportType}
+                  onChange={(e) => setTransportType(e.target.value)}
                   default=""
-                
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm  rounded-md"
                 >
                   <option value="">Transport Type</option>
 
-                  <option value="volvo">Tuk-Tuk</option>
-                  <option value="saab">Motor </option>
-                  <option value="fiat">Pick-up Truck</option>
+                  <option value="Tuk-Tuk">Tuk-Tuk</option>
+                  <option value="Motor">Motor </option>
+                  <option value="Pick-up Truck">Pick-up Truck</option>
                 </select>
-              
+
                 <select
-                 
+                  value={availabilityStatus}
                   default=""
-                  
+                  onChange={(e) => setAvailabilityStatus(e.target.value)}
                   placeholder="delivery status"
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 rounded-md text-sm"
                 >
-                  <option value="">Delivery Status</option>
+                  <option value="">Availability Status</option>
 
-                  <option value="volvo">Available</option>
-                  <option value="saab">Unavailable</option>
-                  
+                  <option value="Available">Available</option>
+                  <option value="Unavailable">Unavailable</option>
                 </select>
                 <button
                   type="submit"
                   class="inline-block w-full rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
-                 
                 >
                   Sign Up
                 </button>
@@ -166,9 +163,7 @@ export default function MotorSignup() {
                   </div>
                 )}
 
-             
                 <div class="mb-6 flex items-center justify-between">
-                  
                   <Link
                     href="/"
                     className="text-white text-xs tracking-wider w-full bg-pink-2 text-right"
@@ -176,7 +171,6 @@ export default function MotorSignup() {
                     Home
                   </Link>
                 </div>
-
               </form>
             </div>
           </div>

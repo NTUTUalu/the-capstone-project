@@ -10,6 +10,9 @@ export default function RegisterInterest() {
   const [businessName, setBusinessName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [location, setLocation] = useState("");
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [error, setError] = useState("");
 
   //we will use router to go to another page after successful signup
@@ -29,7 +32,7 @@ export default function RegisterInterest() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!mobileNumber || !mobileNumber || !accountNumber) {
+    if (!mobileNumber || !businessName || !accountNumber) {
       setError("All fields must be filled!");
 
       return;
@@ -53,16 +56,36 @@ export default function RegisterInterest() {
       return;
     }
 
-  
-
     if (mobileNumber.length < 9 && mobileNumber.length > 7) {
       setError("Enter full Rwandan Number");
 
       return;
     }
-
+    if (selectedCheckboxes.includes(e)) {
+      // If it's selected, remove it from the array
+      const updatedCheckboxes = selectedCheckboxes.filter(
+        (checkbox) => checkbox !== e
+      );
+      setSelectedCheckboxes(updatedCheckboxes);
+    } else {
+      // If it's not selected, add it to the array
+      setSelectedCheckboxes([...selectedCheckboxes, e]);
+    }
     try {
     } catch (error) {}
+  };
+
+  const handleCheckboxChange = (value) => {
+    if (selectedCheckboxes.includes(value)) {
+      // If it's selected, remove it from the array
+      const updatedCheckboxes = selectedCheckboxes.filter(
+        (checkbox) => checkbox !== value
+      );
+      setSelectedCheckboxes(updatedCheckboxes);
+    } else {
+      // If it's not selected, add it to the array
+      setSelectedCheckboxes([...selectedCheckboxes, value]);
+    }
   };
 
   return (
@@ -85,7 +108,6 @@ export default function RegisterInterest() {
                     <input
                       type="text"
                       class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      
                       onChange={(e) => setBusinessName(e.target.value)}
                       required
                       maxlength="35"
@@ -101,7 +123,6 @@ export default function RegisterInterest() {
                     <input
                       type="text"
                       class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                  
                       onChange={(e) => setMobileNumber(e.target.value)}
                       required
                       maxlength="12"
@@ -120,101 +141,110 @@ export default function RegisterInterest() {
                   <div className="flex">
                     <input
                       type="checkbox"
-                    
-                      value="option1"
+                      value="White Eggs"
+                      checked={selectedCheckboxes.includes("White Eggs")}
+                      onChange={() => handleCheckboxChange("White Eggs")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option1">White Eggs</label>
+                    <label>White Eggs</label>
                   </div>
                   <div className="flex w-fit">
                     <input
                       type="checkbox"
-                     
-                      value="option2"
+                      value="Brown Eggs"
+                      checked={selectedCheckboxes.includes("Brown Eggs")}
+                      onChange={() => handleCheckboxChange("Brown Eggs")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option2">Brown Eggs</label>
+                    <label>Brown Eggs</label>
                   </div>
 
                   <div className="flex ">
                     <input
                       type="checkbox"
-                    
-                      value="option2"
+                      value="Matoke"
+                      checked={selectedCheckboxes.includes("Matoke")}
+                      onChange={() => handleCheckboxChange("Matoke")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option2">Matoke</label>
+                    <label>Matoke</label>
                   </div>
                   <div className="flex">
                     <input
                       type="checkbox"
-                      
-                      value="option2"
+                      value="Cavendish Bananas"
+                      checked={selectedCheckboxes.includes("Cavendish bananas")}
+                      onChange={() => handleCheckboxChange("Cavendish bananas")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option2">Cavendish bananas</label>
+                    <label>Cavendish bananas</label>
                   </div>
                   <div className="flex ">
                     <input
                       type="checkbox"
-              
-                      value="option1"
+                      value="Plantain"
+                      checked={selectedCheckboxes.includes("Plantain")}
+                      onChange={() => handleCheckboxChange("Plantain")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option1">Plantain</label>
+                    <label>Plantain</label>
                   </div>
                   <div className="flex w-fit">
                     <input
                       type="checkbox"
-                    
-                      value="option2"
+                      value="Avocados"
+                      checked={selectedCheckboxes.includes("Avocados")}
+                      onChange={() => handleCheckboxChange("Avocados")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option2">Avocados</label>
+                    <label>Avocados</label>
                   </div>
 
                   <div className="flex">
                     <input
                       type="checkbox"
-                      id="option2"
-                      value="option2"
+                      value="Irish Potatoes"
+                      checked={selectedCheckboxes.includes("Irish Potatoes")}
+                      onChange={() => handleCheckboxChange("Irish Potatoes")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option2">Irish Potatoes</label>
+                    <label>Irish Potatoes</label>
                   </div>
                   <div className="flex">
                     <input
                       type="checkbox"
-                    
-                      value="option2"
+                      value="Sweet Potatoes"
+                      checked={selectedCheckboxes.includes("Sweet Potatoe")}
+                      onChange={() => handleCheckboxChange("Sweet Potatoe")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option2">Sweet Potatoes</label>
+                    <label>Sweet Potatoes</label>
                   </div>
                   <div className="flex ">
                     <input
                       type="checkbox"
-                    
-                      value="option1"
+                      value="Chicken"
+                      checked={selectedCheckboxes.includes("Chicken")}
+                      onChange={() => handleCheckboxChange("Chicken")}
                       className="h-3 w-3 mr-1"
                     />
-                    <label for="option1">Chicken</label>
+                    <label>Chicken</label>
                   </div>
                 </div>
                 <select
-             
+                  value={bankName}
+                  onChange={(e) => setBankName(e.target.value)}
                   default=""
-                 
                   className=" flex mb-6 p-1  w-56 bg-slate-200 opacity-40 text-sm ml-3 rounded-md"
                 >
                   <option value="">Select Bank Name</option>
 
-                  <option value="volvo">Equity</option>
-                  <option value="saab">I & M </option>
-                  <option value="fiat">Bank of Kigali</option>
-                  <option value="audi">KCB</option>
-                  <option value="volvo">Eco Bank</option>
-                  <option value="saab">Access Bank</option>
+                  <option value="Equity">Equity</option>
+                  <option value="I & M">I & M </option>
+                  <option value="Bank of Kigali">Bank of Kigali</option>
+                  <option value="KCB">KCB</option>
+                  <option value="Eco Bank">Eco Bank</option>
+                  <option value="Access Bank">Access Bank</option>
                 </select>
                 <div class="relative mb-6 w-60 text-sm">
                   <input
@@ -228,23 +258,24 @@ export default function RegisterInterest() {
                   </label>
                 </div>
                 <select
-                  
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                   default=""
                   placeholder="select location"
                   className=" flex mb-6 p-1  w-56 bg-slate-200 opacity-40 ml-3 rounded-md text-sm"
                 >
                   <option value="">Select Location</option>
 
-                  <option value="volvo">nyagatare</option>
-                  <option value="saab">bugesera</option>
-                  <option value="fiat">kibuye</option>
-                  <option value="audi">nyarugenge</option>
-                  <option value="volvo">ngoma</option>
-                  <option value="saab">eastern province</option>
-                  <option value="fiat">southern province</option>
-                  <option value="audi">western province</option>
-                  <option value="volvo">kicukiro</option>
-                  <option value="volvo">other</option>
+                  <option value="Kigali">Kigali </option>
+                  <option value="Nyagatare">Nyagatare </option>
+                  <option value="Bugesera">Bugesera</option>
+                  <option value="Kibuye">Kibuye</option>
+                  <option value="Nyarugenge">Nyarugenge</option>
+                  <option value="Ngoma">Ngoma</option>
+                  <option value="Eastern Province">Eastern Province</option>
+                  <option value="Southern Province">Southern Province</option>
+                  <option value="Western Province">Western Province</option>
+                  <option value="Kicukiro">Kicukiro</option>
                 </select>
                 <button
                   type="submit"
