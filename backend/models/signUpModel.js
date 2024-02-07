@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
-const signupSchema = mongoose.Schema(
+const signupSchema = new Schema(
   {
     mobileNumber: {
       type: String,
@@ -20,4 +20,7 @@ const signupSchema = mongoose.Schema(
   }
 );
 
-export const User = mongoose.model("userSignup", signupSchema);
+//the statement below says that 
+ const User = mongoose.models.User || mongoose.model("userSignup", signupSchema);
+ export default User;
+// export const User = mongoose.model("userSignup", signupSchema);
