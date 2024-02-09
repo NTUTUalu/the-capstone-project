@@ -2,9 +2,10 @@
 import mongoose, {Schema} from "mongoose";
 
 
+
 const BecomeSupplierSchema = new Schema(
     {
-      names: {
+      businessName: {
         type: String,
         required: true,
       },

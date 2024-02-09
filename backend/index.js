@@ -63,10 +63,11 @@ app.post("/Signup", async (request, response) => {
 //register Transport
 app.post("/BecomeSupplier", async (request, response) => {
   try {
+   
     if (
-      !request.body.names ||
+      !request.body.businessName ||
       !request.body.mobileNumber ||
-      !request.body.products ||
+      !request.body.selectedCheckboxes ||
       !request.body.bankName ||
       !request.body.accountNumber ||
       !request.body.location
@@ -84,9 +85,9 @@ app.post("/BecomeSupplier", async (request, response) => {
 
     //below we create a variable for your new book
     const newSupplier = {
-      names: request.body.names,
+      businessName: request.body.businessName,
       mobileNumber: request.body.mobileNumber,
-      products: request.body.products,
+      products: request.body.selectedCheckboxes,
       bankName: request.body.bankName,
       accountNumber: request.body.accountNumber,
       location: request.body.location,

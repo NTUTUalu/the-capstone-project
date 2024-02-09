@@ -49,18 +49,17 @@ export default function RegisterInterest() {
 
       return;
     }
-
-    if (mobileNumber.length > 10) {
+    if (selectedCheckboxes.length === 0) {
+      setError("Please select at least one checkbox");
+      return;
+    }
+    if (mobileNumber.length !== 9) {
       setError("Your Rwandan number should be 9 characters long");
 
       return;
     }
 
-    if (mobileNumber.length < 9 && mobileNumber.length > 7) {
-      setError("Enter full Rwandan Number");
-
-      return;
-    }
+ 
     if (selectedCheckboxes.includes(e)) {
       // If it's selected, remove it from the array
       const updatedCheckboxes = selectedCheckboxes.filter(
@@ -71,8 +70,33 @@ export default function RegisterInterest() {
       // If it's not selected, add it to the array
       setSelectedCheckboxes([...selectedCheckboxes, e]);
     }
+  
     try {
-    } catch (error) {}
+      const res = await fetch("http://localhost:8080/BecomeSupplier", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          businessName,
+          mobileNumber,
+          selectedCheckboxes,
+          bankName,
+          accountNumber,
+          location,
+
+        })
+      });
+
+      if(res.ok) {
+        const form = e.target;
+        form.reset();
+      }else{
+        console.log("user registration failed.")
+      }
+    } catch (error) {
+      console.log("error during registration: ", error)
+    }
   };
 
   const handleCheckboxChange = (value) => {
@@ -108,7 +132,7 @@ export default function RegisterInterest() {
                     <input
                       type="text"
                       class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      onChange={(e) => setBusinessName(e.target.value)}
+                      onChange={(e) => setBusinessName(e.target.value.trim())}
                       required
                       maxlength="35"
                     />
@@ -123,7 +147,7 @@ export default function RegisterInterest() {
                     <input
                       type="text"
                       class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      onChange={(e) => setMobileNumber(e.target.value)}
+                      onChange={(e) => setMobileNumber(e.target.value.trim())}
                       required
                       maxlength="12"
                     />
@@ -233,7 +257,7 @@ export default function RegisterInterest() {
                 </div>
                 <select
                   value={bankName}
-                  onChange={(e) => setBankName(e.target.value)}
+                  onChange={(e) => setBankName(e.target.value.trim())}
                   default=""
                   className=" flex mb-6 p-1  w-56 bg-slate-200 opacity-40 text-sm ml-3 rounded-md"
                 >
@@ -250,7 +274,7 @@ export default function RegisterInterest() {
                   <input
                     type="text"
                     class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    onChange={(e) => setAccountNumber(e.target.value)}
+                    onChange={(e) => setAccountNumber(e.target.value.trim())}
                     maxlength="16"
                   />
                   <label class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
@@ -259,7 +283,7 @@ export default function RegisterInterest() {
                 </div>
                 <select
                   value={location}
-                  onChange={(e) => setLocation(e.target.value)}
+                  onChange={(e) => setLocation(e.target.value.trim())}
                   default=""
                   placeholder="select location"
                   className=" flex mb-6 p-1  w-56 bg-slate-200 opacity-40 ml-3 rounded-md text-sm"
