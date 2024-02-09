@@ -17,7 +17,7 @@ app.use(cors());
 
 app.get("/", (request, response) => {
   console.log(request);
-  return response.status(234).send("welcome to Poultry plus");
+  return response.status(234).json("welcome to Poultry plus");
 }); //to help us retrieve data from a server
 
 //Route to saving a new book
