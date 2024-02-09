@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export default function MotorSignup() {
   const [names, setNames] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
-  const [province, setProvince] = useState("");
+  const [deliveryProvinces, setDeliveryProvinces] = useState("");
   const [transportType, setTransportType] = useState("");
   const [availabilityStatus, setAvailabilityStatus] = useState("");
   const [error, setError] = useState("");
@@ -36,7 +36,7 @@ export default function MotorSignup() {
       return;
     }
 
-    if (!province || !transportType || !availabilityStatus) {
+    if (!deliveryProvinces || !transportType || !availabilityStatus) {
       setError("One of the drop-down options is not selected!");
 
       return;
@@ -131,9 +131,9 @@ export default function MotorSignup() {
                 </div>
 
                 <select
-                  value={province}
+                  value={deliveryProvinces}
                   default=""
-                  onChange={(e) => setProvince(e.target.value)}
+                  onChange={(e) => setDeliveryProvinces(e.target.value)}
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm rounded-md"
                 >
                   <option value="">Delivery Provinces</option>

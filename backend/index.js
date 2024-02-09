@@ -128,7 +128,7 @@ app.post("/TransportRegister", async (request, response) => {
       names: request.body.names,
       mobileNumber: request.body.mobileNumber,
       deliveryProvinces: request.body.deliveryProvinces,
-      transportType: request.body.deliveryProvinces,
+      transportType: request.body.transportType,
       availabilityStatus: request.body.availabilityStatus,
     };
 
