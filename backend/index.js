@@ -147,7 +147,7 @@ app.post("/TransportRegister", async (request, response) => {
 
 //create product
 //if a product exists then we will just update
-app.post("/CreateProduct", async (request, response) => {
+app.post("/EditProduct", async (request, response) => {
   try {
     if (
       !request.body.category ||
