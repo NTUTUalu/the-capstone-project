@@ -8,11 +8,11 @@ const productsSchema = new Schema(
         type: String,
         required: true,
       },
-      imageURL: {
+      imageName: {
         type: String,
         required: true,
       },
-      productTitle: {
+      productName: {
         type: String,
         required: true,
       },
@@ -34,5 +34,5 @@ const productsSchema = new Schema(
   
 
 //the statement below says that 
-const Products = mongoose.models.User || mongoose.model("userSignup", BecomeSupplierSchema);
+const Products = mongoose.models.User || mongoose.model("products", productsSchema);
 export default Products;

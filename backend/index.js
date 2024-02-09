@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 //below we import the schema
 import  User  from "./models/signUpModel.js";
 import Transport from "./models/registerMotor.js";
-// import BecomeSupplier from "./models/becomeSupplier.js";
-// import Products from "./models/products.js";
+import BecomeSupplier from "./models/becomeSupplier.js";
+import Products from "./models/products.js";
 import bcrypt from "bcryptjs"
 import cors from "cors";
 
@@ -61,6 +61,48 @@ app.post("/Signup", async (request, response) => {
 });
 
 //register Transport
+app.post("/BecomeSupplier", async (request, response) => {
+  try {
+    if (
+      !request.body.names ||
+      !request.body.mobileNumber ||
+      !request.body.products ||
+      !request.body.bankName ||
+      !request.body.accountNumber ||
+      !request.body.location
+    ) {
+      return response.status(400).send({
+        message:
+          "send all required fields* ",
+      });
+    }
+
+       //below we are going to hash the password
+      //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
+      //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
+
+
+    //below we create a variable for your new book
+    const newSupplier = {
+      names: request.body.names,
+      mobileNumber: request.body.mobileNumber,
+      products: request.body.products,
+      bankName: request.body.bankName,
+      accountNumber: request.body.accountNumber,
+      location: request.body.location,
+    };
+
+   //await user user and check if they exit
+    const suppliers = await BecomeSupplier.create(newSupplier);
+    return response.status(201).send(suppliers);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+
+//register Transport
 app.post("/TransportRegister", async (request, response) => {
   try {
     if (
@@ -101,6 +143,47 @@ app.post("/TransportRegister", async (request, response) => {
 });
 
 
+
+//create product
+//if a product exists then we will just update
+app.post("/CreateProduct", async (request, response) => {
+  try {
+    if (
+      !request.body.category ||
+      !request.body.imageName ||
+      !request.body.productName ||
+      !request.body.itemCost ||
+      !request.body.deliveryTime
+    ) {
+      return response.status(400).send({
+        message:
+          "send all required fields* ",
+      });
+    }
+
+       //below we are going to hash the password
+      //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
+      //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
+
+
+    //below we create a variable for your new book
+    const newProduct = {
+      category: request.body.category,
+      imageName: request.body.imageName,
+      productName: request.body.productName,
+      itemCost: request.body.itemCost,
+      deliveryTime: request.body.deliveryTime,
+    };
+
+   //await user user and check if they exit
+    const products = await Products.create(newProduct);
+
+    return response.status(201).send(products);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
 
 //become a supplier
 

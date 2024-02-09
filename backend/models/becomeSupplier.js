@@ -13,7 +13,7 @@ const BecomeSupplierSchema = new Schema(
         required: true,
       },
       products: {
-        type: String,
+        type: [String],
         required: true,
       },
       bankName: {
@@ -25,20 +25,17 @@ const BecomeSupplierSchema = new Schema(
         type: String,
         required: true,
       },
-      accountNumber: {
+      location: {
         type: String,
         required: true,
       },
-   
     },
     {
       timestamps: true,
     }
   );
   
-  
-  
 
 //the statement below says that 
-const BecomeSupplier = mongoose.models.User || mongoose.model("userSignup", BecomeSupplierSchema);
+const BecomeSupplier = mongoose.models.User || mongoose.model("becomeSupplier", BecomeSupplierSchema);
 export default BecomeSupplier;
