@@ -3,6 +3,9 @@ import { PORT, MONGODB_URL } from "./config.js";
 import mongoose from "mongoose";
 //below we import the schema
 import  User  from "./models/signUpModel.js";
+import Transport from "./models/registerMotor.js";
+// import BecomeSupplier from "./models/becomeSupplier.js";
+// import Products from "./models/products.js";
 import bcrypt from "bcryptjs"
 import cors from "cors";
 
@@ -56,6 +59,51 @@ app.post("/Signup", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+//register Transport
+app.post("/TransportRegister", async (request, response) => {
+  try {
+    if (
+      !request.body.names ||
+      !request.body.mobileNumber ||
+      !request.body.deliveryProvinces ||
+      !request.body.transportType ||
+      !request.body.availabilityStatus 
+    ) {
+      return response.status(400).send({
+        message:
+          "send all required fields* ",
+      });
+    }
+
+       //below we are going to hash the password
+      //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
+      //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
+
+
+    //below we create a variable for your new book
+    const newTransport = {
+      names: request.body.names,
+      mobileNumber: request.body.mobileNumber,
+      deliveryProvinces: request.body.deliveryProvinces,
+      transportType: request.body.deliveryProvinces,
+      availabilityStatus: request.body.availabilityStatus,
+    };
+
+   //await user user and check if they exit
+    const transport = await Transport.create(newTransport);
+
+    return response.status(201).send(transport);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+
+
+//become a supplier
+
 
 //create a route to get all books from a database
 app.post("/login", async (request, response) => {

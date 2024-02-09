@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function MotorSignup() {
-  const [name, setName] = useState("");
+  const [names, setNames] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [province, setProvince] = useState("");
   const [transportType, setTransportType] = useState("");
@@ -31,7 +30,7 @@ export default function MotorSignup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !mobileNumber) {
+    if (!names || !mobileNumber) {
       setError("All fields must be filled!");
 
       return;
@@ -61,8 +60,31 @@ export default function MotorSignup() {
       return;
     }
 
+    
     try {
-    } catch (error) {}
+      const res = await fetch("http://localhost:8080/TransportRegister", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          names,
+          mobileNumber,
+          deliveryProvinces,
+          transportType,
+          availabilityStatus
+        })
+      });
+
+      if(res.ok) {
+        const form = e.target;
+        form.reset();
+      }else{
+        console.log("user registration failed.")
+      }
+    } catch (error) {
+      console.log("error during registration: ", error)
+    }
   };
 
   // console.log("mobile number", mobileNumber);
@@ -87,7 +109,7 @@ export default function MotorSignup() {
                   <input
                     type="text"
                     class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setNames(e.target.value)}
                     required
                     maxlength="12"
                   />
@@ -155,7 +177,7 @@ export default function MotorSignup() {
                   type="submit"
                   class="inline-block w-full rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
                 >
-                  Sign Up
+                    Register
                 </button>
                 {error && (
                   <div className="bg-red-500 flex text-wrap text-white w-full max-w-80 tracking-wider text-xs py-1 px-3 rounded-md mt-2">

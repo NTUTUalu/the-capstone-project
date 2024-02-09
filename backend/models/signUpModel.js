@@ -20,7 +20,7 @@ const signupSchema = new Schema(
   }
 );
 
-const RegisterTransportSchema = new Schema(
+const registerTransportSchema = new Schema(
   {
     names: {
       type: String,
@@ -52,42 +52,10 @@ const RegisterTransportSchema = new Schema(
 
 
 
-const BecomeSupplierSchema = new Schema(
-  {
-    names: {
-      type: String,
-      required: true,
-    },
-    mobileNumber: {
-      type: String,
-      required: true,
-    },
-    products: {
-      type: String,
-      required: true,
-    },
-    bankName: {
-      type: String,
-      required: true,
-    },
-    
-    accountNumber: {
-      type: String,
-      required: true,
-    },
-    accountNumber: {
-      type: String,
-      required: true,
-    },
- 
-  },
-  {
-    timestamps: true,
-  }
-);
 
 
 //the statement below says that 
  const User = mongoose.models.User || mongoose.model("userSignup", signupSchema);
  export default User;
 // export const User = mongoose.model("userSignup", signupSchema);
+
