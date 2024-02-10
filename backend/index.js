@@ -246,6 +246,22 @@ app.put("/EditProduct/:productName", async (request, response) => {
 });
 
 //if a product exists then we will just delete
+app.delete("/EditProduct/:productName", async (request, response) => {
+  try {
+    const { productName } = request.params;
+
+    const result = await Products.findOneAndDelete({ productName: productName });
+
+    if (!result) {
+      return response.status(404).json({ message: "Product not found" });
+    }
+
+    return response.status(200).send({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
 
 //create a route to get all books from a database
 app.post("/login", async (request, response) => {
