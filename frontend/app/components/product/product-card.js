@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
-import { Card, Image } from "antd";
-
+import { Card} from "antd";
+import Image from "next/image";
 const { Meta } = Card;
 
 export default function Card2({ productId, image, title, cost, time }) {
@@ -12,7 +12,7 @@ export default function Card2({ productId, image, title, cost, time }) {
   };
 
   return (
-    <>
+    <>  
       <Card
         onClick={handleNavigation}
         cover={
@@ -23,7 +23,7 @@ export default function Card2({ productId, image, title, cost, time }) {
             width={110}
             height={25}
             priority
-          />
+          />            
         }
       >
         <Meta className="" title="" description="" />
