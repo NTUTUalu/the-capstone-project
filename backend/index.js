@@ -138,7 +138,7 @@ app.post("/TransportRegister", async (request, response) => {
 });
 
 //create product
-app.post("/EditProduct", async (request, response) => {
+app.post("/CreateProduct", async (request, response) => {
   try {
     if (
       !request.body.category ||
@@ -190,7 +190,7 @@ app.get("/EditProduct/:productName", async (request, response) => {
 });
 
  //get all books from the database
- app.get("/EditProduct", async (request, response) => {
+ app.get("/GetProduct", async (request, response) => {
   try {
     const products = await Products.find({});
 
@@ -246,7 +246,7 @@ app.put("/EditProduct/:productName", async (request, response) => {
 });
 
 //if a product exists then we will just delete
-app.delete("/EditProduct/product/:productName", async (request, response) => {
+app.delete("/DeleteProduct/product/:productName", async (request, response) => {
   try {
     const { productName } = request.params;
 
@@ -265,7 +265,7 @@ app.delete("/EditProduct/product/:productName", async (request, response) => {
 
 
 // Delete products by category
-app.delete("/EditProduct/category/:category", async (request, response) => {
+app.delete("/DeleteProduct/category/:category", async (request, response) => {
   try {
     const { category } = request.params;
 

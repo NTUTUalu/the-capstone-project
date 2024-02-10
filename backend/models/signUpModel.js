@@ -20,37 +20,6 @@ const signupSchema = new Schema(
   }
 );
 
-const registerTransportSchema = new Schema(
-  {
-    names: {
-      type: String,
-      required: true,
-    },
-    mobileNumber: {
-      type: String,
-      required: true,
-    },
-    deliveryProvinces: {
-      type: String,
-      required: true,
-    },
-    transportType: {
-      type: String,
-      required: true,
-    },
-    
-    availabilityStatus: {
-      type: String,
-      required: true,
-    },
- 
-  },
-  {
-    timestamps: true,
-  }
-);
-
-
 
 
 

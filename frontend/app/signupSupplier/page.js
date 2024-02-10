@@ -59,7 +59,6 @@ export default function RegisterInterest() {
       return;
     }
 
- 
     if (selectedCheckboxes.includes(e)) {
       // If it's selected, remove it from the array
       const updatedCheckboxes = selectedCheckboxes.filter(
@@ -70,7 +69,7 @@ export default function RegisterInterest() {
       // If it's not selected, add it to the array
       setSelectedCheckboxes([...selectedCheckboxes, e]);
     }
-  
+
     try {
       const res = await fetch("http://localhost:8080/BecomeSupplier", {
         method: "POST",
@@ -84,18 +83,17 @@ export default function RegisterInterest() {
           bankName,
           accountNumber,
           location,
-
-        })
+        }),
       });
 
-      if(res.ok) {
+      if (res.ok) {
         const form = e.target;
         form.reset();
-      }else{
-        console.log("user registration failed.")
+      } else {
+        console.log("user registration failed.");
       }
     } catch (error) {
-      console.log("error during registration: ", error)
+      console.log("error during registration: ", error);
     }
   };
 
@@ -117,7 +115,7 @@ export default function RegisterInterest() {
       <div className="wrapper flex w-full bg-blue-5 min-h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
-            <div class="block w-fit h-fit rounded-3xl min-w-72 bg-yellow-900 my-10 px-6 py-3 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
+            <div className="block w-fit h-fit rounded-3xl min-w-72 bg-yellow-900 my-10 px-6 py-3 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
               <form
                 className="flex flex-col bg-pink-4"
                 autocomplete="off"
@@ -128,30 +126,30 @@ export default function RegisterInterest() {
                 </h3>
 
                 <div className="bg-yellow-3 grid grid-rows-1 grid-cols-2 gap-4  py-2 w-full h-fit items-center">
-                  <div class="relative mb- w-60 text-sm">
+                  <div className="relative mb- w-60 text-sm">
                     <input
                       type="text"
-                      class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                      className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                       onChange={(e) => setBusinessName(e.target.value.trim())}
                       required
-                      maxlength="35"
+                      maxLength="35"
                     />
                     <label
                       for="exampleInputEmail2"
-                      class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 "
+                      className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 "
                     >
                       Business Name
                     </label>
                   </div>
-                  <div class="relative mb- w-60 text-sm">
+                  <div className="relative mb- w-60 text-sm">
                     <input
                       type="text"
-                      class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                      className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                       onChange={(e) => setMobileNumber(e.target.value.trim())}
                       required
-                      maxlength="12"
+                      maxLength="12"
                     />
-                    <label class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
+                    <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
                       Mobile Number
                     </label>
                   </div>
@@ -270,14 +268,14 @@ export default function RegisterInterest() {
                   <option value="Eco Bank">Eco Bank</option>
                   <option value="Access Bank">Access Bank</option>
                 </select>
-                <div class="relative mb-6 w-60 text-sm">
+                <div className="relative mb-6 w-60 text-sm">
                   <input
                     type="text"
-                    class="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     onChange={(e) => setAccountNumber(e.target.value.trim())}
-                    maxlength="16"
+                    maxLength="16"
                   />
-                  <label class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
+                  <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
                     Account Number
                   </label>
                 </div>
@@ -303,7 +301,7 @@ export default function RegisterInterest() {
                 </select>
                 <button
                   type="submit"
-                  class="inline-block w-56 rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
+                  className="inline-block w-56 rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
                 >
                   Sign Up
                 </button>
@@ -313,7 +311,7 @@ export default function RegisterInterest() {
                   </div>
                 )}
 
-                <div class="mb-6 flex items-center justify-between">
+                <div className="mb-6 flex items-center justify-between">
                   <Link
                     href="/"
                     className="text-white text-xs tracking-wider w-full bg-pink-2 text-right"

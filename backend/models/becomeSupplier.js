@@ -2,6 +2,9 @@
 import mongoose, {Schema} from "mongoose";
 
 
+//rename the models and file names to not use verbs or action verbs
+//even schemas
+//models should be singular, product instead of products
 
 const BecomeSupplierSchema = new Schema(
     {
@@ -38,5 +41,6 @@ const BecomeSupplierSchema = new Schema(
   
 
 //the statement below says that 
+//mongoose.model("becomeSupplier",,,, the become supplier can be a verb and is used by mongo db
 const BecomeSupplier = mongoose.models.User || mongoose.model("becomeSupplier", BecomeSupplierSchema);
 export default BecomeSupplier;
