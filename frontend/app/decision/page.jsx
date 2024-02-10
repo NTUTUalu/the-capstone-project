@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
+import OnboardingFooter from "../components/second-Footer/second-Footer";
 
 export default function Decision() {
   return (
@@ -44,7 +44,7 @@ export default function Decision() {
 
                   <div className="flex flex-col items-center">
                     <Link
-                      href="/signupClient"
+                      href="/client"
                       className="inline-block w-56 h-fit rounded-3xl bg-transparent border-2 border-amber-500 px-6 py-1.5 text-sm tracking-wider uppercase leading-normal text-amber-500 font-medium transition duration-150 ease-in-out  "
                       data-te-ripple-init
                       data-te-ripple-color="light"
@@ -53,7 +53,7 @@ export default function Decision() {
                     </Link>
                     <p className="text-white text-sm opacity-60 my-1">Or</p>
                     <Link
-                      href="/signupSupplier"
+                      href="/supplier"
                       className="inline-block w-56 h-fit rounded-3xl mb-2 bg-amber-400 px-6 py-1.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-medium transition duration-150 ease-in-out  "
                       data-te-ripple-init
                       data-te-ripple-color="light"

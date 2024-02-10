@@ -2,10 +2,10 @@ import express from "express";
 import { PORT, MONGODB_URL } from "./config.js";
 import mongoose from "mongoose";
 //below we import the schema
-import User from "./models/signUpModel.js";
-import Transport from "./models/registerMotor.js";
-import BecomeSupplier from "./models/becomeSupplier.js";
-import Products from "./models/products.js";
+import User from "./model/user.js";
+import Transport from "./model/transport.js";
+import Supplier from "./model/supplier.js";
+import Product from "./model/product.js";
 import bcrypt from "bcryptjs";
 import cors from "cors";
 
@@ -91,7 +91,7 @@ app.post("/BecomeSupplier", async (request, response) => {
     };
 
     //await user user and check if they exit
-    const suppliers = await BecomeSupplier.create(newSupplier);
+    const suppliers = await Supplier.create(newSupplier);
     return response.status(201).send(suppliers);
   } catch (error) {
     console.log(error.message);
@@ -166,7 +166,7 @@ app.post("/CreateProduct", async (request, response) => {
     };
 
     //await user user and check if they exit
-    const products = await Products.create(newProduct);
+    const products = await Product.create(newProduct);
 
     return response.status(201).send(products);
   } catch (error) {
@@ -180,7 +180,7 @@ app.post("/CreateProduct", async (request, response) => {
 app.get("/EditProduct/:productName", async (request, response) => {
   try {
     const { productName } = request.params;
-    const products = await Products.find({ productName: productName });
+    const products = await Product.find({ productName: productName });
 
     return response.status(200).json(products);
   } catch (error) {
@@ -192,7 +192,7 @@ app.get("/EditProduct/:productName", async (request, response) => {
  //get all books from the database
  app.get("/GetProduct", async (request, response) => {
   try {
-    const products = await Products.find({});
+    const products = await Product.find({});
 
     return response.status(200).json({
       // count: books.length,
@@ -223,7 +223,7 @@ app.put("/EditProduct/:productName", async (request, response) => {
     };
 
     // Assuming productName is the unique identifier for products
-    const result = await Products.findOneAndUpdate(
+    const result = await Product.findOneAndUpdate(
       { productName: productName },
       updatedData,
       { new: true }
@@ -250,7 +250,7 @@ app.delete("/DeleteProduct/product/:productName", async (request, response) => {
   try {
     const { productName } = request.params;
 
-    const result = await Products.findOneAndDelete({ productName: productName });
+    const result = await Product.findOneAndDelete({ productName: productName });
 
     if (!result) {
       return response.status(404).json({ message: "Product not found" });
@@ -270,7 +270,7 @@ app.delete("/DeleteProduct/category/:category", async (request, response) => {
     const { category } = request.params;
 
     // Delete products that match the given category
-    const result = await Products.deleteMany({ category });
+    const result = await Product.deleteMany({ category });
 
     if (result.deletedCount === 0) {
       return response.status(404).json({ message: "No products found for the specified category" });

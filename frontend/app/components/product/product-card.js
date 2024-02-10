@@ -8,7 +8,7 @@ export default function Card2({ productId, image, title, cost, time }) {
   
   const handleNavigation = async (e) => {
     e.preventDefault();
-    router.push("/productDescription");
+    router.push("/product-Description");
   };
 
   return (

@@ -2,7 +2,7 @@
 import mongoose, {Schema} from "mongoose";
 
 
-const productsSchema = new Schema(
+const productSchema = new Schema(
     {
       category: {
         type: String,
@@ -34,5 +34,5 @@ const productsSchema = new Schema(
   
 
 //the statement below says that 
-const Products = mongoose.models.User || mongoose.model("products", productsSchema);
-export default Products;
+const Product = mongoose.models.User || mongoose.model("products", productSchema);
+export default Product;

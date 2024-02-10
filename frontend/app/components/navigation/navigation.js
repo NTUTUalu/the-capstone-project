@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import x from "../../signupClient/page";
+import x from "../../client/page";
 
 export default function Navigation() {
   return (
@@ -44,7 +44,7 @@ export default function Navigation() {
                 FIND TRANSPORT{" "}
               </Link>
               <Link
-                href="/signupDecision"
+                href="/decision"
                 className="bg-amber-500 px-7 py-1 rounded-3xl font-semibold max-md:mr-3"
               >
                 {" "}

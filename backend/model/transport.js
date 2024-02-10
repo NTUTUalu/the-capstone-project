@@ -1,7 +1,7 @@
 
 import mongoose, {Schema} from "mongoose";
 
-const registerTransportSchema = new Schema(
+const transportSchema = new Schema(
     {
       names: {
         type: String,
@@ -32,5 +32,5 @@ const registerTransportSchema = new Schema(
   );
   
   //the statement below says that 
-const Transport = mongoose.models.User || mongoose.model("transportRegister", registerTransportSchema);
+const Transport = mongoose.models.User || mongoose.model("transportRegister", transportSchema);
 export default Transport;

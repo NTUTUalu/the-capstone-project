@@ -2,7 +2,7 @@
 import { Button } from "antd";
 import Link from "next/link";
 import Image from "next/image";
-import On from "../components/onboardingfooter/Onboardingfooter";
+import On from "../components/second-Footer/second-Footer";
 import { Table, Pagination } from "antd";
 
 import { useState } from "react";

@@ -4,18 +4,16 @@
 import "./globals.css";
 import Navigation from "./components/navigation/navigation";
 import Footer from "./components/footer/footer";
-import MoodSetter from "./components/moodsetter/mood";
-import MoodIcons from "./components/moodIcons/moodIcons";
-import Mission from "./components/Mission/mission";
+import MoodSetter from "./components/mood-setter/mood-setter";
+import MoodIcons from "./components/mood-Icon/mood-Icon";
+import Mission from "./components/mission/mission";
 import Transportation from "./components/transportation/transportation";
-import Banner from "./components/MainBanner/Banner";
-import Products from "./components/Products/products";
+import Banner from "./components/main-Banner/main-Banner";
+import Products from "./components/product/product";
 // import Dashboard from "./otherpages/Dashboard/dashboard"
 // import Login from "./otherpages/login/login"
 
-import RegisterInterest from  "./signupSupplier/page";
-
-
+import RegisterInterest from "./supplier/page";
 
 // const Dashboard2 = dynamic(() => import("./components/Dashboard/dashboard2"), {
 //   ssr: false,
@@ -38,8 +36,6 @@ export default function Home() {
       <Transportation />
       <Products />
       <Footer />
-     
-     
     </main>
   );
 }

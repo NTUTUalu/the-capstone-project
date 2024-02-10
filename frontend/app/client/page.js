@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
+import OnboardingFooter from "../components/second-Footer/second-Footer";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";

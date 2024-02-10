@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import On from "../components/onboardingfooter/Onboardingfooter"; //importing a footer
+import On from "../components/second-Footer/second-Footer"; //importing a footer
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -125,7 +125,7 @@ export default function Login() {
 
                 <div className="mb-6 flex items-center justify-between">
                   <Link
-                    href="/signupDecision"
+                    href="/decision"
                     className="text-white text-xs tracking-wider w-full bg-pink-2 text-right transition duration-150 ease-in-out hover:text-slate-300 focus:text-slate-300 active:text-slate-300"
                   >
                     Sign Up

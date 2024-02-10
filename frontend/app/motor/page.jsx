@@ -1,16 +1,16 @@
 "use client";
 import Link from "next/link";
-import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
+import OnboardingFooter from "../components/second-Footer/second-Footer";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export default function ProductUpdate() {
-  const [category, setCategory] = useState("");
-  const [imageName, setImageName] = useState("");
-  const [productName, setProductName] = useState("");
-  const [itemCost, setItemCost] = useState("");
-  const [deliveryTime, setDeliveryTime] = useState("");
+export default function MotorSignup() {
+  const [names, setNames] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [deliveryProvinces, setDeliveryProvinces] = useState("");
+  const [transportType, setTransportType] = useState("");
+  const [availabilityStatus, setAvailabilityStatus] = useState("");
   const [error, setError] = useState("");
 
   //we will use router to go to another page after successful signup
@@ -27,61 +27,62 @@ export default function ProductUpdate() {
     }
   }, [error]);
 
-  const categoryOptions = {
-    "Fresh Eggs": ["White Eggs", "Brown Eggs"],
-    Bananas: ["Plantain", "Cavendish Bananas", "Matoke"],
-    Avocados: ["Avocados"],
-    Potatoes: ["Irish Potatoes", "Sweet Potatoes"],
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!category || !imageName || !productName || !itemCost || !deliveryTime) {
+    if (!names || !mobileNumber) {
       setError("All fields must be filled!");
+
       return;
     }
 
-    if (!productName || !category || !deliveryTime) {
+    if (!deliveryProvinces || !transportType || !availabilityStatus) {
       setError("One of the drop-down options is not selected!");
 
       return;
     }
 
-    if (isNaN(itemCost)) {
-      setError("Item cost should have digits only");
+    if (isNaN(mobileNumber)) {
+      setError("Account number should have digits only");
+
+      return;
+    }
+
+    if (mobileNumber.length > 10) {
+      setError("Your Rwandan number should be 9 digits long");
+
+      return;
+    }
+
+    if (mobileNumber.length < 9 && mobileNumber.length > 7) {
+      setError("Enter full Rwandan Number");
 
       return;
     }
 
     try {
-      const res = await fetch("http://localhost:8080/CreateProduct", {
+      const res = await fetch("http://localhost:8080/TransportRegister", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          category,
-          imageName,
-          productName,
-          itemCost,
-          deliveryTime,
+          names,
+          mobileNumber,
+          deliveryProvinces,
+          transportType,
+          availabilityStatus,
         }),
       });
 
       if (res.ok) {
-        setCategory("");
-
-        setProductName("");
-
-        setDeliveryTime("");
         const form = e.target;
         form.reset();
       } else {
-        console.log("Product edit has failed.");
+        console.log("user registration failed.");
       }
     } catch (error) {
-      console.log("Could not access the database: ", error);
+      console.log("error during registration: ", error);
     }
   };
 
@@ -97,86 +98,85 @@ export default function ProductUpdate() {
             <div className="block w-80 h-fit rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 my-10 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
               <form
                 className="flex flex-col  "
-                autoComplete="off"
+                autocomplete="off"
                 onSubmit={handleSubmit}
               >
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
-                  Product Update
+                  Register Transport
                 </h3>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value.trim())}
-                  default=""
-                  className="flex mb-6 p-1 w-60 bg-slate-200 opacity-40 text-sm rounded-md"
-                >
-                  <option value="">Product Category</option>
-                  {Object.keys(categoryOptions).map((categoryOption, index) => (
-                    <option key={index} value={categoryOption}>
-                      {categoryOption}
-                    </option>
-                  ))}
-                </select>
-
-                {category && categoryOptions[category] && (
-                  <select
-                    value={productName}
-                    default=""
-                    onChange={(e) => setProductName(e.target.value.trim())}
-                    className="flex mb-6 p-1 w-60 bg-slate-200 opacity-40 rounded-md text-sm"
-                  >
-                    <option value="">Product Name</option>
-                    {categoryOptions[category].map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                )}
-
                 <div className="relative mb-6 w-60 text-sm">
                   <input
                     type="text"
                     className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    onChange={(e) => setImageName(e.target.value.trim())}
+                    onChange={(e) => setNames(e.target.value)}
                     required
                     maxLength="12"
                   />
                   <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
-                    Image Name{" "}
+                    Names
                   </label>
                 </div>
                 <div className="relative mb-6 w-60 text-sm">
                   <input
                     type="text"
                     className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    onChange={(e) => setItemCost(e.target.value.trim())}
+                    onChange={(e) => setMobileNumber(e.target.value)}
                     required
                     maxLength="12"
                   />
                   <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
-                    Item Cost <span className="text-xs font-light">(RWF)</span>
+                    Mobile Number
                   </label>
                 </div>
 
                 <select
-                  value={deliveryTime}
+                  value={deliveryProvinces}
                   default=""
-                  onChange={(e) => setDeliveryTime(e.target.value.trim())}
+                  onChange={(e) => setDeliveryProvinces(e.target.value)}
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm rounded-md"
                 >
-                  <option value="">Delivery time</option>
-                  <option value="20">20 minutes</option>
-                  <option value="30">30 minutes</option>
-                  <option value="40">40 minutes</option>
-                  <option value="50">50 minutes</option>
-                  <option value="60">60+ minutes</option>
+                  <option value="">Delivery Provinces</option>
+                  <option value="Kigali">Kigali </option>
+                  <option value="Nyagatare">Nyagatare </option>
+                  <option value="Bugesera">Bugesera</option>
+                  <option value="Kibuye">Kibuye</option>
+                  <option value="Nyarugenge">Nyarugenge</option>
+                  <option value="Ngoma">Ngoma</option>
+                  <option value="Eastern Province">Eastern Province</option>
+                  <option value="Southern Province">Southern Province</option>
+                  <option value="Western Province">Western Province</option>
+                  <option value="Kicukiro">Kicukiro</option>
+                </select>
+                <select
+                  value={transportType}
+                  onChange={(e) => setTransportType(e.target.value)}
+                  default=""
+                  className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm  rounded-md"
+                >
+                  <option value="">Transport Type</option>
+
+                  <option value="Tuk-Tuk">Tuk-Tuk</option>
+                  <option value="Motor">Motor </option>
+                  <option value="Pick-up Truck">Pick-up Truck</option>
                 </select>
 
+                <select
+                  value={availabilityStatus}
+                  default=""
+                  onChange={(e) => setAvailabilityStatus(e.target.value)}
+                  placeholder="delivery status"
+                  className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 rounded-md text-sm"
+                >
+                  <option value="">Availability Status</option>
+
+                  <option value="Available">Available</option>
+                  <option value="Unavailable">Unavailable</option>
+                </select>
                 <button
                   type="submit"
                   className="inline-block w-full rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
                 >
-                  Finish
+                  Register
                 </button>
                 {error && (
                   <div className="bg-red-500 flex text-wrap text-white w-full max-w-80 tracking-wider text-xs py-1 px-3 rounded-md mt-2">

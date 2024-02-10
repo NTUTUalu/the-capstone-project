@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Tabs, Card } from 'antd';
-import Card2 from "./pcard";
+import Card2 from "./product-card";
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
-
 const { Meta } = Card;
 
 export default function Products() {
@@ -51,10 +50,11 @@ export default function Products() {
             </div>
           ),
         }));
-        // Prepend the "CHICKEN DEALS" tab to the tabs array
-        setTabs([{ 
+        // Insert the "CHICKEN DEALS" tab in the middle
+        const middleIndex = Math.ceil(newTabs.length / 2);
+        newTabs.splice(middleIndex, 0, { 
           key: 'chicken-deals',
-          label: 'Chicken deals',
+          label: 'Chicken Deals',
           children: (
             <div className="flex flex-col justify-center items-center ">
               <Image
@@ -68,7 +68,8 @@ export default function Products() {
               <p>Chicken deals yet to be updated.</p>
             </div>
           ),
-        }, ...newTabs]);
+        });
+        setTabs(newTabs);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -82,7 +83,7 @@ export default function Products() {
         <h1 className="font-bold text-center text-2xl bg-pink-6 w-full" id="products">Our products</h1>
       </div>
       <div className="wrapper flex w-full h-screen px-20 pt-10 pb-10 bg-pink-3 max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1 max-sm:items-center bg-amber-4">
-        <Tabs defaultActiveKey="1" items={tabs} className={`bg-pink-3 w-full h-auto`} />
+        <Tabs defaultActiveKey="Bananas" items={tabs} className={`bg-pink-3 w-full h-auto`} />
       </div>
     </>
   );

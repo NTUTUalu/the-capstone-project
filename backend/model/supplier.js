@@ -6,7 +6,7 @@ import mongoose, {Schema} from "mongoose";
 //even schemas
 //models should be singular, product instead of products
 
-const BecomeSupplierSchema = new Schema(
+const supplierSchema = new Schema(
     {
       businessName: {
         type: String,
@@ -42,5 +42,5 @@ const BecomeSupplierSchema = new Schema(
 
 //the statement below says that 
 //mongoose.model("becomeSupplier",,,, the become supplier can be a verb and is used by mongo db
-const BecomeSupplier = mongoose.models.User || mongoose.model("becomeSupplier", BecomeSupplierSchema);
-export default BecomeSupplier;
+const Supplier = mongoose.models.User || mongoose.model("becomeSupplier", supplierSchema);
+export default Supplier;

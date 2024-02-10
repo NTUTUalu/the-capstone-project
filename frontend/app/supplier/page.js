@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import OnboardingFooter from "../components/onboardingfooter/Onboardingfooter";
+import OnboardingFooter from "../components/second-Footer/second-Footer";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";

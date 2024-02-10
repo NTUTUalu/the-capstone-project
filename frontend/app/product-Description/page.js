@@ -3,20 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import Navigation from "../components/navigation/navigation";
 import Footer from "../components/footer/footer";
-import MoodSetter from "../components/moodsetter/mood";
+import MoodSetter from "../components/mood-setter/mood-setter";
 import { Table, Pagination } from "antd";
 
-export default function Productdescription(key, image,title,cost,time) {
-
+export default function Productdescription(key, image, title, cost, time) {
   return (
     <>
       <Navigation />
       <div className="wrapper  flex w-full mt-10 h-fit px-20 pt-10 pb-10 bg-pink-3 max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center">
-      
-          <div className="left flex bg-pink-7 flex-col  w-1/4   justify-center  max-md:justify-start max-md:mt-0 max-sm:w-4/6">
+        <div className="left flex bg-pink-7 flex-col  w-1/4   justify-center  max-md:justify-start max-md:mt-0 max-sm:w-4/6">
           <div className="flex justify-center  ">
             <Image
-            key={key}
+              key={key}
               src={image}
               alt="Vercel Logo"
               className="dark:invert rounded-3xl w-5/6"
@@ -59,10 +57,8 @@ export default function Productdescription(key, image,title,cost,time) {
             <button className="text-amber-500">FIND SUPPLIER</button>{" "}
           </Link>
         </div>
-         
-        
       </div>
-     
+
       <Footer />
     </>
   );
