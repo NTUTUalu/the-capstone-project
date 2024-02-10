@@ -2,21 +2,19 @@ import express from "express";
 import { PORT, MONGODB_URL } from "./config.js";
 import mongoose from "mongoose";
 //below we import the schema
-import  User  from "./models/signUpModel.js";
+import User from "./models/signUpModel.js";
 import Transport from "./models/registerMotor.js";
 import BecomeSupplier from "./models/becomeSupplier.js";
 import Products from "./models/products.js";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";
 import cors from "cors";
 
 const app = express();
-
 
 //this is middleware for parsing request body
 //it helps us to send data to the server in a json format that can be understood by the browser
 app.use(express.json());
 app.use(cors());
-
 
 app.get("/", (request, response) => {
   console.log(request);
@@ -38,10 +36,12 @@ app.post("/Signup", async (request, response) => {
       });
     }
 
-       //below we are going to hash the password
-       const hashedPassword = await bcrypt.hash(request.body.password, 5);
-       const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
-
+    //below we are going to hash the password
+    const hashedPassword = await bcrypt.hash(request.body.password, 5);
+    const hashedConfirmPassword = await bcrypt.hash(
+      request.body.confirmPassword,
+      5
+    );
 
     //below we create a variable for your new book
     const newUser = {
@@ -50,7 +50,7 @@ app.post("/Signup", async (request, response) => {
       confirmPassword: hashedConfirmPassword,
     };
 
-   //await user user and check if they exit
+    //await user user and check if they exit
     const user = await User.create(newUser);
 
     return response.status(201).send(user);
@@ -63,7 +63,6 @@ app.post("/Signup", async (request, response) => {
 //register Transport
 app.post("/BecomeSupplier", async (request, response) => {
   try {
-   
     if (
       !request.body.businessName ||
       !request.body.mobileNumber ||
@@ -73,15 +72,13 @@ app.post("/BecomeSupplier", async (request, response) => {
       !request.body.location
     ) {
       return response.status(400).send({
-        message:
-          "send all required fields* ",
+        message: "send all required fields* ",
       });
     }
 
-       //below we are going to hash the password
-      //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
-      //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
-
+    //below we are going to hash the password
+    //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
+    //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
 
     //below we create a variable for your new book
     const newSupplier = {
@@ -93,7 +90,7 @@ app.post("/BecomeSupplier", async (request, response) => {
       location: request.body.location,
     };
 
-   //await user user and check if they exit
+    //await user user and check if they exit
     const suppliers = await BecomeSupplier.create(newSupplier);
     return response.status(201).send(suppliers);
   } catch (error) {
@@ -101,7 +98,6 @@ app.post("/BecomeSupplier", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
-
 
 //register Transport
 app.post("/TransportRegister", async (request, response) => {
@@ -111,18 +107,16 @@ app.post("/TransportRegister", async (request, response) => {
       !request.body.mobileNumber ||
       !request.body.deliveryProvinces ||
       !request.body.transportType ||
-      !request.body.availabilityStatus 
+      !request.body.availabilityStatus
     ) {
       return response.status(400).send({
-        message:
-          "send all required fields* ",
+        message: "send all required fields* ",
       });
     }
 
-       //below we are going to hash the password
-      //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
-      //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
-
+    //below we are going to hash the password
+    //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
+    //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
 
     //below we create a variable for your new book
     const newTransport = {
@@ -133,7 +127,7 @@ app.post("/TransportRegister", async (request, response) => {
       availabilityStatus: request.body.availabilityStatus,
     };
 
-   //await user user and check if they exit
+    //await user user and check if they exit
     const transport = await Transport.create(newTransport);
 
     return response.status(201).send(transport);
@@ -143,10 +137,7 @@ app.post("/TransportRegister", async (request, response) => {
   }
 });
 
-
-
 //create product
-//if a product exists then we will just update
 app.post("/EditProduct", async (request, response) => {
   try {
     if (
@@ -157,15 +148,13 @@ app.post("/EditProduct", async (request, response) => {
       !request.body.deliveryTime
     ) {
       return response.status(400).send({
-        message:
-          "send all required fields* ",
+        message: "send all required fields* ",
       });
     }
 
-       //below we are going to hash the password
-      //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
-      //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
-
+    //below we are going to hash the password
+    //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
+    //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
 
     //below we create a variable for your new book
     const newProduct = {
@@ -176,7 +165,7 @@ app.post("/EditProduct", async (request, response) => {
       deliveryTime: request.body.deliveryTime,
     };
 
-   //await user user and check if they exit
+    //await user user and check if they exit
     const products = await Products.create(newProduct);
 
     return response.status(201).send(products);
@@ -186,33 +175,82 @@ app.post("/EditProduct", async (request, response) => {
   }
 });
 
-//become a supplier
+//get products from the database
+// the code below is for getting books in respect to the year they were published
+app.get("/EditProduct/:productName", async (request, response) => {
+  try {
+    const { productName } = request.params;
+    const products = await Products.find({ productName: productName });
 
+    return response.status(200).json(products);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+//if a product exists then we will just update
+
+app.put("/EditProduct/:productName", async (request, response) => {
+  try {
+    // const { productName } = request.params;
+    const { category, imageName, productName, itemCost, deliveryTime } =
+      request.body;
+
+    // Define the updated data object
+    const updatedData = {
+      category: request.body.category,
+      imageName: request.body.imageName,
+      productName: request.body.productName,
+      itemCost: request.body.itemCost,
+      deliveryTime: request.body.deliveryTime,
+      // Add other fields here
+    };
+
+    // Assuming productName is the unique identifier for products
+    const result = await Products.findOneAndUpdate(
+      { productName: productName },
+      updatedData,
+      { new: true }
+    );
+
+    if (!result) {
+      return response.status(404).json({ message: "Product not found" });
+    }
+
+    return response
+      .status(200)
+      .send({
+        message: "Product updated successfully",
+        updatedProduct: result,
+      });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+//if a product exists then we will just delete
 
 //create a route to get all books from a database
 app.post("/login", async (request, response) => {
-  const {mobileNumber, password} = request.body;
+  const { mobileNumber, password } = request.body;
   try {
-    
-    const user = await User.findOne({ mobileNumber});
-    if (
-      !mobileNumber 
-    ) {
+    const user = await User.findOne({ mobileNumber });
+    if (!mobileNumber) {
       return response.status(401).send({
-        message:
-          "user does not exist ",
+        message: "user does not exist ",
       });
     }
 
-    // 
+    //
     const validUser = bcrypt.compare(password, user.password);
-    if (!validUser) return  response.status(401).send({
-      message:
-        "Invalid credentials "
-    });
+    if (!validUser)
+      return response.status(401).send({
+        message: "Invalid credentials ",
+      });
 
-    return response.status(200).json({message: "Login successful"});
-
+    return response.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.log(error.message);
     response.status(500).json({ message: error.message });
@@ -229,11 +267,7 @@ mongoose
     app.listen(PORT, () => {
       console.log(`App is listening to port: ${PORT}`);
     });
-    
   })
   .catch((error) => {
     console.log(error);
   });
-
-
- 

@@ -48,11 +48,11 @@ export default function ProductUpdate() {
       return;
     }
 
-    // if (isNaN(itemCost)) {
-    //   setError("Item cost should have digits only");
+    if (isNaN(itemCost)) {
+      setError("Item cost should have digits only");
 
-    //   return;
-    // }
+      return;
+    }
 
     try {
       const res = await fetch("http://localhost:8080/EditProduct", {
@@ -176,7 +176,7 @@ export default function ProductUpdate() {
                   type="submit"
                   class="inline-block w-full rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
                 >
-                  Register
+                  Finish
                 </button>
                 {error && (
                   <div className="bg-red-500 flex text-wrap text-white w-full max-w-80 tracking-wider text-xs py-1 px-3 rounded-md mt-2">
