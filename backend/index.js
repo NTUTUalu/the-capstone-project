@@ -246,7 +246,7 @@ app.put("/EditProduct/:productName", async (request, response) => {
 });
 
 //if a product exists then we will just delete
-app.delete("/EditProduct/:productName", async (request, response) => {
+app.delete("/EditProduct/product/:productName", async (request, response) => {
   try {
     const { productName } = request.params;
 
@@ -262,6 +262,27 @@ app.delete("/EditProduct/:productName", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+
+// Delete products by category
+app.delete("/EditProduct/category/:category", async (request, response) => {
+  try {
+    const { category } = request.params;
+
+    // Delete products that match the given category
+    const result = await Products.deleteMany({ category });
+
+    if (result.deletedCount === 0) {
+      return response.status(404).json({ message: "No products found for the specified category" });
+    }
+
+    return response.status(200).json({ message: "Products deleted successfully" });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 
 //create a route to get all books from a database
 app.post("/login", async (request, response) => {

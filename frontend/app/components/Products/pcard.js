@@ -12,6 +12,7 @@ export default function Card2({ key, image, title, cost, time }) {
     e.preventDefault();
     router.push("/productDescription");
   }
+  
   return (
     <>
       <Card
