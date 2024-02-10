@@ -189,6 +189,21 @@ app.get("/EditProduct/:productName", async (request, response) => {
   }
 });
 
+ //get all books from the database
+ app.get("/EditProduct", async (request, response) => {
+  try {
+    const products = await Products.find({});
+
+    return response.status(200).json({
+      // count: books.length,
+      data: products,
+    });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 //if a product exists then we will just update
 
 app.put("/EditProduct/:productName", async (request, response) => {
