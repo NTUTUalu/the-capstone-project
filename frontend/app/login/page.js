@@ -45,23 +45,12 @@ export default function Login() {
     }
 
 
-    if (mobileNumber.length >= 10) {
+    if (mobileNumber.length !== 10) {
       setError("Your Rwandan number should be 9 digits long");
 
       return;
     }
-
-    // if (password.length < 8 ) {
-    //   setError("password too short");
-
-    //   return;
-    // }
-
-    if (mobileNumber.length < 9 ) {
-      setError("Mobile Number too short");
-
-      return;
-    }
+ 
 
     try {
       const res = await fetch("http://localhost:8080/login", {
@@ -76,10 +65,17 @@ export default function Login() {
         })
       });
 
+      const gateway = mobileNumber;
+
       if(res.ok) {
         const form = e.target;
         form.reset();
-        router.push("/Dashboard");
+        if(gateway == "0783298700") {
+          router.push("/productsUpdate");
+        } else {
+          router.push("/Dashboard");
+        }
+     
       }else{
         console.log("Login failed");
       }
