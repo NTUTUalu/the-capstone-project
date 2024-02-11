@@ -8,6 +8,7 @@ import Supplier from "./model/supplier.js";
 import Product from "./model/product.js";
 import bcrypt from "bcryptjs";
 import cors from "cors";
+import jwt from "jsonwebtoken"
 
 const app = express();
 
@@ -15,6 +16,30 @@ const app = express();
 //it helps us to send data to the server in a json format that can be understood by the browser
 app.use(express.json());
 app.use(cors());
+import 'dotenv/config';
+
+const verifyToken = (req, res, next) => {
+  // Check for the Authorization header
+  const authHeader = req.headers['authorization'];
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Authorization header is missing' });
+  }
+
+  // Extract the token from the header
+  const token = authHeader.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ error: 'Token is missing' });
+  }
+
+  try {
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET); // Replace 'your_secret_key' with your actual secret key
+    req.user = decoded; // Attach the decoded payload to the request object for further use
+    next(); // Call next middleware
+  } catch (error) {
+    return res.status(403).json({ error: 'Invalid token' });
+  }
+};
 
 app.get("/", (request, response) => {
   console.log(request);
@@ -23,31 +48,26 @@ app.get("/", (request, response) => {
 
 //Route to saving a new book
 // since working with mongoose is an async process we use "async"
-app.post("/Signup", async (request, response) => {
+app.post("/signup", async (request, response) => {
   try {
     if (
       !request.body.mobileNumber ||
       !request.body.password ||
-      !request.body.confirmPassword
+      !request.body.name
     ) {
       return response.status(400).send({
-        message:
-          "send all required fields: mobileNumber, password, confirmPassword ",
+        message: "send all required fields: mobileNumber, password, name ",
       });
     }
 
     //below we are going to hash the password
     const hashedPassword = await bcrypt.hash(request.body.password, 5);
-    const hashedConfirmPassword = await bcrypt.hash(
-      request.body.confirmPassword,
-      5
-    );
 
     //below we create a variable for your new book
     const newUser = {
+      name: request.body.name,
       mobileNumber: request.body.mobileNumber,
       password: hashedPassword,
-      confirmPassword: hashedConfirmPassword,
     };
 
     //await user user and check if they exit
@@ -61,11 +81,11 @@ app.post("/Signup", async (request, response) => {
 });
 
 //register Transport
-app.post("/BecomeSupplier", async (request, response) => {
+//checking if we are logged in or not
+app.post("/become-supplier",verifyToken, async (request, response) => {
   try {
     if (
       !request.body.businessName ||
-      !request.body.mobileNumber ||
       !request.body.selectedCheckboxes ||
       !request.body.bankName ||
       !request.body.accountNumber ||
@@ -83,11 +103,11 @@ app.post("/BecomeSupplier", async (request, response) => {
     //below we create a variable for your new book
     const newSupplier = {
       businessName: request.body.businessName,
-      mobileNumber: request.body.mobileNumber,
       products: request.body.selectedCheckboxes,
       bankName: request.body.bankName,
       accountNumber: request.body.accountNumber,
       location: request.body.location,
+      userId: new mongoose.Types.ObjectId(request.user.id)
     };
 
     //await user user and check if they exit
@@ -100,12 +120,10 @@ app.post("/BecomeSupplier", async (request, response) => {
 });
 
 //register Transport
-app.post("/TransportRegister", async (request, response) => {
+app.post("/become-transporter",verifyToken, async (request, response) => {
   try {
     if (
-      !request.body.names ||
-      !request.body.mobileNumber ||
-      !request.body.deliveryProvinces ||
+      !request.body.deliveryProvince ||
       !request.body.transportType ||
       !request.body.availabilityStatus
     ) {
@@ -120,11 +138,10 @@ app.post("/TransportRegister", async (request, response) => {
 
     //below we create a variable for your new book
     const newTransport = {
-      names: request.body.names,
-      mobileNumber: request.body.mobileNumber,
-      deliveryProvinces: request.body.deliveryProvinces,
+      deliveryProvince: request.body.deliveryProvince,
       transportType: request.body.transportType,
       availabilityStatus: request.body.availabilityStatus,
+      userId: new mongoose.Types.ObjectId(request.user.id)
     };
 
     //await user user and check if they exit
@@ -177,10 +194,12 @@ app.post("/CreateProduct", async (request, response) => {
 
 //get products from the database
 // the code below is for getting books in respect to the year they were published
-app.get("/EditProduct/:productName", async (request, response) => {
+app.get("/products/:productId", async (request, response) => {
   try {
-    const { productName } = request.params;
-    const products = await Product.find({ productName: productName });
+    const { productId } = request.params;
+    const products = await Product.find({
+      _id: new mongoose.Types.ObjectId(productId),
+    });
 
     return response.status(200).json(products);
   } catch (error) {
@@ -189,8 +208,8 @@ app.get("/EditProduct/:productName", async (request, response) => {
   }
 });
 
- //get all books from the database
- app.get("/GetProduct", async (request, response) => {
+//get all books from the database
+app.get("/products", async (request, response) => {
   try {
     const products = await Product.find({});
 
@@ -233,12 +252,10 @@ app.put("/EditProduct/:productName", async (request, response) => {
       return response.status(404).json({ message: "Product not found" });
     }
 
-    return response
-      .status(200)
-      .send({
-        message: "Product updated successfully",
-        updatedProduct: result,
-      });
+    return response.status(200).send({
+      message: "Product updated successfully",
+      updatedProduct: result,
+    });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -256,13 +273,14 @@ app.delete("/DeleteProduct/product/:productName", async (request, response) => {
       return response.status(404).json({ message: "Product not found" });
     }
 
-    return response.status(200).send({ message: "Product deleted successfully" });
+    return response
+      .status(200)
+      .send({ message: "Product deleted successfully" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
-
 
 // Delete products by category
 app.delete("/DeleteProduct/category/:category", async (request, response) => {
@@ -273,16 +291,19 @@ app.delete("/DeleteProduct/category/:category", async (request, response) => {
     const result = await Product.deleteMany({ category });
 
     if (result.deletedCount === 0) {
-      return response.status(404).json({ message: "No products found for the specified category" });
+      return response
+        .status(404)
+        .json({ message: "No products found for the specified category" });
     }
 
-    return response.status(200).json({ message: "Products deleted successfully" });
+    return response
+      .status(200)
+      .json({ message: "Products deleted successfully" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
-
 
 //create a route to get all books from a database
 app.post("/login", async (request, response) => {
@@ -301,8 +322,14 @@ app.post("/login", async (request, response) => {
       return response.status(401).send({
         message: "Invalid credentials ",
       });
-
-    return response.status(200).json({ message: "Login successful" });
+      const token = jwt.sign(
+        {
+          id: user._id,
+        },
+        process.env.TOKEN_SECRET,
+        { expiresIn: "12h" }
+      );
+    return response.status(200).json({ message: "Login successful",data:{...user._doc,token:token} });
   } catch (error) {
     console.log(error.message);
     response.status(500).json({ message: error.message });

@@ -10,7 +10,7 @@ export default function Products() {
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/GetProduct')
+    fetch('http://localhost:8080/products')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -40,6 +40,7 @@ export default function Products() {
             <div className="flex grid-cols-5 gap-8">
               {products.map(product => (
                 <Card2
+                productId={product._id}
                   key={product._id}
                   image={`/${product.imageName}`}
                   title={product.productName}

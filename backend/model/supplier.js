@@ -8,11 +8,12 @@ import mongoose, {Schema} from "mongoose";
 
 const supplierSchema = new Schema(
     {
-      businessName: {
-        type: String,
-        required: true,
+      userId : {
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: "user",
       },
-      mobileNumber: {
+      businessName: {
         type: String,
         required: true,
       },

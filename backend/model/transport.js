@@ -3,15 +3,12 @@ import mongoose, {Schema} from "mongoose";
 
 const transportSchema = new Schema(
     {
-      names: {
-        type: String,
-        required: true,
+      userId : {
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: "user",
       },
-      mobileNumber: {
-        type: String,
-        required: true,
-      },
-      deliveryProvinces: {
+      deliveryProvince: {
         type: String,
         required: true,
       },

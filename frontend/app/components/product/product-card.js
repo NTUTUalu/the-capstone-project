@@ -1,20 +1,16 @@
-import { useRouter } from "next/navigation";
-import { Card} from "antd";
+
+import {Card} from "antd";
 import Image from "next/image";
 const { Meta } = Card;
+import Link from "next/link";
 
 export default function Card2({ productId, image, title, cost, time }) {
-  const router = useRouter();
   
-  const handleNavigation = async (e) => {
-    e.preventDefault();
-    router.push("/product-Description");
-  };
-
+  
+ 
   return (
-    <>  
+    <Link href={"/product/"+productId}>  
       <Card
-        onClick={handleNavigation}
         cover={
           <Image
             src={image}
@@ -37,6 +33,6 @@ export default function Card2({ productId, image, title, cost, time }) {
           <span className="text-amber-500 font-normal">{time} minutes</span>
         </h4>
       </Card>
-    </>
+    </Link>
   );
 }

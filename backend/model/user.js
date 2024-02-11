@@ -1,30 +1,28 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     mobileNumber: {
       type: String,
+      unique: true,
       required: true,
     },
     password: {
       type: String,
       required: true,
     },
-    confirmPassword: {
-      type: String,
-      required: true,
-    },
+   
   },
   {
     timestamps: true,
   }
 );
 
-
-
-
-//the statement below says that 
- const User = mongoose.models.User || mongoose.model("userSignup", userSchema);
- export default User;
+//the statement below says that
+const User = mongoose.model("user", userSchema);
+export default User;
 // export const User = mongoose.model("userSignup", signupSchema);
-
