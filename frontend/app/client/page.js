@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 // importing the model for creating a user
 
 export default function SignUp() {
+  const [name, setName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -30,7 +31,7 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!mobileNumber || !confirmPassword || !password) {
+    if (!mobileNumber || !confirmPassword || !password || !name) {
       setError("All fields must be filled!");
 
       return;
@@ -61,7 +62,7 @@ export default function SignUp() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/Signup", {
+      const res = await fetch("http://localhost:8080/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,13 +70,14 @@ export default function SignUp() {
         body: JSON.stringify({
           mobileNumber,
           password,
-          confirmPassword,
+          name
         }),
       });
 
       if (res.ok) {
         const form = e.target;
         form.reset();
+        router.push("/login");
       } else {
         console.log("user registration failed.");
       }
@@ -94,10 +96,22 @@ export default function SignUp() {
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
             <div className="block max-w-sm rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
-              <form autocomplete="off" onSubmit={handleSubmit} class>
+              <form autoComplete="off" onSubmit={handleSubmit} class>
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
                   Sign Up
                 </h3>
+                <div className="relative mb-6 w-60 text-sm">
+                  <input
+                    type="text"
+                    className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    maxLength="35"
+                  />
+                  <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
+                    Names
+                  </label>
+                </div>
                 <div className="relative mb-6">
                   <input
                     type="text"

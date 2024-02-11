@@ -37,28 +37,34 @@ export default function Decision() {
                       priority
                     />
                   </div>
-                  <p className="text-sm text-center mb-8 text-white tracking-wider mt-4 ">
-                    Crafting a digital solution to take Rwanda <br />
-                    e-commerce to the next level
+                  <p className="text-sm text-center mb-4 text-white tracking-wider mt-4 ">
+                    Choose action button below                   
                   </p>
 
                   <div className="flex flex-col items-center">
+                   
+                    
                     <Link
-                      href="/client"
-                      className="inline-block w-56 h-fit rounded-3xl bg-transparent border-2 border-amber-500 px-6 py-1.5 text-sm tracking-wider uppercase leading-normal text-amber-500 font-medium transition duration-150 ease-in-out  "
-                      data-te-ripple-init
-                      data-te-ripple-color="light"
+                      href="/transporter"
+                      className="inline-block w-64 h-fit rounded-3xl mb-2 bg-amber-400 text-center py-1.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-medium transition duration-150 ease-in-out  "
+                      
                     >
-                      PROCEED TO Signup
+                      BECOME A transporter
+                    </Link>
+                   <Link
+                      href="/supplier"
+                      className="inline-block w-64 h-fit rounded-3xl  bg-amber-400 px- text-center py-1.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-medium transition duration-150 ease-in-out  "
+                     
+                    >
+                      BECOME A Supplier
                     </Link>
                     <p className="text-white text-sm opacity-60 my-1">Or</p>
                     <Link
-                      href="/supplier"
-                      className="inline-block w-56 h-fit rounded-3xl mb-2 bg-amber-400 px-6 py-1.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-medium transition duration-150 ease-in-out  "
-                      data-te-ripple-init
-                      data-te-ripple-color="light"
+                      href="/"
+                      className="inline-block w-64 h-fit rounded-3xl bg-transparent border-2 border-amber-500 text-center py-1.5 text-sm tracking-wider uppercase leading-normal text-amber-500 font-medium transition duration-150 ease-in-out  "
+                     
                     >
-                      BECOME A Supplier
+                      proceed as customer
                     </Link>
                   </div>
 

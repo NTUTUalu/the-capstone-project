@@ -32,14 +32,14 @@ export default function RegisterInterest() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!mobileNumber || !businessName || !accountNumber) {
+    if ( !businessName || !accountNumber) {
       setError("All fields must be filled!");
 
       return;
     }
 
-    if (isNaN(mobileNumber)) {
-      setError("Mobile number is incorrect!");
+    if (isNaN(accountNumber)) {
+      setError("Account number is incorrect!");
 
       return;
     }
@@ -53,11 +53,7 @@ export default function RegisterInterest() {
       setError("Please select at least one checkbox");
       return;
     }
-    if (mobileNumber.length !== 9) {
-      setError("Your Rwandan number should be 9 characters long");
-
-      return;
-    }
+   
 
     if (selectedCheckboxes.includes(e)) {
       // If it's selected, remove it from the array
@@ -71,14 +67,13 @@ export default function RegisterInterest() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/BecomeSupplier", {
+      const res = await fetch("http://localhost:8080/become-supplier", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           businessName,
-          mobileNumber,
           selectedCheckboxes,
           bankName,
           accountNumber,
@@ -89,6 +84,7 @@ export default function RegisterInterest() {
       if (res.ok) {
         const form = e.target;
         form.reset();
+        router.push("/success");
       } else {
         console.log("user registration failed.");
       }
@@ -118,7 +114,7 @@ export default function RegisterInterest() {
             <div className="block w-fit h-fit rounded-3xl min-w-72 bg-yellow-900 my-10 px-6 py-3 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
               <form
                 className="flex flex-col bg-pink-4"
-                autocomplete="off"
+                autoComplete="off"
                 onSubmit={handleSubmit}
               >
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
@@ -135,24 +131,13 @@ export default function RegisterInterest() {
                       maxLength="35"
                     />
                     <label
-                      for="exampleInputEmail2"
+                      
                       className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 "
                     >
                       Business Name
                     </label>
                   </div>
-                  <div className="relative mb- w-60 text-sm">
-                    <input
-                      type="text"
-                      className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      onChange={(e) => setMobileNumber(e.target.value.trim())}
-                      required
-                      maxLength="12"
-                    />
-                    <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
-                      Mobile Number
-                    </label>
-                  </div>
+                  
                 </div>
 
                 <label className="text-white font-normal text-sm tracking-wider opacity-40 ml-3">

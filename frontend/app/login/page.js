@@ -64,9 +64,9 @@ export default function Login() {
         const form = e.target;
         form.reset();
         if (gateway == "0783298700") {
-          router.push("/productsUpdate");
+          router.push("/products-Update");
         } else {
-          router.push("/Dashboard");
+          router.push("/dashboard");
         }
       } else {
         console.log("Login failed");

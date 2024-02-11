@@ -6,9 +6,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function MotorSignup() {
-  const [names, setNames] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [deliveryProvinces, setDeliveryProvinces] = useState("");
+ 
+  const [deliveryProvince, setDeliveryProvince] = useState("");
   const [transportType, setTransportType] = useState("");
   const [availabilityStatus, setAvailabilityStatus] = useState("");
   const [error, setError] = useState("");
@@ -30,46 +29,24 @@ export default function MotorSignup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!names || !mobileNumber) {
-      setError("All fields must be filled!");
 
-      return;
-    }
-
-    if (!deliveryProvinces || !transportType || !availabilityStatus) {
+    if (!deliveryProvince || !transportType || !availabilityStatus) {
       setError("One of the drop-down options is not selected!");
 
       return;
     }
 
-    if (isNaN(mobileNumber)) {
-      setError("Account number should have digits only");
 
-      return;
-    }
-
-    if (mobileNumber.length > 10) {
-      setError("Your Rwandan number should be 9 digits long");
-
-      return;
-    }
-
-    if (mobileNumber.length < 9 && mobileNumber.length > 7) {
-      setError("Enter full Rwandan Number");
-
-      return;
-    }
 
     try {
-      const res = await fetch("http://localhost:8080/TransportRegister", {
+      const res = await fetch("http://localhost:8080/become-transporter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          names,
-          mobileNumber,
-          deliveryProvinces,
+       
+          deliveryProvince,
           transportType,
           availabilityStatus,
         }),
@@ -78,6 +55,7 @@ export default function MotorSignup() {
       if (res.ok) {
         const form = e.target;
         form.reset();
+        router.push("/success");
       } else {
         console.log("user registration failed.");
       }
@@ -98,41 +76,21 @@ export default function MotorSignup() {
             <div className="block w-80 h-fit rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 my-10 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
               <form
                 className="flex flex-col  "
-                autocomplete="off"
+                autoComplete="off"
                 onSubmit={handleSubmit}
               >
-                <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
+                <h3 className="w-full bg-gray-3 text-center mb-6 font-semibold tracking-wide text-white text-2xl">
                   Register Transport
                 </h3>
-                <div className="relative mb-6 w-60 text-sm">
-                  <input
-                    type="text"
-                    className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    onChange={(e) => setNames(e.target.value)}
-                    required
-                    maxLength="12"
-                  />
-                  <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
-                    Names
-                  </label>
-                </div>
-                <div className="relative mb-6 w-60 text-sm">
-                  <input
-                    type="text"
-                    className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    onChange={(e) => setMobileNumber(e.target.value)}
-                    required
-                    maxLength="12"
-                  />
-                  <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
-                    Mobile Number
-                  </label>
-                </div>
+                
+                <p className="text-sm text-left mb-8 text-slate-200 tracking-wider mt-4 ">
+                    Provide transport information below:                   
+                  </p>
 
                 <select
-                  value={deliveryProvinces}
+                  value={deliveryProvince}
                   default=""
-                  onChange={(e) => setDeliveryProvinces(e.target.value)}
+                  onChange={(e) => setDeliveryProvince(e.target.value)}
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm rounded-md"
                 >
                   <option value="">Delivery Provinces</option>
