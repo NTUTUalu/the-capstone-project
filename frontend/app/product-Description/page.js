@@ -10,8 +10,8 @@ export default function Productdescription(key, image, title, cost, time) {
   return (
     <>
       <Navigation />
-      <div className="wrapper  flex w-full mt-10 h-fit px-20 pt-10 pb-10 bg-pink-3 max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center">
-        <div className="left flex bg-pink-7 flex-col  w-1/4   justify-center  max-md:justify-start max-md:mt-0 max-sm:w-4/6">
+      <div className="wrapper  flex w-full mt-10 h-fit px-20 pt-10 pb-10 bg-pink-3 max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center ">
+        <div className="left flex bg-pink-7 flex-col  w-1/4   justify-center  max-md:justify-start max-md:mt-0 max-sm:w-4/6 ">
           <div className="flex justify-center  ">
             <Image
               key={key}
