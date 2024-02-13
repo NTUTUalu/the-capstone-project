@@ -47,7 +47,7 @@ export default function Login() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/login", {
+      fetch("http://localhost:8080/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,21 +56,28 @@ export default function Login() {
           mobileNumber,
           password,
         }),
-      });
-
-      const gateway = mobileNumber;
-
-      if (res.ok) {
-        const form = e.target;
-        form.reset();
-        if (gateway == "0783298700") {
-          router.push("/products-Update");
-        } else {
-          router.push("/decision");
-        }
-      } else {
-        console.log("Login failed");
-      }
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          const gateway = mobileNumber;
+         localStorage.setItem("token", json.data.token)
+          if (json.data) {
+            const form = e.target;
+            form.reset();
+            if (gateway == "0783298700") {
+              router.push("/products-Update");
+            } else {
+             
+              router.push("/decision");
+            }
+          } else {
+            console.log("Login failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
       console.log("error during registration: ", error);
     }

@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 export default function RegisterInterest() {
   const [businessName, setBusinessName] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [bankName, setBankName] = useState("");
   const [location, setLocation] = useState("");
@@ -32,7 +31,7 @@ export default function RegisterInterest() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if ( !businessName || !accountNumber) {
+    if (!businessName || !accountNumber) {
       setError("All fields must be filled!");
 
       return;
@@ -53,7 +52,6 @@ export default function RegisterInterest() {
       setError("Please select at least one checkbox");
       return;
     }
-   
 
     if (selectedCheckboxes.includes(e)) {
       // If it's selected, remove it from the array
@@ -67,10 +65,11 @@ export default function RegisterInterest() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/become-supplier", {
+      fetch("http://localhost:8080/become-supplier", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer "+ localStorage.getItem("token"),
         },
         body: JSON.stringify({
           businessName,
@@ -79,15 +78,21 @@ export default function RegisterInterest() {
           accountNumber,
           location,
         }),
-      });
-
-      if (res.ok) {
-        const form = e.target;
-        form.reset();
-        router.push("/success");
-      } else {
-        console.log("user registration failed.");
-      }
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json)
+          if (json) {
+            const form = e.target;
+            form.reset();
+            router.push("/success");
+          } else {
+            console.log("user registration failed.");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
       console.log("error during registration: ", error);
     }
@@ -130,14 +135,10 @@ export default function RegisterInterest() {
                       required
                       maxLength="35"
                     />
-                    <label
-                      
-                      className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 "
-                    >
+                    <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 ">
                       Business Name
                     </label>
                   </div>
-                  
                 </div>
 
                 <label className="text-white font-normal text-sm tracking-wider opacity-40 ml-3">
