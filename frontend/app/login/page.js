@@ -66,7 +66,7 @@ export default function Login() {
         if (gateway == "0783298700") {
           router.push("/products-Update");
         } else {
-          router.push("/dashboard");
+          router.push("/decision");
         }
       } else {
         console.log("Login failed");
@@ -82,7 +82,7 @@ export default function Login() {
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
             <div className="block max-w-sm rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
-              <form autocomplete="off" onSubmit={handleSubmit}>
+              <form autoComplete="off" onSubmit={handleSubmit}>
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
                   Login
                 </h3>

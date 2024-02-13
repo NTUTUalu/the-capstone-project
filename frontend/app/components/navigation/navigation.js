@@ -44,7 +44,7 @@ export default function Navigation() {
                 FIND TRANSPORT{" "}
               </Link>
               <Link
-                href="/decision"
+                href="/client"
                 className="bg-amber-500 px-7 py-1 rounded-3xl font-semibold max-md:mr-3"
               >
                 {" "}

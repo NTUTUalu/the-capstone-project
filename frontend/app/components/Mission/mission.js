@@ -17,7 +17,7 @@ export default function Mission() {
           <p className="w-5/6 text-slate-500 font-normal mb-6 max-md:w-5/6 max-md:font-semibold max-sm:w-full">
           We are committed to helping businesses expand their market reach by connecting them with new and old customers. If you are you a farmer or Agri-product supplier eager to expand your business and sell your products online? Click the button below to register interest! 🚚🥚 
           </p>
-          <Link href="./supplier" className="border border-amber-500 px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3">   <button className="text-black">REGISTER INTEREST</button> </Link>
+          <Link href="./login" className="border border-amber-500 px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3">   <button className="text-black">BECOME A SUPPLIER</button> </Link>
         </div>
         <div className="left flex bg-pink-7 flex-col  w-1/2   justify-center  max-md:justify-start max-md:mt-0 max-sm:w-4/6">
           <div className="flex justify-center  ">
