@@ -25,6 +25,20 @@ export default function Login() {
     }
   }, [error]);
 
+  useEffect(() => {
+    //check the local storage for token
+    const token = localStorage.getItem("token")
+    const supplierId = localStorage.getItem("supplierId")
+    const transporterId = localStorage.getItem("transporterId")
+
+    if (token && (supplierId || transporterId)) {
+      router.push("/dashboard")
+    } else if (token && !supplierId && !transporterId) {
+      router.push("/decision")
+    }
+
+  },[]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -60,17 +74,21 @@ export default function Login() {
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
-          const gateway = mobileNumber;
+          
          localStorage.setItem("token", json.data.token)
           if (json.data) {
             const form = e.target;
             form.reset();
-            if (gateway == "0783298700") {
-              router.push("/products-Update");
-            } else {
-             
-              router.push("/decision");
-            }
+           if(json.data?.supplier){
+            //they are supplier go to dashboard
+            localStorage.setItem("supplierId", json.data.supplier._id)
+            router.push("/dashboard")
+           } else if (json.data?.transporter) {
+            localStorage.setItem("transporterId", json.data.transporter._id)
+            router.push("/dashboard")
+           } else {
+            router.push("/decision")
+           }
           } else {
             console.log("Login failed");
           }

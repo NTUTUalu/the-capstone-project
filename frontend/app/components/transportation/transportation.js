@@ -28,18 +28,15 @@ export default function Transportation() {
             
           </h1>
           <p className="w-5/6 text-slate-500 font-normal mb-6 max-md:w-5/6 max-md:font-semibold max-sm:w-full">
-          We empathize with the logistics struggle that both farmers and businesses go through that include high Peak-Hour Pricing Struggles. We have partnered with the most trusted delivery drivers to help bring products to your business door-step. Rides include  <span className="text-amber-500 font-semibold">tuk-tuks, motors, and pick-up trucks </span>. Register your vehicle to <span className="italic ">become a transporter</span> for our valued customers  <Link
-            href="/motor"
-            className="text-amber-800 font-bold underline underline-offset-4"
-          >HERE.
-          </Link>
+          We empathize with the logistics struggle that both farmers and businesses go through that include high Peak-Hour Pricing Struggles. We have partnered with the most trusted delivery drivers to help bring products to your business door-step. Rides include  <span className="text-amber-500 font-semibold">tuk-tuks, motors, and pick-up trucks </span>. Register your vehicle to <span className="italic ">become a transporter</span> for our valued customers.
+       
           </p>
           <Link
-            href="/login"
+            href="/signup"
             className="border border-amber-500 px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3"
           >
             {" "}
-            <button className="text-black">Login</button>{" "}
+            <button className="text-black"> Become transporter</button>{" "}
           </Link>
         </div>
       

@@ -1,6 +1,6 @@
 import express from "express";
 import { PORT, MONGODB_URL } from "./config.js";
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 //below we import the schema
 import User from "./model/user.js";
 import Transport from "./model/transport.js";
@@ -8,7 +8,7 @@ import Supplier from "./model/supplier.js";
 import Product from "./model/product.js";
 import bcrypt from "bcryptjs";
 import cors from "cors";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 const app = express();
 
@@ -16,19 +16,19 @@ const app = express();
 //it helps us to send data to the server in a json format that can be understood by the browser
 app.use(express.json());
 app.use(cors());
-import 'dotenv/config';
+import "dotenv/config";
 
 const verifyToken = (req, res, next) => {
   // Check for the Authorization header
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers["authorization"];
   if (!authHeader) {
-    return res.status(401).json({ error: 'Authorization header is missing' });
+    return res.status(401).json({ error: "Authorization header is missing" });
   }
 
   // Extract the token from the header
-  const token = authHeader.split(' ')[1];
+  const token = authHeader.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ error: 'Token is missing' });
+    return res.status(401).json({ error: "Token is missing" });
   }
 
   try {
@@ -37,7 +37,7 @@ const verifyToken = (req, res, next) => {
     req.user = decoded; // Attach the decoded payload to the request object for further use
     next(); // Call next middleware
   } catch (error) {
-    return res.status(403).json({ error: 'Invalid token' });
+    return res.status(403).json({ error: "Invalid token" });
   }
 };
 
@@ -82,7 +82,7 @@ app.post("/signup", async (request, response) => {
 
 //register Transport
 //checking if we are logged in or not
-app.post("/become-supplier",verifyToken, async (request, response) => {
+app.post("/become-supplier", verifyToken, async (request, response) => {
   try {
     if (
       !request.body.businessName ||
@@ -107,7 +107,7 @@ app.post("/become-supplier",verifyToken, async (request, response) => {
       bankName: request.body.bankName,
       accountNumber: request.body.accountNumber,
       location: request.body.location,
-      userId: new mongoose.Types.ObjectId(request.user.id)
+      userId: new mongoose.Types.ObjectId(request.user.id),
     };
 
     //await user user and check if they exit
@@ -120,7 +120,7 @@ app.post("/become-supplier",verifyToken, async (request, response) => {
 });
 
 //register Transport
-app.post("/become-transporter",verifyToken, async (request, response) => {
+app.post("/become-transporter", verifyToken, async (request, response) => {
   try {
     if (
       !request.body.deliveryProvince ||
@@ -141,7 +141,7 @@ app.post("/become-transporter",verifyToken, async (request, response) => {
       deliveryProvince: request.body.deliveryProvince,
       transportType: request.body.transportType,
       availabilityStatus: request.body.availabilityStatus,
-      userId: new mongoose.Types.ObjectId(request.user.id)
+      userId: new mongoose.Types.ObjectId(request.user.id),
     };
 
     //await user user and check if they exit
@@ -322,14 +322,37 @@ app.post("/login", async (request, response) => {
       return response.status(401).send({
         message: "Invalid credentials ",
       });
-      const token = jwt.sign(
-        {
-          id: user._id,
-        },
-        process.env.TOKEN_SECRET,
-        { expiresIn: "12h" }
-      );
-    return response.status(200).json({ message: "Login successful",data:{...user._doc,token:token} });
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.TOKEN_SECRET,
+      { expiresIn: "12h" }
+    );
+    //check  if they have supplier or transporter account
+    const supplier = await Supplier.findOne({
+      userId: new mongoose.Types.ObjectId(user._id),
+    });
+    let responseObject = { ...user._doc };
+
+    if (supplier) {
+      responseObject= {...responseObject,supplier:supplier}
+    }
+    //if they are not supplier we check if they are a transporter
+    if (!supplier) {
+      const transport = await Transport.findOne({
+        userId: new mongoose.Types.ObjectId(user._id),
+      })
+      if (transport) {
+        responseObject = {...responseObject, transporter: transport} 
+      }
+    }
+    return response
+      .status(200)
+      .json({
+        message: "Login successful",
+        data: { ...responseObject, token: token },
+      });
   } catch (error) {
     console.log(error.message);
     response.status(500).json({ message: error.message });

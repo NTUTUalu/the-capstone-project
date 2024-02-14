@@ -6,9 +6,12 @@ import On from "../components/second-Footer/second-Footer";
 import { Table, Pagination } from "antd";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard2() {
   const [activeTab, setActiveTab] = useState("transport");
+
+  const router = useRouter()
 
   const columns = [
     {
@@ -161,7 +164,7 @@ export default function Dashboard2() {
               </li>
             </ul>
           </div>
-          <div className="bottom flex bg-blue-1 justify-center w-full h-28">
+          <div className="bottom flex flex-col gap-2 bg-blue-1 justify-center w-full h-28">
             <Link
               href="/"
               className="border border-white h-fit px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3"
@@ -171,6 +174,18 @@ export default function Dashboard2() {
                 HOME
               </button>{" "}
             </Link>
+            <button
+              onClick={() => {
+                localStorage.clear()
+                router.push("/")
+              }}
+              className="border border-white h-fit px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3"
+            >
+              {" "}
+              <p className="text-white font-semibold flex justify-center ">
+                Logoout
+              </p>{" "}
+            </button>
           </div>
         </div>
         <div className="right flex flex-col h-full bg-amber-2 w-full">

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import x from "../../client/page";
+import x from "../../signup/page";
 
 export default function Navigation() {
   return (
@@ -39,17 +39,15 @@ export default function Navigation() {
                 {" "}
                 OUR PRODUCTS{" "}
               </Link>
-              <Link href="/login" className=" mr-4 max-md:mr-3">
-                {" "}
-                FIND TRANSPORT{" "}
-              </Link>
+              
               <Link
-                href="/client"
+                href="/signup"
                 className="bg-amber-500 px-7 py-1 rounded-3xl font-semibold max-md:mr-3"
               >
                 {" "}
                 <button className="text-white">SIGN UP</button>{" "}
               </Link>
+              <Link href="/login" className="border border-amber-500 ml-4 text-center py-1 w-32 rounded-3xl font-normal max-md:mr-3">   <button className="text-black">LOGIN</button> </Link>
             </div>
           </div>
         </div>

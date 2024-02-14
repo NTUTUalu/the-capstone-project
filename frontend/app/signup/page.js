@@ -17,6 +17,21 @@ export default function SignUp() {
   //we will use router to go to another page after successful signup
   const router = useRouter();
 
+
+  useEffect(() => {
+    //check the local storage for token
+    const token = localStorage.getItem("token")
+    const supplierId = localStorage.getItem("supplierId")
+    const transporterId = localStorage.getItem("transporterId")
+
+    if (token && (supplierId || transporterId)) {
+      router.push("/dashboard")
+    } else if (token && !supplierId && !transporterId) {
+      router.push("/decision")
+    }
+
+  },[]);
+
   //using useEffect to display error for limited time
   useEffect(() => {
     if (error) {
