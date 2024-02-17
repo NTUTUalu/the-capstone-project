@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function ProductUpdate() {
+  const [action, setAction] = useState("");
   const [category, setCategory] = useState("");
   const [imageName, setImageName] = useState("");
   const [productName, setProductName] = useState("");
@@ -101,8 +102,21 @@ export default function ProductUpdate() {
                 onSubmit={handleSubmit}
               >
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">
-                  Product Update
+                  Product Dashboard
                 </h3>
+
+                <select
+                  value={action}
+                  onChange={(e) => setAction(e.target.value.trim())}
+                  default=""
+                  className="flex mb-6 p-1 w-60 bg-slate-200 opacity-40 text-sm rounded-md"
+                >
+                  <option value="">Product Category</option>\{" "}
+                  <option value="30">30 minutes</option>
+                  <option value="40">40 minutes</option>
+                  <option value="50">50 minutes</option>
+                  <option value="60">60+ minutes</option>
+                </select>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value.trim())}

@@ -16,7 +16,12 @@ export default function SignUp() {
 
   //we will use router to go to another page after successful signup
   const router = useRouter();
+  // var spaceCount = (name.match(/ /g) || []).length;
 
+  // if (spaceCount > 1) {
+  //     nameError.innerHTML = "Include only first and last name";
+  //     return false;
+  // }
 
   useEffect(() => {
     //check the local storage for token

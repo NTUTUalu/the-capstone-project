@@ -162,6 +162,23 @@ export default function Dashboard2() {
                   Opportunities
                 </button>
               </li>
+              <li role="presentation" className="flex-grow text-center">
+                <button
+                  onClick={() => setActiveTab("orders")}
+                  className={`my-2 block border-x-0 border-b-2 border-t-0  px-2 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
+                    activeTab === "orders"
+                      ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
+                      : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
+                  }`}
+                  data-te-toggle="pill"
+                  data-te-target="#tabs-profile03"
+                  role="tab"
+                  aria-controls="tabs-profile03"
+                  aria-selected="false"
+                >
+                  Orders
+                </button>
+              </li>
             </ul>
           </div>
           <div className="bottom flex flex-col gap-2 bg-blue-1 justify-center w-full h-28">
@@ -188,9 +205,12 @@ export default function Dashboard2() {
             </button>
           </div>
         </div>
+
+
         <div className="right flex flex-col h-full bg-amber-2 w-full">
-          <div className="top bg-white border-b-2 border-slate-100 w-full h-10"></div>
+         
           <div className="middle bg-amber-4 h-full w-full">
+          <div className="top bg-white border-b-2 border-slate-100 w-full h-10"></div>
             <div className="my-2 bg-blue-4 px-4 h-full">
               {activeTab === "transport" && (
                 <div
@@ -278,6 +298,28 @@ export default function Dashboard2() {
                             <h3 className=" ">22nd February, 5pm</h3>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+               {activeTab === "orders" && (
+                
+                <div
+                  className=" transition-opacity duration-150 ease-linear "
+                  id="tabs-profile03"
+                  role="tabpanel"
+                  aria-labelledby="tabs-profile-tab03"
+                >
+                  <div className="h-full w-full">
+                    <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">
+                      Orders
+                    </div>
+                    <div className="bottom bg-blue-300 h-full flex">
+                      
+                      <div className="bg-yellow-2 w-full pr-10 p-2">
+                        {/* we enter the form here */}
+
                       </div>
                     </div>
                   </div>
