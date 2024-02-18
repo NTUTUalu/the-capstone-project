@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function RegisterInterest() {
   const [businessName, setBusinessName] = useState("");
+  const [email, setEmail] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [bankName, setBankName] = useState("");
   const [location, setLocation] = useState("");
@@ -31,11 +32,16 @@ export default function RegisterInterest() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!businessName || !accountNumber) {
+    if (!businessName || !accountNumber || !email) {
       setError("All fields must be filled!");
 
       return;
     }
+    if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+      //we are saying the first character must be an alphabet, there will be a space, then any character from A-z
+      setError("  Invalid email!");
+      
+      return false;}
 
     if (isNaN(accountNumber)) {
       setError("Account number is incorrect!");
@@ -72,6 +78,7 @@ export default function RegisterInterest() {
           "Authorization": "Bearer "+ localStorage.getItem("token"),
         },
         body: JSON.stringify({
+          email,
           businessName,
           selectedCheckboxes,
           bankName,
@@ -85,7 +92,7 @@ export default function RegisterInterest() {
           if (json) {
             const form = e.target;
             form.reset();
-            router.push("/success");
+            router.push("/success-register");
           } else {
             console.log("user registration failed.");
           }
@@ -141,9 +148,9 @@ export default function RegisterInterest() {
                   </div>
                   <div className="relative mb- w-60 text-sm">
                     <input
-                      type="text"
+                      type="email"
                       className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      onChange={(e) => setBusinessName(e.target.value.trim())}
+                      onChange={(e) => setEmail(e.target.value.trim())}
                       required
                       maxLength="35"
                     />

@@ -1,9 +1,6 @@
 // "use client";
 import Link from "next/link";
 import Image from "next/image";
-import OnboardingFooter from "../components/second-Footer/second-Footer";
-
-
 
 export default function Decision() {
   return (
@@ -32,16 +29,16 @@ export default function Decision() {
             />
           </div>
 
-          <p className="text-slate-600 font-semibold text-lg">Your payment was successful</p>
-          <p className="w-full text-center text-slate-600">Thank you for your payment. We will be in contact with more details shortly.</p>
+          <p className="text-slate-600 font-semibold text-lg">Your registration was successful</p>
+          <p className="w-full text-center text-slate-600">Thank you for your registration. Proceed to the dashboard to explore more about activities.</p>
                   
 
                   <div className="mb-6 flex items-center justify-right  w-full">
                     <Link
-                      href="/"
+                      href="/dashboard"
                       className="text-slate-600 underline text-xs tracking-wider w-full bg-pink-2 text-right transition duration-150 ease-in-out mt-4 font-semibold"
                     >
-                      Proceed to home
+                      Proceed to dashboard
                     </Link>
                   </div>
                 </div>

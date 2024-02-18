@@ -89,6 +89,7 @@ app.post("/become-supplier", verifyToken, async (request, response) => {
       !request.body.selectedCheckboxes ||
       !request.body.bankName ||
       !request.body.accountNumber ||
+      !request.body.email ||
       !request.body.location
     ) {
       return response.status(400).send({
@@ -107,6 +108,7 @@ app.post("/become-supplier", verifyToken, async (request, response) => {
       bankName: request.body.bankName,
       accountNumber: request.body.accountNumber,
       location: request.body.location,
+      email: request.body.email,
       userId: new mongoose.Types.ObjectId(request.user.id),
     };
 

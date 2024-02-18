@@ -55,7 +55,7 @@ export default function MotorSignup() {
       if (res.ok) {
         const form = e.target;
         form.reset();
-        router.push("/success");
+        router.push("/success-register");
       } else {
         console.log("user registration failed.");
       }
