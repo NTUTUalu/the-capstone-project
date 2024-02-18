@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import On from "../components/second-Footer/second-Footer";
 import { Table, Pagination } from "antd";
-
+import Card from "./card";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -109,9 +109,9 @@ export default function Dashboard2() {
   const pageSize = 11;
   return (
     <>
-      <div className="wrapper flex w-full bg-pink-4 h-screen">
-        <div className="left h-full w-48 bg-yellow-900 flex flex-col">
-          <div className="top h-full w-full flex flex-col pt-4">
+      <div className="wrapper flex w-full bg-pink-4 min-h-screen ">
+        <div className="left min-h-screen h-full w-48 bg-yellow-900 flex flex-col justify-between">
+          <div className=" h-full w-full flex flex-col pt-4 bg-pink-3">
             <Link href="#" className="bg-pink-3 flex justify-center mb-8">
               <Image
                 src="/logo.png"
@@ -123,14 +123,14 @@ export default function Dashboard2() {
               />
             </Link>
             <ul
-              className="mr-4 flex list-none flex-col flex-wrap pl-0"
+              className="mr- flex list-none flex-col flex-wrap pl-0 bg-amber-5"
               role="tablist"
               data-te-nav-ref
             >
-              <li role="presentation" className="flex-grow text-center">
+              <li role="presentation" className="flex-grow  w-full ">
                 <button
                   onClick={() => setActiveTab("transport")}
-                  className={`my-2 block border-x-0 border-b-2 border-t-0  px-2 pb-3.5 pt-4 text-xs uppercase leading-tight  hover:isolate     ${
+                  className={`my-2 block border-x-0  text-left pl-5 border-b-2 border-t-0 w-full  pb-3.5 pt-4 text-xs uppercase leading-tight  hover:isolate     ${
                     activeTab === "transport"
                       ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
                       : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
@@ -145,10 +145,10 @@ export default function Dashboard2() {
                   Find Transport
                 </button>
               </li>
-              <li role="presentation" className="flex-grow text-center">
+              <li role="presentation" className="flex-grow">
                 <button
                   onClick={() => setActiveTab("opportunities")}
-                  className={`my-2 block border-x-0 border-b-2 border-t-0  px-2 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
+                  className={`my-2 block border-x-0 border-b-2  w-full border-t-0  text-left pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
                     activeTab === "opportunities"
                       ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
                       : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
@@ -162,10 +162,10 @@ export default function Dashboard2() {
                   Opportunities
                 </button>
               </li>
-              <li role="presentation" className="flex-grow text-center">
+              <li role="presentation" className="flex-grow ">
                 <button
                   onClick={() => setActiveTab("orders")}
-                  className={`my-2 block border-x-0 border-b-2 border-t-0  px-2 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
+                  className={`my-2 block text-left border-x-0 border-b-2 w-full border-t-0 pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
                     activeTab === "orders"
                       ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
                       : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
@@ -181,13 +181,13 @@ export default function Dashboard2() {
               </li>
             </ul>
           </div>
-          <div className="bottom flex flex-col gap-2 bg-blue-1 justify-center w-full h-28">
+          <div className="bottom flex flex-col gap-2 bg-blue-1 items-center w-full h-28 bg-slate-4">
             <Link
               href="/"
-              className="border border-white h-fit px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3"
+              className="border border-white flex justify-center h-fit px- py-1 w-32 rounded-3xl font-normal max-md:mr-3"
             >
               {" "}
-              <button className="text-white font-semibold flex justify-center ">
+              <button className="text-white font-semibold  flex justify-center  ">
                 HOME
               </button>{" "}
             </Link>
@@ -196,11 +196,11 @@ export default function Dashboard2() {
                 localStorage.clear();
                 router.push("/");
               }}
-              className="border border-white h-fit px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3"
+              className="border border-white h-fit  py-1 w-32 flex justify-center rounded-3xl font-normal max-md:mr-3"
             >
               {" "}
-              <p className="text-white font-semibold flex justify-center ">
-                Logoout
+              <p className="text-white font-semibold ">
+                Logout
               </p>{" "}
             </button>
           </div>
@@ -302,55 +302,37 @@ export default function Dashboard2() {
                 </div>
               )}
               {activeTab === "orders" && (
-                <div
-                  className=" transition-opacity duration-150 ease-linear "
-                  id="tabs-profile03"
-                  role="tabpanel"
-                  aria-labelledby="tabs-profile-tab03"
-                >
-                  <div className="h-full w-full ">
-                    <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">
-                      Orders
-                    </div>
-                    <div className="grid grid-cols-1 gap-8 w-fit mt-8 justify-items-center mx-20 rounded-3xl min-w-72 bg-yellow-900  p-4  shadow-[0_2px_15px_-3px_rgba(0,0,0,0.7),0_10px_20px_-2px_rgba(0,0,0,0.4)]dark:bg-neutral-7">
-                      <form className="w- h-fit grid grid-cols-1 grid-rows-1 items-center justify-items-center gap-4 bg-pink-3">
-                        <div className="grid grid-cols-2 grid-row-1 gap-4 p-5 bg-yellow-0 w-full h-60 rounded-3xl border border-white ">
-                          <div className="flex flex-col tracking-wide p-4 bg-pink-1 border-r-2 border-white ">
-                            <h4 className="text-amber-400 tracking-wide font-medium mb-1 text-2xl">
-                              WHITE EGGS
-                            </h4>
-                            <h4 className="text-white font- tracking-wide mb-1">
-                              Total: RWF 22000
-                            </h4>
-                            <h4 className="text-white font- tracking-wide mb-1">
-                              Quantity: 22
-                            </h4>
-                            <h4 className="text-white font- tracking-wide mb-1">
-                              Province: Mpumalanga
-                            </h4>
-                            <h4 className="text-white font- tracking-wide mb-1">
-                              Client Name: JJ Suppliers
-                            </h4>
-                          </div>
-                          <div className=" bg-blue-1 position-relative grid grid-cols-2 gap-2 pb-5 items-end bg-slate-4 h-full w-fit">
-                            <button
-                              type="submit"
-                              className="inline-block w-fit rounded-3xl h-10   bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 "
-                            >
-                              Accept
-                            </button>{" "}
-                            <button
-                              type="submit"
-                              className="inline-block w-fit rounded-3xl h-10 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 "
-                            >
-                              Decline
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
+                <>
+                 <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Orders</div>
+                  <Card
+                    province="Mpumalanga"
+                    total={22000}
+                    productName="WHITE EGGS"
+                    clientName="JJ Suppliers"
+                    quantity={22}
+                  />
+                  <Card
+                    province="Mpumalanga"
+                    total={22000}
+                    productName="WHITE EGGS"
+                    clientName="JJ Suppliers"
+                    quantity={22}
+                  />
+                  <Card
+                    province="Mpumalanga"
+                    total={22000}
+                    productName="WHITE EGGS"
+                    clientName="JJ Suppliers"
+                    quantity={22}
+                  />
+                  <Card
+                    province="Mpumalanga"
+                    total={22000}
+                    productName="WHITE EGGS"
+                    clientName="JJ Suppliers"
+                    quantity={22}
+                  />
+                </>
               )}
             </div>
           </div>
