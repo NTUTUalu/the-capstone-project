@@ -109,6 +109,9 @@ export default function Checkout() {
                     WHITE EGGS
                   </h4>
                   <h4 className="text-white font- tracking-wide mb-1">
+                              Total: RWF 22000
+                            </h4>
+                  <h4 className="text-white font- tracking-wide mb-1">
                     Quantity: 22
                   </h4>
                   <h4 className="text-white font- tracking-wide mb-1">

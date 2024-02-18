@@ -70,7 +70,7 @@ export default function Decision() {
 
                   <div className="mb-6 flex items-center justify-right  w-full">
                     <Link
-                      href="/"
+                      href="/login"
                       className="text-white text-xs tracking-wider w-full bg-pink-2 text-right transition duration-150 ease-in-out hover:text-slate-300 focus:text-slate-300 active:text-slate-300"
                     >
                       Login

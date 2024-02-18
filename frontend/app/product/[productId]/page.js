@@ -213,7 +213,7 @@ export default function Productdescription() {
               #FarmToDoorPerfection
             </p>
             <Link
-              href="/"
+              href="/checkout"
               className="border border-amber-500 px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3"
             >
               {" "}
