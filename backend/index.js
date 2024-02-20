@@ -121,6 +121,18 @@ app.post("/become-supplier", verifyToken, async (request, response) => {
   }
 });
 
+app.get("/get-suppliers", async(request,response) => {
+  try {
+   
+    const suppliers = await Supplier.find()
+
+    return response.status(201).json(suppliers);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+}) 
+
 //register Transport
 app.post("/become-transporter", verifyToken, async (request, response) => {
   try {

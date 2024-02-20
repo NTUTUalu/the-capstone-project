@@ -5,11 +5,11 @@ import Image from "next/image";
 import On from "../components/second-Footer/second-Footer";
 import { Table, Pagination } from "antd";
 import Card from "./card";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard2() {
-  const [activeTab, setActiveTab] = useState("transport");
+  const [activeTab, setActiveTab] = useState("");
 
   const router = useRouter();
 
@@ -106,7 +106,26 @@ export default function Dashboard2() {
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
-  const pageSize = 11;
+  const [loggedUserId, setloggedUserId] = useState("");
+  const [userType, setUserType] = useState("");
+
+  useEffect(() => {
+    const supplierId = localStorage.getItem("supplierId");
+    const transporterId = localStorage.getItem("transporterId");
+
+    if (supplierId) {
+      setloggedUserId(supplierId)
+      setUserType("supplier");
+      setActiveTab("orders")
+    } else if (transporterId) {
+      setloggedUserId(transporterId)
+      setUserType("transporter");
+      setActiveTab("welcome")
+    }
+  
+   
+  }, [])
+  
   return (
     <>
       <div className="wrapper flex w-full bg-pink-4 min-h-screen ">
@@ -127,7 +146,7 @@ export default function Dashboard2() {
               role="tablist"
               data-te-nav-ref
             >
-              <li role="presentation" className="flex-grow  w-full ">
+              {userType === "supplier" && <li role="presentation" className="flex-grow  w-full ">
                 <button
                   onClick={() => setActiveTab("transport")}
                   className={`my-2 block border-x-0  text-left pl-5 border-b-2 border-t-0 w-full  pb-3.5 pt-4 text-xs uppercase leading-tight  hover:isolate     ${
@@ -144,25 +163,8 @@ export default function Dashboard2() {
                 >
                   Find Transport
                 </button>
-              </li>
-              <li role="presentation" className="flex-grow">
-                <button
-                  onClick={() => setActiveTab("opportunities")}
-                  className={`my-2 block border-x-0 border-b-2  w-full border-t-0  text-left pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
-                    activeTab === "opportunities"
-                      ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
-                      : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
-                  }`}
-                  data-te-toggle="pill"
-                  data-te-target="#tabs-profile03"
-                  role="tab"
-                  aria-controls="tabs-profile03"
-                  aria-selected="false"
-                >
-                  Opportunities
-                </button>
-              </li>
-              <li role="presentation" className="flex-grow ">
+              </li>}
+              {userType === "supplier" && <li role="presentation" className="flex-grow ">
                 <button
                   onClick={() => setActiveTab("orders")}
                   className={`my-2 block text-left border-x-0 border-b-2 w-full border-t-0 pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
@@ -178,7 +180,25 @@ export default function Dashboard2() {
                 >
                   Orders
                 </button>
-              </li>
+              </li>}
+              {userType === "supplier" && <li role="presentation" className="flex-grow">
+                <button
+                  onClick={() => setActiveTab("opportunities")}
+                  className={`my-2 block border-x-0 border-b-2  w-full border-t-0  text-left pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
+                    activeTab === "opportunities"
+                      ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
+                      : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
+                  }`}
+                  data-te-toggle="pill"
+                  data-te-target="#tabs-profile03"
+                  role="tab"
+                  aria-controls="tabs-profile03"
+                  aria-selected="false"
+                >
+                  Opportunities
+                </button>
+              </li>}
+           
             </ul>
           </div>
           <div className="bottom flex flex-col gap-2 bg-blue-1 items-center w-full h-28 bg-slate-4">
@@ -210,6 +230,22 @@ export default function Dashboard2() {
           <div className="middle bg-amber-4 h-full w-full">
             <div className="top bg-white border-b-2 border-slate-100 w-full h-10"></div>
             <div className="my-2 bg-blue-4 px-4 h-full">
+            {activeTab === "welcome" && (
+                <div
+                  className="h-full bg-green-4 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+                  id="tabs-home03"
+                  role="tabpanel"
+                  aria-labelledby="tabs-home-tab03"
+                  data-te-tab-active
+                >
+                  <div className="h-full w-full">
+                    <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">
+                      Welcome
+                    </div>
+                   
+                  </div>
+                </div>
+              )}
               {activeTab === "transport" && (
                 <div
                   className="h-full bg-green-4 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"

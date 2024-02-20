@@ -39,10 +39,11 @@ export default function MotorSignup() {
 
 
     try {
-      const res = await fetch("http://localhost:8080/become-transporter", {
+      fetch("http://localhost:8080/become-transporter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer "+ localStorage.getItem("token"),
         },
         body: JSON.stringify({
        
@@ -50,15 +51,23 @@ export default function MotorSignup() {
           transportType,
           availabilityStatus,
         }),
+      }).then((response) => response.json())
+      .then((json) => {
+        console.log(json)
+        if (json) {
+          const form = e.target;
+          console.log(json);
+          localStorage.setItem("transporterId", json._id);
+          form.reset();
+          router.push("/success-register");
+        } else {
+          console.log("user registration failed.");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-
-      if (res.ok) {
-        const form = e.target;
-        form.reset();
-        router.push("/success-register");
-      } else {
-        console.log("user registration failed.");
-      }
+     
     } catch (error) {
       console.log("error during registration: ", error);
     }

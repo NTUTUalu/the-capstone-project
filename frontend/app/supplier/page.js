@@ -91,6 +91,7 @@ export default function RegisterInterest() {
           console.log(json)
           if (json) {
             const form = e.target;
+            localStorage.setItem("supplierId", json._id);
             form.reset();
             router.push("/success-register");
           } else {
