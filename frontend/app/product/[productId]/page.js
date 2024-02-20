@@ -6,13 +6,16 @@ import Footer from "@/app/components/footer/footer";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
+
 export default function Productdescription() {
   const { productId } = useParams();
-  console.log(productId);
+  const { supplierId } = useParams();
+  // console.log(productId);
 
   const [deliveryProvince, setDeliveryProvince] = useState("");
   const [supplier, setSupplier] = useState("");
   const [product, setProduct] = useState(null);
+  const [data, setData] = useState([]);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -71,11 +74,33 @@ export default function Productdescription() {
       });
   }, [productId]);
 
+  useEffect(() => {
+    fetch("http://localhost:8080/get-suppliers" )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Check if the data object has a "data" property which is an array
+        console.log(data);
+        setData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        // Handle the error gracefully, e.g., display a message to the user
+      });
+  }, []);
+ 
+
+
   return (
     <>
       <Navigation />
       {product && (
-        <div className="wrapper  flex w-full mt-10 h-fit px-20 pt-10 pb-10 bg-pink-3 max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center">
+        <div className="flex flex-col w-full min-h-screen">
+        <div className="wrapper  flex w-full mt-10 h-fit px-20 pt-10 pb-10 bg max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center">
           <div className="left flex flex-col  w-80   justify-center  max-md:justify-start max-md:mt-0 max-sm:w-4/6 mr-6">
             <div className="flex justify-center bg-pink- w-full h-full ">
               <Image
@@ -137,7 +162,7 @@ export default function Productdescription() {
                 </span>
               </div>
             </div>
-            <div className="bg-yellow-3 grid grid-rows-1 grid-cols-2 gap-2 py-2 w-fit h-fit items-center bg-slate-2">
+            {/* <div className="bg-yellow-3 grid grid-rows-1 grid-cols-2 gap-2 py-2 w-fit h-fit items-center bg-slate-2">
               <div className="relative mb- w-60 text-sm">
                 <select
                   value={deliveryProvince}
@@ -193,7 +218,7 @@ export default function Productdescription() {
                   </select>
                 )}
               </div>
-            </div>
+            </div> */}
             
             <h4>
               Delivery Time <span className="text-xs">(+/-)</span> :{" "}
@@ -202,7 +227,7 @@ export default function Productdescription() {
               </span>
             </h4>
             {error && (
-              <div className="bg-red-500 flex text-wrap text-white w-full max-w-80 tracking-wider text-xs py-1 px-3 rounded-md mt-2">
+              <div className="bg flex text-wrap text-white w-full max-w-80 tracking-wider text-xs py-1 px-3 rounded-md mt-2">
                 {error}
               </div>
             )}
@@ -212,15 +237,55 @@ export default function Productdescription() {
               your doorstep in a heartbeat. 🌐🍳 #PoultryPlusDelivers
               #FarmToDoorPerfection
             </p>
-            <Link
+            {/* <Link
               href="/checkout"
               className="border border-amber-500 px-7 py-1 w-fit rounded-3xl font-normal max-md:mr-3"
             >
               {" "}
               <button className="text-amber-500">CHECKOUT</button>{" "}
-            </Link>
+            </Link> */}
           </form>
         </div>
+        <div
+                  className="h-full bg-g min-h-screen transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+                  id="tabs-home03"
+                  role="tabpanel"
+                  aria-labelledby="tabs-home-tab03"
+                  data-te-tab-active
+                >
+                  <div className="h-full w-full">
+                    
+                    <div className=" bg-amber-8 flex flex-col w-full px-20">
+                      <h1 className="w-full bg text-center my-8 text-lg tracking-wide font-semibold">
+                        Find Suitable Transportation
+                      </h1>
+                      <table className=" grid grid-cols-1 grid-rows-auto border border-slate-400">
+      <thead className="w-full h-10 flex justify-center align-center ">
+        <tr className="grid grid-cols-3 w-full h-full ">
+          <th className=" flex justify-center items-center border-r border-slate-400">Supplier Names</th>
+          <th className=" border-r flex justify-center items-center border-slate-400">Province</th>
+          <th  className=" border-r flex justify-center items-center">Action</th>
+        </tr>
+      </thead>
+      <tbody className="grid grid-cols-1 w-full h-fit  ">
+      {data.map(supplier => (
+    <tr className="grid grid-cols-3 w-full h-12 b items-center  border-y border-slate-400" key={supplier.id}>
+      <td className="bg-amber-100 flex justify-center items-center h-full border-r border-slate-400">{supplier.businessName}</td>
+      <td className="bg-slate-200 flex justify-center items-center text-center h-full border-r border-slate-400">{supplier.location}</td>
+      <td className="bg-amber-100 flex justify-center items-center  h-full">
+        <button className="bg-amber-500 rounded-3xl h-8 w-36"  onClick={() => handleAction(supplier.id)}>Checkout</button>
+      </td>
+    </tr>
+  ))}
+
+      </tbody>
+    </table>
+                      
+                    </div>
+                  </div>
+                </div>
+        </div>
+        
       )}
       {!product && (
         <div className="wrapper  flex w-full mt-10 h-fit px-20 pt-10 pb-10 bg-pink-3 max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center">
