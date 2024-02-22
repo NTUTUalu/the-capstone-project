@@ -4,16 +4,22 @@ import Image from "next/image";
 import On from "../components/second-Footer/second-Footer"; //importing a footer
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Checkout() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
+  const [supplier, setSupplier] = useState("");
+  const [product, setProduct] = useState(null);
 
   //we will use router to go to another page after successful signup
   const router = useRouter();
+  const params = useSearchParams();
+  const productId = params.get("productId");
+  const supplierId = params.get("supplierId");
+  const quantity = params.get("quantity");
 
   //using useEffect to display error for limited time
   useEffect(() => {
@@ -26,6 +32,77 @@ export default function Checkout() {
     }
   }, [error]);
 
+  const createOrder = (e) => {
+    e.preventDefault();
+
+    try {
+      fetch("http://localhost:8080/orders/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "clientName": name,
+      "clientAddress": address,
+      "clientEmail": email,
+      "productId": productId,
+      "supplierId": supplierId,
+      "quantity": quantity
+        }),
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json)
+         
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log("error during registration: ", error);
+    }
+  }
+
+  useEffect(() => {
+    fetch("http://localhost:8080/products/" + productId)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Check if the data object has a "data" property which is an array
+        console.log(data);
+        setProduct(data[0]);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        // Handle the error gracefully, e.g., display a message to the user
+      });
+  }, [productId]);
+
+  
+  useEffect(() => {
+    fetch("http://localhost:8080/supplier/" + supplierId)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Check if the data object has a "data" property which is an array
+        console.log(data);
+        setSupplier(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        // Handle the error gracefully, e.g., display a message to the user
+      });
+  }, [supplierId]);
+console.log(supplier);
+console.log(product);
   useEffect(() => {
     //check the local storage for token
     const token = localStorage.getItem("token");
@@ -39,62 +116,6 @@ export default function Checkout() {
     }
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!address || !name || !email) {
-      setError("All fields must be filled!");
-
-      return;
-    }
-
-    if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
-      //we are saying the first character must be an alphabet, there will be a space, then any character from A-z
-      setError("  Invalid email!");
-
-      return false;
-    }
-
-    try {
-      fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          mobileNumber,
-          password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          console.log(json);
-
-          localStorage.setItem("token", json.data.token);
-          if (json.data) {
-            const form = e.target;
-            form.reset();
-            if (json.data?.supplier) {
-              //they are supplier go to dashboard
-              localStorage.setItem("supplierId", json.data.supplier._id);
-              router.push("/dashboard");
-            } else if (json.data?.transporter) {
-              localStorage.setItem("transporterId", json.data.transporter._id);
-              router.push("/dashboard");
-            } else {
-              router.push("/decision");
-            }
-          } else {
-            console.log("Login failed");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (error) {
-      console.log("error during registration: ", error);
-    }
-  };
 
   return (
     <>
@@ -106,31 +127,31 @@ export default function Checkout() {
               <div className="grid grid-cols-2 grid-row-1 gap-4 p-5 bg-yellow-0 w-full h-60 rounded-3xl border border-white ">
                 <div className="flex flex-col tracking-wide p-4 bg-pink-1 border-r-2 border-white ">
                   <h4 className="text-amber-400 tracking-wide font-medium mb-1 text-2xl">
-                    WHITE EGGS
+                    {product?.productName}
                   </h4>
                   <h4 className="text-white font- tracking-wide mb-1">
-                              Total: RWF 22000
+                              Total: RWF {product?.itemCost*quantity} 
                             </h4>
                   <h4 className="text-white font- tracking-wide mb-1">
-                    Quantity: 22
+                    Quantity: {quantity}
                   </h4>
                   <h4 className="text-white font- tracking-wide mb-1">
-                    Province: Mpumalanga
+                    Province: {supplier?.location}
                   </h4>
                   <h4 className="text-white font- tracking-wide mb-1">
-                    Supplier Name: JJ Suppliers
+                    Supplier Name: {supplier?.businessName}
                   </h4>
                 </div>
                 <div className=" bg-blue-1 position-relative">
                   <div className=" flex justify-center w-full h-full items-center position-relative bg-red-2">
-                    <Image
-                      src="/irish.png"
+                    {product?.imageName && <Image
+                      src={"/" + product?.imageName}
                       alt="Vercel Logo"
                       className="dark:invert rounded-3xl w-72 h-48"
                       width={180}
                       height={25}
                       priority
-                    />{" "}
+                    />}
                   </div>
                 </div>
               </div>
@@ -176,6 +197,7 @@ export default function Checkout() {
                 </div>
               </div>
               <button
+              onClick={createOrder}
                 type="submit"
                 className="inline-block w-64 rounded-3xl h-12 mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 "
               >

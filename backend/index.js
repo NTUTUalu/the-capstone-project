@@ -6,6 +6,7 @@ import User from "./model/user.js";
 import Transport from "./model/transport.js";
 import Supplier from "./model/supplier.js";
 import Product from "./model/product.js";
+import Order from "./model/order.js";
 import bcrypt from "bcryptjs";
 import cors from "cors";
 import jwt from "jsonwebtoken";
@@ -121,17 +122,16 @@ app.post("/become-supplier", verifyToken, async (request, response) => {
   }
 });
 
-app.get("/get-suppliers", async(request,response) => {
+app.get("/get-suppliers", async (request, response) => {
   try {
-   
-    const suppliers = await Supplier.find()
+    const suppliers = await Supplier.find();
 
     return response.status(201).json(suppliers);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
-}) 
+});
 
 //register Transport
 app.post("/become-transporter", verifyToken, async (request, response) => {
@@ -216,6 +216,20 @@ app.get("/products/:productId", async (request, response) => {
     });
 
     return response.status(200).json(products);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+app.get("/supplier/:supplierId", async (request, response) => {
+  try {
+    const { supplierId } = request.params;
+    const suppliers = await Supplier.find({
+      _id: new mongoose.Types.ObjectId(supplierId),
+    });
+
+    return response.status(200).json(suppliers[0]);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -350,26 +364,60 @@ app.post("/login", async (request, response) => {
     let responseObject = { ...user._doc };
 
     if (supplier) {
-      responseObject= {...responseObject,supplier:supplier}
+      responseObject = { ...responseObject, supplier: supplier };
     }
     //if they are not supplier we check if they are a transporter
     if (!supplier) {
       const transport = await Transport.findOne({
         userId: new mongoose.Types.ObjectId(user._id),
-      })
+      });
       if (transport) {
-        responseObject = {...responseObject, transporter: transport} 
+        responseObject = { ...responseObject, transporter: transport };
       }
     }
-    return response
-      .status(200)
-      .json({
-        message: "Login successful",
-        data: { ...responseObject, token: token },
-      });
+    return response.status(200).json({
+      message: "Login successful",
+      data: { ...responseObject, token: token },
+    });
   } catch (error) {
     console.log(error.message);
     response.status(500).json({ message: error.message });
+  }
+});
+
+app.post("/orders/create", async (request, response) => {
+  try {
+    if (
+      !request.body.supplierId ||
+      !request.body.productId ||
+      !request.body.clientName ||
+      !request.body.clientAddress ||
+      !request.body.clientEmail
+    ) {
+      return response.status(400).send({
+        message: "send all required fields* ",
+      });
+    }
+    const product = await Product.findOne({_id: new mongoose.Types.ObjectId(request.body.productId)})
+    //create new order
+    const newOrder = {
+      clientName: request.body.clientName,
+      clientAddress: request.body.clientAddress,
+      clientEmail: request.body.clientEmail,
+      
+      productId: new mongoose.Types.ObjectId(request.body.productId),
+      supplierId: new mongoose.Types.ObjectId(request.body.supplierId),
+      totalAmount: product.itemCost* request.body.quantity
+    };
+    
+    const order = await Order.create(newOrder);
+
+    return response.status(201).send(order);
+
+
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
   }
 });
 
