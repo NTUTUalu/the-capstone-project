@@ -4,6 +4,8 @@ import OnboardingFooter from "../components/second-Footer/second-Footer";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import CustomToast from "../components/toast/toast";
+import toast, { Toaster } from 'react-hot-toast';
 
 // importing the model for creating a user
 
@@ -81,25 +83,32 @@ export default function SignUp() {
       return;
     }
 
+    
     try {
       const res = await fetch("http://localhost:8080/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          mobileNumber,
-          password,
-          name
-        }),
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              mobileNumber,
+              password,
+              name
+          }),
       });
 
       if (res.ok) {
-        const form = e.target;
-        form.reset();
-        router.push("/login");
+          const form = e.target;
+          console.log("about to enter toast");
+          form.reset();
+          toast.success("signup successful!");
+            setTimeout(() => {
+              router.push("/login"); // Navigate to the success page after the toast disappears
+            }, 3000); 
+        
+          
       } else {
-        console.log("user registration failed.");
+          console.log("user registration failed.");
       }
     } catch (error) {
       console.log("error during registration: ", error);
@@ -115,6 +124,10 @@ export default function SignUp() {
       <div className="wrapper flex w-full bg-blue-5 h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
+          <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
             <div className="block max-w-sm rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
               <form autoComplete="off" onSubmit={handleSubmit} class>
                 <h3 className="w-full bg-gray-3 text-center mb-10 font-semibold tracking-wide text-white text-2xl">

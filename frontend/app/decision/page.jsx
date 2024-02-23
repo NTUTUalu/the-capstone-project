@@ -46,11 +46,12 @@ export default function Decision() {
                     
                     <Link
                       href="/transporter"
-                      className="inline-block w-64 h-fit rounded-3xl mb-2 bg-amber-400 text-center py-1.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-medium transition duration-150 ease-in-out  "
+                      className="inline-block w-64 h-fit rounded-3xl bg-transparent border-2 border-amber-500 text-center py-1.5 text-sm tracking-wider uppercase leading-normal text-amber-500 font-medium transition duration-150 ease-in-out "
                       
                     >
                       BECOME A transporter
                     </Link>
+                    <p className="text-white text-sm opacity-60 my-1">Or</p>
                    <Link
                       href="/supplier"
                       className="inline-block w-64 h-fit rounded-3xl  bg-amber-400 px- text-center py-1.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-medium transition duration-150 ease-in-out  "
@@ -58,23 +59,11 @@ export default function Decision() {
                     >
                       BECOME A Supplier
                     </Link>
-                    <p className="text-white text-sm opacity-60 my-1">Or</p>
-                    <Link
-                      href="/"
-                      className="inline-block w-64 h-fit rounded-3xl bg-transparent border-2 border-amber-500 text-center py-1.5 text-sm tracking-wider uppercase leading-normal text-amber-500 font-medium transition duration-150 ease-in-out  "
-                     
-                    >
-                      proceed as customer
-                    </Link>
+                   
                   </div>
 
                   <div className="mb-6 flex items-center justify-right  w-full">
-                    <Link
-                      href="/login"
-                      className="text-white text-xs tracking-wider w-full bg-pink-2 text-right transition duration-150 ease-in-out hover:text-slate-300 focus:text-slate-300 active:text-slate-300"
-                    >
-                      Login
-                    </Link>
+                 
                   </div>
                 </div>
               </div>
