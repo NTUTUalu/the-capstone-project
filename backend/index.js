@@ -404,7 +404,7 @@ app.post("/orders/create", async (request, response) => {
       clientName: request.body.clientName,
       clientAddress: request.body.clientAddress,
       clientEmail: request.body.clientEmail,
-      
+     
       productId: new mongoose.Types.ObjectId(request.body.productId),
       supplierId: new mongoose.Types.ObjectId(request.body.supplierId),
       totalAmount: product.itemCost* request.body.quantity
@@ -420,6 +420,31 @@ app.post("/orders/create", async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+//FETCHING ALL ORDERS FOR A CERTAIN SUPPLIER
+app.get("/orders/supplier/:supplierId", async (request, response) => {
+  try {
+
+    const { supplierId } = request.params;
+    const orders = await Order.find({
+      supplierId: new mongoose.Types.ObjectId(supplierId),
+    });
+
+    if (!orders) {
+      return response.status(404).json({ message: "Orders not found for the supplier ID provided." });
+    }
+
+    console.log(orders)
+
+    return response.status(200).json(orders);
+   
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+
+});
+
 
 //mongoose will help us establish connection to the database
 mongoose

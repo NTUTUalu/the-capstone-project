@@ -94,7 +94,7 @@ export default function RegisterInterest() {
             const form = e.target;
             localStorage.setItem("supplierId", json._id);
             form.reset();
-            toast.success('Successfully toasted!')
+            toast.success('Supplier Registration successful!')
             setTimeout(() => {
               router.push("/success-register"); // Navigate to the success page after the toast disappears
             }, 3000); 

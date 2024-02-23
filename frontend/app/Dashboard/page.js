@@ -1,14 +1,15 @@
 "use client";
-import { Button } from "antd";
+
 import Link from "next/link";
 import Image from "next/image";
-import On from "../components/second-Footer/second-Footer";
+import toast, { Toaster } from 'react-hot-toast';
 import { Table, Pagination } from "antd";
 import Card from "./card";
 import { useState,useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard2() {
+  const [order, setOrder] = useState([]);
   const [activeTab, setActiveTab] = useState("");
 
   const router = useRouter();
@@ -124,12 +125,44 @@ export default function Dashboard2() {
     }
   
    
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const supplierId = localStorage.getItem("supplierId");
+        if (!supplierId) return; // If supplierId is not available, return early
+  
+        const url = `http://localhost:8080/orders/supplier/${supplierId}`;
+        const response = await fetch(url);
+  
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+  
+        const data = await response.json();
+        console.log(data);
+        setOrder(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle the error gracefully, e.g., display a message to the user
+      }
+    };
+  
+    fetchOrders();
+  }, []); // Empty dependency array to run the effect only once
+  
+
+  
   
   return (
     <>
       <div className="wrapper flex w-full bg-pink-4 min-h-screen ">
         <div className="left min-h-screen h-full w-48 bg-yellow-900 flex flex-col justify-between">
+        <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
           <div className=" h-full w-full flex flex-col pt-4 bg-pink-3">
             <Link href="#" className="bg-pink-3 flex justify-center mb-8">
               <Image
@@ -214,7 +247,11 @@ export default function Dashboard2() {
             <button
               onClick={() => {
                 localStorage.clear();
-                router.push("/");
+                toast.success("Logout successful!");
+                setTimeout(() => {
+                  router.push("/"); // Navigate to the success page after the toast disappears
+                }, 3000); 
+                
               }}
               className="border border-white h-fit  py-1 w-32 flex justify-center rounded-3xl font-normal max-md:mr-3"
             >
@@ -340,35 +377,21 @@ export default function Dashboard2() {
               {activeTab === "orders" && (
                 <>
                  <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Orders</div>
-                  <Card
-                    province="Mpumalanga"
-                    total={22000}
-                    productName="WHITE EGGS"
-                    clientName="JJ Suppliers"
-                    quantity={22}
-                  />
-                  <Card
-                    province="Mpumalanga"
-                    total={22000}
-                    productName="WHITE EGGS"
-                    clientName="JJ Suppliers"
-                    quantity={22}
-                  />
-                  <Card
-                    province="Mpumalanga"
-                    total={22000}
-                    productName="WHITE EGGS"
-                    clientName="JJ Suppliers"
-                    quantity={22}
-                  />
-                  <Card
-                    province="Mpumalanga"
-                    total={22000}
-                    productName="WHITE EGGS"
-                    clientName="JJ Suppliers"
-                    quantity={22}
-                  />
-                </>
+                 {order && order.map(order => (
+        <Card
+          key={order?._id} // Assuming each order has a unique identifier, adjust accordingly
+          clientAddress={order?.clientAddress} // Assuming province is a property of each order
+          totalAmount={order?.totalAmount} // Assuming total is a property of each order
+          productName={order?.productName} // Assuming productName is a property of each order
+          clientName={order?.clientName} // Assuming clientName is a property of each order
+          clientEmail={order?.clientEmail} // Assuming quantity is a property of each order
+        />
+      ))}
+
+
+                  
+                 
+                                 </>
               )}
             </div>
           </div>

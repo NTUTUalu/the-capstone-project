@@ -1,6 +1,6 @@
 
 
-function OrderComponent({ province, total, productName, clientName, quantity }) {
+function OrderComponent({ clientAddress, clientEmail, productName, clientName, totalAmount }) {
   const handleAccept = (e) => {
     e.preventDefault();
     // Handle accept logic
@@ -20,9 +20,9 @@ function OrderComponent({ province, total, productName, clientName, quantity }) 
             <div className="grid grid-cols-2 grid-row-1 gap-4 p-5 bg-yellow-0 w-full h-60 rounded-3xl border border-white">
               <div className="flex flex-col tracking-wide p-4 bg-pink-1 border-r-2 border-white">
                 <h4 className="text-amber-400 tracking-wide font-medium mb-1 text-2xl">{productName}</h4>
-                <h4 className="text-white font- tracking-wide mb-1">Total: RWF {total}</h4>
-                <h4 className="text-white font- tracking-wide mb-1">Quantity: {quantity}</h4>
-                <h4 className="text-white font- tracking-wide mb-1">Province: {province}</h4>
+                <h4 className="text-white font- tracking-wide mb-1">Total: RWF {totalAmount}</h4>
+                <h4 className="text-white font- tracking-wide mb-1">client Email: {clientEmail}</h4>
+                <h4 className="text-white font- tracking-wide mb-1">Client Address: {clientAddress}</h4>
                 <h4 className="text-white font- tracking-wide mb-1">Client Name: {clientName}</h4>
               </div>
               <div className="bg-blue-1 position-relative grid grid-cols-2 gap-2 pb-5 items-end bg-slate-4 h-full w-fit">
