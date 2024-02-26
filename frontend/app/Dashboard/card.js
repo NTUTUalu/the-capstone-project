@@ -19,7 +19,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
       refreshOrders()
       if (res.ok) {
           console.log(res.json());
-         
+         //execute if user fails
           
       } else {
           console.log("user registration failed.");
