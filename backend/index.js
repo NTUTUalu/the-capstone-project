@@ -398,23 +398,23 @@ app.post("/orders/create", async (request, response) => {
         message: "send all required fields* ",
       });
     }
-    const product = await Product.findOne({_id: new mongoose.Types.ObjectId(request.body.productId)})
+    const product = await Product.findOne({
+      _id: new mongoose.Types.ObjectId(request.body.productId),
+    });
     //create new order
     const newOrder = {
       clientName: request.body.clientName,
       clientAddress: request.body.clientAddress,
       clientEmail: request.body.clientEmail,
-     
+
       productId: new mongoose.Types.ObjectId(request.body.productId),
       supplierId: new mongoose.Types.ObjectId(request.body.supplierId),
-      totalAmount: product.itemCost* request.body.quantity
+      totalAmount: product.itemCost * request.body.quantity,
     };
-    
+
     const order = await Order.create(newOrder);
 
     return response.status(201).send(order);
-
-
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -422,29 +422,43 @@ app.post("/orders/create", async (request, response) => {
 });
 
 //FETCHING ALL ORDERS FOR A CERTAIN SUPPLIER
-app.get("/orders/supplier/:supplierId", async (request, response) => {
+app.get("/orders/supplier/:supplierId",verifyToken, async (request, response) => {
   try {
-
     const { supplierId } = request.params;
     const orders = await Order.find({
       supplierId: new mongoose.Types.ObjectId(supplierId),
-    });
+    }).populate("productId");
 
     if (!orders) {
-      return response.status(404).json({ message: "Orders not found for the supplier ID provided." });
+      return response
+        .status(404)
+        .json({ message: "Orders not found for the supplier ID provided." });
     }
 
-    console.log(orders)
+    console.log(orders);
 
     return response.status(200).json(orders);
-   
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
-
 });
 
+app.post("/orders/update/:orderId",verifyToken,  async (request, response) => {
+  try {
+    const { orderId } = request.params;
+    const updateOrder = await Order.findOneAndUpdate(
+      { _id: new mongoose.Types.ObjectId(orderId) },
+      { status: request.body.status },
+      { new: true }
+    );
+
+    return response.status(200).json(updateOrder);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
 
 //mongoose will help us establish connection to the database
 mongoose

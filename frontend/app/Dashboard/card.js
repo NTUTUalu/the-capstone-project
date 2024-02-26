@@ -1,15 +1,63 @@
 
 
-function OrderComponent({ clientAddress, clientEmail, productName, clientName, totalAmount }) {
-  const handleAccept = (e) => {
+function OrderComponent({ clientAddress, clientEmail, productName, clientName, totalAmount,orderId, orderStatus, refreshOrders }) {
+  const handleAccept = async (e) => {
     e.preventDefault();
     // Handle accept logic
+    
+    try {
+      const res = await fetch("http://localhost:8080/orders/update/"+ orderId, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer "+ localStorage.getItem("token"),
+          },
+          body: JSON.stringify({
+              status: "accepted"
+          }),
+      });
+      refreshOrders()
+      if (res.ok) {
+          console.log(res.json());
+         
+          
+      } else {
+          console.log("user registration failed.");
+      }
+    } catch (error) {
+      console.log("error during registration: ", error);
+    }
   };
 
-  const handleDecline = (e) => {
+  const handleDecline = async  (e) => {
     e.preventDefault();
     // Handle decline logic
+
+    try {
+      const res = await fetch("http://localhost:8080/orders/update/"+ orderId, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer "+ localStorage.getItem("token"),
+          },
+          body: JSON.stringify({
+              status: "declined"
+          }),
+      });
+      refreshOrders()
+      if (res.ok) {
+          console.log(res.json());
+       
+          
+      } else {
+          console.log("user registration failed.");
+      }
+    } catch (error) {
+      console.log("error during registration: ", error);
+    }
   };
+
+  
 
   return (
     <div className="transition-opacity duration-150 ease-linear" id="tabs-profile03" role="tabpanel" aria-labelledby="tabs-profile-tab03">
@@ -26,8 +74,8 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
                 <h4 className="text-white font- tracking-wide mb-1">Client Name: {clientName}</h4>
               </div>
               <div className="bg-blue-1 position-relative grid grid-cols-2 gap-2 pb-5 items-end bg-slate-4 h-full w-fit">
-                <button type="button" onClick={handleAccept} className="inline-block w-fit rounded-3xl h-10 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400">Accept</button>
-                <button type="button" onClick={handleDecline} className="inline-block w-fit rounded-3xl h-10 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400">Decline</button>
+               {orderStatus === "pending" && <button type="button" onClick={handleAccept} className="inline-block w-fit rounded-3xl h-10 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400">Accept</button>}
+                {orderStatus === "pending" && <button type="button" onClick={handleDecline} className="inline-block w-fit rounded-3xl h-10 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400">Decline</button>}
               </div>
             </div>
           </form>

@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import { Table, Pagination } from "antd";
 import Card from "./card";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard2() {
@@ -115,54 +115,51 @@ export default function Dashboard2() {
     const transporterId = localStorage.getItem("transporterId");
 
     if (supplierId) {
-      setloggedUserId(supplierId)
+      setloggedUserId(supplierId);
       setUserType("supplier");
-      setActiveTab("orders")
+      setActiveTab("orders");
     } else if (transporterId) {
-      setloggedUserId(transporterId)
+      setloggedUserId(transporterId);
       setUserType("transporter");
-      setActiveTab("welcome")
+      setActiveTab("welcome");
     }
-  
-   
   }, []);
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const supplierId = localStorage.getItem("supplierId");
-        if (!supplierId) return; // If supplierId is not available, return early
-  
-        const url = `http://localhost:8080/orders/supplier/${supplierId}`;
-        const response = await fetch(url);
-  
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-  
-        const data = await response.json();
-        console.log(data);
-        setOrder(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        // Handle the error gracefully, e.g., display a message to the user
+  const fetchOrders = async () => {
+    try {
+      const supplierId = localStorage.getItem("supplierId");
+      if (!supplierId) return; // If supplierId is not available, return early
+
+      const url = `http://localhost:8080/orders/supplier/${supplierId}`;
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-    };
-  
+
+      const data = await response.json();
+
+      setOrder(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle the error gracefully, e.g., display a message to the user
+    }
+  };
+
+  useEffect(() => {
     fetchOrders();
   }, []); // Empty dependency array to run the effect only once
-  
 
-  
-  
   return (
     <>
       <div className="wrapper flex w-full bg-pink-4 min-h-screen ">
         <div className="left min-h-screen h-full w-48 bg-yellow-900 flex flex-col justify-between">
-        <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+          <Toaster position="top-center" reverseOrder={false} />
           <div className=" h-full w-full flex flex-col pt-4 bg-pink-3">
             <Link href="#" className="bg-pink-3 flex justify-center mb-8">
               <Image
@@ -179,59 +176,64 @@ export default function Dashboard2() {
               role="tablist"
               data-te-nav-ref
             >
-              {userType === "supplier" && <li role="presentation" className="flex-grow  w-full ">
-                <button
-                  onClick={() => setActiveTab("transport")}
-                  className={`my-2 block border-x-0  text-left pl-5 border-b-2 border-t-0 w-full  pb-3.5 pt-4 text-xs uppercase leading-tight  hover:isolate     ${
-                    activeTab === "transport"
-                      ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
-                      : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
-                  }`}
-                  data-te-toggle="pill"
-                  data-te-target="#tabs-home03"
-                  data-te-nav-active
-                  role="tab"
-                  aria-controls="tabs-home03"
-                  aria-selected="true"
-                >
-                  Find Transport
-                </button>
-              </li>}
-              {userType === "supplier" && <li role="presentation" className="flex-grow ">
-                <button
-                  onClick={() => setActiveTab("orders")}
-                  className={`my-2 block text-left border-x-0 border-b-2 w-full border-t-0 pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
-                    activeTab === "orders"
-                      ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
-                      : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
-                  }`}
-                  data-te-toggle="pill"
-                  data-te-target="#tabs-profile03"
-                  role="tab"
-                  aria-controls="tabs-profile03"
-                  aria-selected="false"
-                >
-                  Orders
-                </button>
-              </li>}
-              {userType === "supplier" && <li role="presentation" className="flex-grow">
-                <button
-                  onClick={() => setActiveTab("opportunities")}
-                  className={`my-2 block border-x-0 border-b-2  w-full border-t-0  text-left pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
-                    activeTab === "opportunities"
-                      ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
-                      : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
-                  }`}
-                  data-te-toggle="pill"
-                  data-te-target="#tabs-profile03"
-                  role="tab"
-                  aria-controls="tabs-profile03"
-                  aria-selected="false"
-                >
-                  Opportunities
-                </button>
-              </li>}
-           
+              {userType === "supplier" && (
+                <li role="presentation" className="flex-grow  w-full ">
+                  <button
+                    onClick={() => setActiveTab("transport")}
+                    className={`my-2 block border-x-0  text-left pl-5 border-b-2 border-t-0 w-full  pb-3.5 pt-4 text-xs uppercase leading-tight  hover:isolate     ${
+                      activeTab === "transport"
+                        ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
+                        : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
+                    }`}
+                    data-te-toggle="pill"
+                    data-te-target="#tabs-home03"
+                    data-te-nav-active
+                    role="tab"
+                    aria-controls="tabs-home03"
+                    aria-selected="true"
+                  >
+                    Find Transport
+                  </button>
+                </li>
+              )}
+              {userType === "supplier" && (
+                <li role="presentation" className="flex-grow ">
+                  <button
+                    onClick={() => setActiveTab("orders")}
+                    className={`my-2 block text-left border-x-0 border-b-2 w-full border-t-0 pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
+                      activeTab === "orders"
+                        ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
+                        : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
+                    }`}
+                    data-te-toggle="pill"
+                    data-te-target="#tabs-profile03"
+                    role="tab"
+                    aria-controls="tabs-profile03"
+                    aria-selected="false"
+                  >
+                    Orders
+                  </button>
+                </li>
+              )}
+              {userType === "supplier" && (
+                <li role="presentation" className="flex-grow">
+                  <button
+                    onClick={() => setActiveTab("opportunities")}
+                    className={`my-2 block border-x-0 border-b-2  w-full border-t-0  text-left pl-5 pb-3.5 pt-4 text-xs uppercase leading-tight       ${
+                      activeTab === "opportunities"
+                        ? "text-amber-500 border-amber-500 dark:data-[te-nav-active]:border-primary-400"
+                        : "text-neutral-500 dark:hover:bg-transparent dark:data-[te-nav-active]:text-primary-400 border-transparent"
+                    }`}
+                    data-te-toggle="pill"
+                    data-te-target="#tabs-profile03"
+                    role="tab"
+                    aria-controls="tabs-profile03"
+                    aria-selected="false"
+                  >
+                    Opportunities
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
           <div className="bottom flex flex-col gap-2 bg-blue-1 items-center w-full h-28 bg-slate-4">
@@ -250,15 +252,12 @@ export default function Dashboard2() {
                 toast.success("Logout successful!");
                 setTimeout(() => {
                   router.push("/"); // Navigate to the success page after the toast disappears
-                }, 3000); 
-                
+                }, 3000);
               }}
               className="border border-white h-fit  py-1 w-32 flex justify-center rounded-3xl font-normal max-md:mr-3"
             >
               {" "}
-              <p className="text-white font-semibold ">
-                Logout
-              </p>{" "}
+              <p className="text-white font-semibold ">Logout</p>{" "}
             </button>
           </div>
         </div>
@@ -267,7 +266,7 @@ export default function Dashboard2() {
           <div className="middle bg-amber-4 h-full w-full">
             <div className="top bg-white border-b-2 border-slate-100 w-full h-10"></div>
             <div className="my-2 bg-blue-4 px-4 h-full">
-            {activeTab === "welcome" && (
+              {activeTab === "welcome" && (
                 <div
                   className="h-full bg-green-4 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                   id="tabs-home03"
@@ -279,7 +278,6 @@ export default function Dashboard2() {
                     <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">
                       Welcome
                     </div>
-                   
                   </div>
                 </div>
               )}
@@ -376,22 +374,24 @@ export default function Dashboard2() {
               )}
               {activeTab === "orders" && (
                 <>
-                 <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">Orders</div>
-                 {order && order.map(order => (
-        <Card
-          key={order?._id} // Assuming each order has a unique identifier, adjust accordingly
-          clientAddress={order?.clientAddress} // Assuming province is a property of each order
-          totalAmount={order?.totalAmount} // Assuming total is a property of each order
-          productName={order?.productName} // Assuming productName is a property of each order
-          clientName={order?.clientName} // Assuming clientName is a property of each order
-          clientEmail={order?.clientEmail} // Assuming quantity is a property of each order
-        />
-      ))}
-
-
-                  
-                 
-                                 </>
+                  <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">
+                    Orders
+                  </div>
+                  {order &&
+                    order.map((order) => (
+                      <Card
+                        key={order?._id} // Assuming each order has a unique identifier, adjust accordingly
+                        clientAddress={order?.clientAddress} // Assuming province is a property of each order
+                        totalAmount={order?.totalAmount} // Assuming total is a property of each order
+                        productName={order.productId?.productName} // Assuming productName is a property of each order
+                        clientName={order?.clientName} // Assuming clientName is a property of each order
+                        clientEmail={order?.clientEmail} // Assuming quantity is a property of each order
+                        orderId={order?._id}
+                        refreshOrders={() => fetchOrders()}
+                        orderStatus={order?.status}
+                      />
+                    ))}
+                </>
               )}
             </div>
           </div>
