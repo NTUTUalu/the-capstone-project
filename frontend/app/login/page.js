@@ -32,7 +32,7 @@ export default function Login() {
     const transporterId = localStorage.getItem("transporterId")
 
     if (token && (supplierId || transporterId)) {
-      router.push("/dashboard")
+      router.push("/Dashboard")
     } else if (token && !supplierId && !transporterId) {
       router.push("/decision")
     }
@@ -85,7 +85,7 @@ export default function Login() {
             router.push("/dashboard")
            } else if (json.data?.transporter) {
             localStorage.setItem("transporterId", json.data.transporter._id)
-            router.push("/dashboard")
+            router.push("/Dashboard")
            } else {
             router.push("/decision")
            }
