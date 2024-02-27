@@ -16,13 +16,6 @@ import Products from "./components/product/product";
 import RegisterInterest from "./supplier/page";
 import Mission from "./components/Mission/mission";
 
-// const Dashboard2 = dynamic(() => import("./components/Dashboard/dashboard2"), {
-//   ssr: false,
-// });
-// const Dashboard = dynamic(() => import("./Dashboard/page"), {
-//   ssr: false,
-// });
-// import Productdescription from "./components/productDescription/productDescription";
 
 export default function Home() {
   return (
