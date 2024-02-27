@@ -1,5 +1,5 @@
 import express from "express";
-import { PORT, MONGODB_URL } from "./config.js";
+// import { PORT  } from "./";
 import mongoose, { Mongoose } from "mongoose";
 //below we import the schema
 import User from "./model/user.js";
@@ -10,6 +10,8 @@ import Order from "./model/order.js";
 import bcrypt from "bcryptjs";
 import cors from "cors";
 import jwt from "jsonwebtoken";
+import 'dotenv';
+// dotenv.config();
 
 const app = express();
 
@@ -17,7 +19,7 @@ const app = express();
 //it helps us to send data to the server in a json format that can be understood by the browser
 app.use(express.json());
 app.use(cors());
-import "dotenv/config";
+// import "dotenv/config";
 
 const verifyToken = (req, res, next) => {
   // Check for the Authorization header
@@ -461,14 +463,15 @@ app.post("/orders/update/:orderId",verifyToken,  async (request, response) => {
 });
 
 //mongoose will help us establish connection to the database
+// const PORT = process.env.PORT;
 mongoose
-  .connect(MONGODB_URL)
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("App connected to the database");
 
     //we put the line below here because we want the server to run only when we have connection to the database
     app.listen(PORT, () => {
-      console.log(`App is listening to port: ${PORT}`);
+      console.log(`App is listening to port: ${process.env.PORT}`);
     });
   })
   .catch((error) => {
