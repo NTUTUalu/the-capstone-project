@@ -22,6 +22,7 @@ export default function Checkout() {
   const quantity = params.get("quantity");
 
   //using useEffect to display error for limited time
+  //this
   useEffect(() => {
     if (error) {
       const timeoutId = setTimeout(() => {
