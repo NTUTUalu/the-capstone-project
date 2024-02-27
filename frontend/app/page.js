@@ -6,7 +6,7 @@ import Navigation from "./components/navigation/navigation";
 import Footer from "./components/footer/footer";
 import MoodSetter from "./components/mood-setter/mood-setter";
 import MoodIcons from "./components/mood-Icon/mood-Icon";
-import Mission from "./components/mission/mission";
+
 import Transportation from "./components/transportation/transportation";
 import Banner from "./components/main-Banner/main-Banner";
 import Products from "./components/product/product";
@@ -14,6 +14,7 @@ import Products from "./components/product/product";
 // import Login from "./otherpages/login/login"
 
 import RegisterInterest from "./supplier/page";
+import Mission from "./components/mission/mission";
 
 // const Dashboard2 = dynamic(() => import("./components/Dashboard/dashboard2"), {
 //   ssr: false,
@@ -31,7 +32,7 @@ export default function Home() {
       <Navigation />
       <MoodSetter />
       <MoodIcons />
-      <Mission />
+      <Mission/>
       <Banner />
       <Transportation />
       <Products />
