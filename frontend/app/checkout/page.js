@@ -111,7 +111,7 @@ console.log(product);
     const transporterId = localStorage.getItem("transporterId");
 
     if (token && (supplierId || transporterId)) {
-      router.push("/dashboard");
+      router.push("/Dashboard");
     } else if (token && !supplierId && !transporterId) {
       router.push("/decision");
     }
