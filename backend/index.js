@@ -10,9 +10,10 @@ import Order from "./model/order.js";
 import bcrypt from "bcryptjs";
 import cors from "cors";
 import jwt from "jsonwebtoken";
-import "dotenv/config";
+import { config } from "dotenv";
+// import "dotenv/config";
 // import 'dotenv';
-// dotenv.config();
+config();
 
 const app = express();
 
@@ -463,7 +464,7 @@ app.post("/orders/update/:orderId",verifyToken,  async (request, response) => {
 });
 
 //mongoose will help us establish connection to the database
-// const PORT = process.env.PORT;
+const PORT = process.env.PORT;
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
@@ -471,7 +472,7 @@ mongoose
 
     //we put the line below here because we want the server to run only when we have connection to the database
     app.listen(PORT, () => {
-      console.log(`App is listening to port: ${process.env.PORT}`);
+      console.log(`App is listening to port: ${PORT}`);
     });
   })
   .catch((error) => {
