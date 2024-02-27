@@ -57,7 +57,7 @@ export default function Productdescription() {
   }, [error]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/products/" + productId)
+    fetch(`${BASE_API_URL}/products/` + productId)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
