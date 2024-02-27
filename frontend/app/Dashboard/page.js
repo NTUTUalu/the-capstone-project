@@ -7,6 +7,7 @@ import { Table, Pagination } from "antd";
 import Card from "./card";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {BASE_API_URL} from "../../constants"
 
 export default function Dashboard2() {
   const [order, setOrder] = useState([]);
@@ -130,7 +131,7 @@ export default function Dashboard2() {
       const supplierId = localStorage.getItem("supplierId");
       if (!supplierId) return; // If supplierId is not available, return early
 
-      const url = `http://localhost:8080/orders/supplier/${supplierId}`;
+      const url = `${BASE_API_URL}/orders/supplier/${supplierId}`;
       const response = await fetch(url, {
         headers: {
           "Content-Type": "application/json",

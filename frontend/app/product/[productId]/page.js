@@ -5,6 +5,7 @@ import Navigation from "@/app/components/navigation/navigation";
 import Footer from "@/app/components/footer/footer";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import {BASE_API_URL} from "../../../constants"
 
 export default function Productdescription() {
   const { productId } = useParams();
@@ -75,7 +76,7 @@ export default function Productdescription() {
   }, [productId]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/get-suppliers")
+    fetch(`${BASE_API_URL}/get-suppliers`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import OnboardingFooter from "../components/second-Footer/second-Footer";
-
+import {BASE_API_URL} from "../../constants"
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -56,7 +56,7 @@ export default function ProductUpdate() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/CreateProduct", {
+      const res = await fetch(`${BASE_API_URL}/CreateProduct`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

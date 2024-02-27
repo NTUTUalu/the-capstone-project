@@ -4,6 +4,7 @@ import OnboardingFooter from "../components/second-Footer/second-Footer";
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {BASE_API_URL} from "../../constants"
 
 export default function MotorSignup() {
  
@@ -39,7 +40,7 @@ export default function MotorSignup() {
 
 
     try {
-      fetch("http://localhost:8080/become-transporter", {
+      fetch(`${BASE_API_URL}/become-transporter`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -6,6 +6,7 @@ import CustomToast from "../components/toast/toast";
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {BASE_API_URL} from "../../constants"
 
 export default function RegisterInterest() {
   const [businessName, setBusinessName] = useState("");
@@ -72,7 +73,7 @@ export default function RegisterInterest() {
     }
 
     try {
-      fetch("http://localhost:8080/become-supplier", {
+      fetch(`${BASE_API_URL}/become-supplier`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

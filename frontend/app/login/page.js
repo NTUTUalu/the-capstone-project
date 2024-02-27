@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import On from "../components/second-Footer/second-Footer"; //importing a footer
-
+import {BASE_API_URL} from "../../constants"
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -61,7 +61,7 @@ export default function Login() {
     // }
 
     try {
-      fetch("http://localhost:8080/login", {
+      fetch(`${BASE_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

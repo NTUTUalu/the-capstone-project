@@ -1,4 +1,4 @@
-
+import {BASE_API_URL} from "../../constants"
 
 function OrderComponent({ clientAddress, clientEmail, productName, clientName, totalAmount,orderId, orderStatus, refreshOrders }) {
   const handleAccept = async (e) => {
@@ -6,7 +6,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
     // Handle accept logic
     
     try {
-      const res = await fetch("http://localhost:8080/orders/update/"+ orderId, {
+      const res = await fetch(`${BASE_API_URL}/orders/update/`+ orderId, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",

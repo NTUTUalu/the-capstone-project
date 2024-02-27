@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import On from "../components/second-Footer/second-Footer"; //importing a footer
-
+import {BASE_API_URL} from "../../constants"
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -36,7 +36,7 @@ export default function Checkout() {
     e.preventDefault();
 
     try {
-      fetch("http://localhost:8080/orders/create", {
+      fetch(`${BASE_API_URL}/orders/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export default function Checkout() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8080/products/" + productId)
+    fetch(`${BASE_API_URL}/products/` + productId)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -84,7 +84,7 @@ export default function Checkout() {
 
   
   useEffect(() => {
-    fetch("http://localhost:8080/supplier/" + supplierId)
+    fetch(`${BASE_API_URL}/supplier/` + supplierId)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

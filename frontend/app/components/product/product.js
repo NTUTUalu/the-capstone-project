@@ -4,13 +4,14 @@ import Card2 from "./product-card";
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 const { Meta } = Card;
+import {BASE_API_URL} from "../../../constants"
 
 export default function Products() {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/products')
+    fetch(`${BASE_API_URL}/products`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

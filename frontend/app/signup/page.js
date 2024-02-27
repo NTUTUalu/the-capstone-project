@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import CustomToast from "../components/toast/toast";
 import toast, { Toaster } from 'react-hot-toast';
+import {BASE_API_URL} from "../../constants"
 
 // importing the model for creating a user
 
@@ -85,7 +86,7 @@ export default function SignUp() {
 
     
     try {
-      const res = await fetch("http://localhost:8080/signup", {
+      const res = await fetch(`${BASE_API_URL}/signup`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",

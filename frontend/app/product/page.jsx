@@ -3,6 +3,7 @@ import Link from "next/link";
 import OnboardingFooter from "../components/second-Footer/second-Footer";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import {BASE_API_URL} from "../../constants"
 import { useRouter } from "next/navigation";
 
 export default function ProductUpdate() {
@@ -55,7 +56,7 @@ export default function ProductUpdate() {
     }
 
     try {
-      const res = await fetch("http://localhost:8080/CreateProduct", {
+      const res = await fetch(`${BASE_API_URL}/CreateProduct`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
