@@ -10,6 +10,7 @@ import Order from "./model/order.js";
 import bcrypt from "bcryptjs";
 import cors from "cors";
 import jwt from "jsonwebtoken";
+import "dotenv/config";
 // import 'dotenv';
 // dotenv.config();
 
@@ -19,7 +20,6 @@ const app = express();
 //it helps us to send data to the server in a json format that can be understood by the browser
 app.use(express.json());
 app.use(cors());
-import "dotenv";
 
 const verifyToken = (req, res, next) => {
   // Check for the Authorization header
