@@ -3,10 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import OnboardingFooter from "../components/second-Footer/second-Footer";
 import CustomToast from "../components/toast/toast";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {BASE_API_URL} from "../../constants"
+import { BASE_API_URL } from "../../constants";
 
 export default function RegisterInterest() {
   const [businessName, setBusinessName] = useState("");
@@ -42,8 +42,9 @@ export default function RegisterInterest() {
     if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
       //we are saying the first character must be an alphabet, there will be a space, then any character from A-z
       setError("  Invalid email!");
-      
-      return false;}
+
+      return false;
+    }
 
     if (isNaN(accountNumber)) {
       setError("Account number is incorrect!");
@@ -77,7 +78,7 @@ export default function RegisterInterest() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer "+ localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify({
           email,
@@ -90,16 +91,15 @@ export default function RegisterInterest() {
       })
         .then((response) => response.json())
         .then((json) => {
-          console.log(json)
+          console.log(json);
           if (json) {
             const form = e.target;
             localStorage.setItem("supplierId", json._id);
             form.reset();
-            toast.success('Supplier Registration successful!')
+            toast.success("Supplier Registration successful!");
             setTimeout(() => {
               router.push("/success-register"); // Navigate to the success page after the toast disappears
-            }, 3000); 
-            
+            }, 3000);
           } else {
             console.log("user registration failed.");
           }
@@ -130,10 +130,7 @@ export default function RegisterInterest() {
       <div className="wrapper flex w-full bg-blue-5 min-h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
-          <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+            <Toaster position="top-center" reverseOrder={false} />
             <div className="block w-fit h-fit rounded-3xl min-w-72 bg-yellow-900 my-10 px-6 py-3 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
               <form
                 className="flex flex-col bg-pink-4"
@@ -157,6 +154,7 @@ export default function RegisterInterest() {
                       Business Name
                     </label>
                   </div>
+                  
                   <div className="relative mb- w-60 text-sm">
                     <input
                       type="email"
@@ -269,6 +267,35 @@ export default function RegisterInterest() {
                     <label>Chicken</label>
                   </div>
                 </div>
+                {/* <div className="bg-yellow-3 grid grid-rows-1 grid-cols-2 gap-4  py-2 w-full h-fit items-center">
+                <div className="relative   flex mb- w-60 text-sm bg">
+                    <select className=" flex  p-1  w-56  bg-slate-200 opacity-40 ml-3 rounded-md text-sm">
+                      <option disabled="" value="RWF">
+                        RWF
+                      </option>
+                    </select>
+                  </div>
+                  <div className="relative mb- w-60 text-sm">
+                    <select className=" flex  p-1  w-56  bg-slate-200 opacity-40 ml-3 rounded-md text-sm">
+                      <option disabled="" value="">
+                        Choose Bank
+                      </option>
+                      <option value="726">Access Bank Rwanda Plc</option>
+                      <option value="727">Bank of Africa Rwanda Plc</option>
+                      <option value="728">Bank of Kigali Plc</option>
+                      <option value="729">BPR Bank Rwanda Plc</option>
+                      <option value="730">Cogebanque Pls</option>
+                      <option value="731">Ecobank Rwanda Plc</option>
+                      <option value="732">Equity Bank Rwanda Plc</option>
+                      <option value="733">
+                        Guaranty Trust Bank Rwanda Plc
+                      </option>
+                      <option value="734">I&amp;M Bank Rwanda Plc</option>
+                      <option value="735">NCBA Bank Rwanda Plc</option>
+                    </select>
+                  </div>
+                </div> */}
+                
                 <select
                   value={bankName}
                   onChange={(e) => setBankName(e.target.value.trim())}
@@ -284,6 +311,17 @@ export default function RegisterInterest() {
                   <option value="Eco Bank">Eco Bank</option>
                   <option value="Access Bank">Access Bank</option>
                 </select>
+                {/* <div className="relative mb-6 w-60 text-sm">
+                  <input
+                    type="text"
+                    className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    onChange={(e) => setAccountNumber(e.target.value.trim())}
+                    maxLength="16"
+                  />
+                  <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
+                    Sub Account
+                  </label>
+                </div> */}
                 <div className="relative mb-6 w-60 text-sm">
                   <input
                     type="text"
