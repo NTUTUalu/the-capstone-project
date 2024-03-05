@@ -14,7 +14,7 @@ import Products from "./components/product/product";
 // import Login from "./otherpages/login/login"
 
 import RegisterInterest from "./supplier/page";
-import Mission from "./components/Mission/mission";
+import Mission from "./components/mission/mission";
 
 
 export default function Home() {

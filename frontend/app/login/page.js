@@ -82,10 +82,10 @@ export default function Login() {
            if(json.data?.supplier){
             //they are supplier go to dashboard
             localStorage.setItem("supplierId", json.data.supplier._id)
-            router.push("/Dashboard")
+            router.push("/dashboard")
            } else if (json.data?.transporter) {
             localStorage.setItem("transporterId", json.data.transporter._id)
-            router.push("/Dashboard")
+            router.push("/dashboard")
            } else {
             router.push("/decision")
            }
