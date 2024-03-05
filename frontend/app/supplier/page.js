@@ -154,7 +154,7 @@ export default function RegisterInterest() {
                       Business Name
                     </label>
                   </div>
-                  
+
                   <div className="relative mb- w-60 text-sm">
                     <input
                       type="email"
@@ -268,7 +268,7 @@ export default function RegisterInterest() {
                   </div>
                 </div>
                 <div className="bg-yellow-3 grid grid-rows-1 grid-cols-2 gap-4  py-2 w-full h-fit items-center">
-                <div className="relative   flex mb- w-60 text-sm bg">
+                  <div className="relative   flex mb- w-60 text-sm bg">
                     <select className=" flex  p-1  w-56  bg-slate-200 opacity-40 ml-3 rounded-md text-sm">
                       <option disabled="" value="RWF">
                         RWF
@@ -276,7 +276,12 @@ export default function RegisterInterest() {
                     </select>
                   </div>
                   <div className="relative mb- w-60 text-sm">
-                    <select className=" flex  p-1  w-56  bg-slate-200 opacity-40 ml-3 rounded-md text-sm">
+                    <select
+                      value={bankName}
+                      onChange={(e) => setBankName(e.target.value.trim())}
+                      default=""
+                      className=" flex  p-1  w-56  bg-slate-200 opacity-40 ml-3 rounded-md text-sm"
+                    >
                       <option disabled="" value="">
                         Choose Bank
                       </option>
@@ -294,8 +299,8 @@ export default function RegisterInterest() {
                       <option value="735">NCBA Bank Rwanda Plc</option>
                     </select>
                   </div>
-                </div> 
-                
+                </div>
+
                 {/* <select
                   value={bankName}
                   onChange={(e) => setBankName(e.target.value.trim())}
@@ -312,7 +317,6 @@ export default function RegisterInterest() {
                   <option value="Access Bank">Access Bank</option>
                 </select> */}
 
-               
                 <div className="relative mb-6 w-60 text-sm">
                   <input
                     type="text"

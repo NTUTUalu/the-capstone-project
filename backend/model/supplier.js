@@ -28,7 +28,6 @@ const supplierSchema = new Schema(
       type: String,
       required: true,
     },
-
     accountNumber: {
       type: String,
       required: true,

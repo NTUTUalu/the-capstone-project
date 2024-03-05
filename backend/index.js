@@ -100,7 +100,7 @@ app.post("/become-supplier", verifyToken, async (request, response) => {
         message: "send all required fields* ",
       });
     }
-
+    console.log(request.body.bankName)
     //below we are going to hash the password
     //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
     //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
