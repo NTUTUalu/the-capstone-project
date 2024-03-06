@@ -1,6 +1,7 @@
 import express from "express";
 // import { PORT  } from "./";
 import mongoose, { Mongoose } from "mongoose";
+import https from "https";
 //below we import the schema
 import User from "./model/user.js";
 import Transport from "./model/transport.js";
@@ -100,7 +101,7 @@ app.post("/become-supplier", verifyToken, async (request, response) => {
         message: "send all required fields* ",
       });
     }
-    console.log(request.body.bankName)
+    console.log(request.body.bankName);
     //below we are going to hash the password
     //  const hashedPassword = await bcrypt.hash(request.body.password, 5);
     //  const hashedConfirmPassword = await bcrypt.hash(request.body.confirmPassword,5);
@@ -118,12 +119,74 @@ app.post("/become-supplier", verifyToken, async (request, response) => {
 
     //await user user and check if they exit
     const suppliers = await Supplier.create(newSupplier);
+
+    //create subaccount
+    const data = await createPaystackAccount({
+
+      businessName: request.body.businessName,
+      bankName: request.body.bankName,
+      accountNumber: request.body.accountNumber,
+      email: request.body.email,
+
+    })
+    console.log(data)
     return response.status(201).send(suppliers);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
+
+const createPaystackAccount = async (body) => {
+  try {
+    const params = JSON.stringify({
+      business_name: body.businessName,
+      settlement_bank: body.bankName,
+      account_number: body.accountNumber,
+      percentage_charge: 5.5,
+      primary_contact_email: body.email 
+    });
+    console.log(params)
+    const options = {
+      hostname: "api.paystack.co",
+      port: 443,
+      path: "/subaccount",
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + process.env.PAYSTACK_SECRET_KEY,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const paystackReq = https.request(options, (resp) => {
+      let data = "";
+
+      resp.on("data", (chunk) => {
+        data += chunk;
+      });
+
+      resp.on("end", () => {
+        const responseData = JSON.parse(data);
+
+        if (responseData.status) {
+          const transactionData = responseData.data;
+          console.log(transactionData);
+        } else {
+          console.log(responseData);
+        }
+      });
+    });
+
+    paystackReq.on("error", (error) => {
+      console.log(error.message);
+    });
+
+    paystackReq.write(params);
+    paystackReq.end();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 app.get("/get-suppliers", async (request, response) => {
   try {
@@ -425,29 +488,32 @@ app.post("/orders/create", async (request, response) => {
 });
 
 //FETCHING ALL ORDERS FOR A CERTAIN SUPPLIER
-app.get("/orders/supplier/:supplierId",verifyToken, async (request, response) => {
-  try {
-    const { supplierId } = request.params;
-    const orders = await Order.find({
-      supplierId: new mongoose.Types.ObjectId(supplierId),
-    }).populate("productId");
+app.get("/orders/supplier/:supplierId",
+  verifyToken,
+  async (request, response) => {
+    try {
+      const { supplierId } = request.params;
+      const orders = await Order.find({
+        supplierId: new mongoose.Types.ObjectId(supplierId),
+      }).populate("productId");
 
-    if (!orders) {
-      return response
-        .status(404)
-        .json({ message: "Orders not found for the supplier ID provided." });
+      if (!orders) {
+        return response
+          .status(404)
+          .json({ message: "Orders not found for the supplier ID provided." });
+      }
+
+      console.log(orders);
+
+      return response.status(200).json(orders);
+    } catch (error) {
+      console.log(error.message);
+      response.status(500).send({ message: error.message });
     }
-
-    console.log(orders);
-
-    return response.status(200).json(orders);
-  } catch (error) {
-    console.log(error.message);
-    response.status(500).send({ message: error.message });
   }
-});
+);
 
-app.post("/orders/update/:orderId",verifyToken,  async (request, response) => {
+app.post("/orders/update/:orderId", verifyToken, async (request, response) => {
   try {
     const { orderId } = request.params;
     const updateOrder = await Order.findOneAndUpdate(
@@ -462,6 +528,30 @@ app.post("/orders/update/:orderId",verifyToken,  async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+app.post("/updated/:orderId", verifyToken, async (request, response) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+
+  try {
+      const updatedOrder = await Order.findOneAndUpdate(
+          { orderId },
+          { status },
+          { new: true }
+      );
+
+      if (!updatedOrder) {
+          return res.status(404).json({ message: "Order not found" });
+      }
+
+      return res.status(200).json(updatedOrder);
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+
 
 //mongoose will help us establish connection to the database
 const PORT = process.env.PORT;

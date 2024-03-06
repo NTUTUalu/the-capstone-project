@@ -32,7 +32,7 @@ export default function Login() {
     const transporterId = localStorage.getItem("transporterId")
 
     if (token && (supplierId || transporterId)) {
-      router.push("/Dashboard")
+      router.push("/dashboard")
     } else if (token && !supplierId && !transporterId) {
       router.push("/decision")
     }

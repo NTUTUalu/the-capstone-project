@@ -35,7 +35,7 @@ export default function Decision() {
 
                   <div className="mb-6 flex items-center justify-right  w-full">
                     <Link
-                      href="/Dashboard"
+                      href="/dashboard"
                       className="text-slate-600 underline text-xs tracking-wider w-full bg-pink-2 text-right transition duration-150 ease-in-out mt-4 font-semibold"
                     >
                       Proceed to dashboard

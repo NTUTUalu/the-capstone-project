@@ -1,6 +1,6 @@
 import https from 'https';
 
-export async function POST(request ) {
+export async function POST(request, res ) {
     //
     const data = await request.json()
    
