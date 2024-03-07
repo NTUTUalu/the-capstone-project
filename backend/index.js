@@ -12,6 +12,8 @@ import bcrypt from "bcryptjs";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
+import sgMail from "@sendgrid/mail";
+sgMail.setApiKey(process.env.SENDGRID_API);
 // import "dotenv/config";
 // import 'dotenv';
 config();
@@ -122,14 +124,12 @@ app.post("/become-supplier", verifyToken, async (request, response) => {
 
     //create subaccount
     const data = await createPaystackAccount({
-
       businessName: request.body.businessName,
       bankName: request.body.bankName,
       accountNumber: request.body.accountNumber,
       email: request.body.email,
-
-    })
-    console.log(data)
+    });
+    console.log(data);
     return response.status(201).send(suppliers);
   } catch (error) {
     console.log(error.message);
@@ -144,9 +144,9 @@ const createPaystackAccount = async (body) => {
       settlement_bank: body.bankName,
       account_number: body.accountNumber,
       percentage_charge: 5.5,
-      primary_contact_email: body.email 
+      primary_contact_email: body.email,
     });
-    console.log(params)
+    console.log(params);
     const options = {
       hostname: "api.paystack.co",
       port: 443,
@@ -488,7 +488,8 @@ app.post("/orders/create", async (request, response) => {
 });
 
 //FETCHING ALL ORDERS FOR A CERTAIN SUPPLIER
-app.get("/orders/supplier/:supplierId",
+app.get(
+  "/orders/supplier/:supplierId",
   verifyToken,
   async (request, response) => {
     try {
@@ -522,36 +523,32 @@ app.post("/orders/update/:orderId", verifyToken, async (request, response) => {
       { new: true }
     );
 
+    //MESSAGING api
+    const msg = {
+      to: request.body.clientName,
+      //we have to find the email of the supplier from the DB
+      from: 'enter supplier ID',
+      subject: `Order status: ${request.body.status}`,
+      text: `Hi, your order status from the supplier is in ${request.body.status} status`,
+      html: `Thank you for trusting us!`,
+    };
+
+    sgMail
+      .send(msg)
+      .then((response) => {
+        console.log(response[0].statusCode);
+        console.log(response[0].headers);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
     return response.status(200).json(updateOrder);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
-
-app.post("/updated/:orderId", verifyToken, async (request, response) => {
-  const { orderId } = req.params;
-  const { status } = req.body;
-
-  try {
-      const updatedOrder = await Order.findOneAndUpdate(
-          { orderId },
-          { status },
-          { new: true }
-      );
-
-      if (!updatedOrder) {
-          return res.status(404).json({ message: "Order not found" });
-      }
-
-      return res.status(200).json(updatedOrder);
-  } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-
-
 
 //mongoose will help us establish connection to the database
 const PORT = process.env.PORT;
