@@ -118,7 +118,7 @@ export default function Productdescription() {
               className=" leading-8 left flex flex-col bg-blue-4 justify-center w-3/4  max-md:justify-start max-md:mt-0 max-md:pt-7 max-sm:w-full bg-pink-4"
             >
               <h4 className="text-slate-400 font-medium mb-1">
-                Our Transportation Partnership
+                Product Description
               </h4>
               <h1 className="text-slate-950 font-bold text-2xl w-5/6  mb-3 max-md:text-3xl max-md:w-full  max-sm:text-2xl max-sm:w-5/6">
                 {product?.productName}
@@ -161,64 +161,7 @@ export default function Productdescription() {
                   </span>
                 </div>
               </div>
-              {/* <div className="bg-yellow-3 grid grid-rows-1 grid-cols-2 gap-2 py-2 w-fit h-fit items-center bg-slate-2">
-              <div className="relative mb- w-60 text-sm">
-                <select
-                  value={deliveryProvince}
-                  onChange={(e) => setDeliveryProvince(e.target.value)}
-                  className="flex p-1 w-60 bg-slate-300 opacity-40 text-sm rounded-md"
-                >
-                  <option value="">Select Province</option>
-                  <option value="Kigali">Kigali</option>
-                  <option value="Nyagatare">Nyagatare</option>
-                  <option value="Bugesera">Bugesera</option>
-                  <option value="Kibuye">Kibuye</option>
-                  <option value="Nyarugenge">Nyarugenge</option>
-                  <option value="Ngoma">Ngoma</option>
-                  <option value="Eastern Province">Eastern Province</option>
-                  <option value="Southern Province">Southern Province</option>
-                  <option value="Western Province">Western Province</option>
-                  <option value="Kicukiro">Kicukiro</option>
-                </select>
-              </div>
-
-              <div className="relative mb- w-60 text-sm">
-                {[
-                  "Kigali",
-                  "Nyagatare",
-                  "Bugesera",
-                  "Kibuye",
-                  "Nyarugenge",
-                ].includes(deliveryProvince) ? (
-                  <select
-                    value={supplier}
-                    onChange={(e) => setSupplier(e.target.value.trim())}
-                    default=""
-                    className="flex p-1 w-60 bg-slate-300 opacity-40 text-sm rounded-md"
-                  >
-                    <option value="">Select Supplier</option>
-                    <option value="Kigali farmers">Kigali farmers</option>
-                    <option value="Three Brothers Supplier">
-                      Three Brothers Supplier
-                    </option>
-                    <option value="Patrick Holdings">Patrick Holdings</option>
-                  </select>
-                ) : (
-                  <select
-                    value={supplier}
-                    onChange={(e) => setSupplier(e.target.value.trim())}
-                    default=""
-                    className="flex p-1 w-60 bg-slate-300 opacity-40 text-sm rounded-md"
-                  >
-                    <option value="">Select Supplier</option>
-                    <option value="JJ holdings">JJ holdings</option>
-                    <option value="Anne Supermarket">Anne Supermarket</option>
-                    <option value="Agri farmers">Agri farmers</option>
-                  </select>
-                )}
-              </div>
-            </div> */}
-
+              
               <h4>
                 Delivery Time <span className="text-xs">(+/-)</span> :{" "}
                 <span className="text-amber-500 font-normal">
@@ -255,7 +198,7 @@ export default function Productdescription() {
             <div className="h-full w-full">
               <div className=" bg-amber-8 flex flex-col w-full px-20">
                 <h1 className="w-full bg text-center my-8 text-lg tracking-wide font-semibold">
-                  Find Suitable Transportation
+                  Find Suitable Supplier
                 </h1>
                 <table className=" grid grid-cols-1 grid-rows-auto border border-slate-400">
                   <thead className="w-full h-10 flex justify-center align-center ">
@@ -264,7 +207,7 @@ export default function Productdescription() {
                         Supplier Names
                       </th>
                       <th className=" border-r flex justify-center items-center border-slate-400">
-                        Province
+                        District
                       </th>
                       <th className=" border-r flex justify-center items-center">
                         Action
@@ -286,7 +229,7 @@ export default function Productdescription() {
                         <td className="bg-amber-100 flex justify-center items-center  h-full">
                           <Link
                           href={`/checkout?productId=${productId}&supplierId=${supplier._id}&quantity=${quantity}`}
-                            className="bg-amber-500 rounded-3xl h-8 w-36"
+                            className="bg-amber-500 rounded-3xl h-8 w-36 flex justify-center items-center"
                            
                           >
                             Checkout

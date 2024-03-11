@@ -5,6 +5,9 @@ import On from "../components/second-Footer/second-Footer"; //importing a footer
 import {BASE_API_URL} from "../../constants"
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+import PaystackPop from '@paystack/inline-js'
+
 
 export default function Checkout() {
   const [name, setName] = useState("");
@@ -33,9 +36,67 @@ export default function Checkout() {
     }
   }, [error]);
 
-  const createOrder = (e) => {
+  useEffect(() => {
+    async function loadPaystack() {
+      if (typeof window !== 'undefined') {
+        const PaystackPop = (await import('@paystack/inline-js')).default;
+        window.PaystackPop = PaystackPop; // Assign PaystackPop to window object
+      }
+    }
+
+    loadPaystack();
+  }, []);
+
+  const totalCost = product?.itemCost * quantity;
+
+  async function paystackpay(e) {
     e.preventDefault();
 
+    if (!name || !address || !email) {
+      toast.error("All fields must be filled!")
+
+      return;
+    }
+    if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+      //we are saying the first character must be an alphabet, there will be a space, then any character from A-z
+   
+      toast.error(" Invalid email!")
+
+      return false;
+    }
+
+   
+
+
+    if (typeof window !== 'undefined' && window.PaystackPop) {
+      const paystack = new window.PaystackPop();
+      paystack.newTransaction({
+        //below is our test public key for payment
+        
+        key: 'pk_test_aec0a77b8d196fd42f7b11ef3f96dce59c799646',
+        amount:totalCost*100,
+        email,
+        name,
+        address,
+        // the message will be displayed on successful purchase
+        // Pay with card, its the one working
+        onSuccess(transaction) {
+          setAddress("");
+          setEmail("")
+          setName("")
+          createOrder()
+          // let message = `Payment complete! Reference ${transaction.reference}`
+       
+        },
+        onCancel() {
+          alert('Payment cancelled')
+        }
+      });
+    }
+  }
+
+  const createOrder = () => {
+ 
     try {
       fetch(`${BASE_API_URL}/orders/create`, {
         method: "POST",
@@ -54,7 +115,9 @@ export default function Checkout() {
         .then((response) => response.json())
         .then((json) => {
           console.log(json)
-         
+          setTimeout(() => {
+            router.push("/success"); // Navigate to the success page after the toast disappears
+          }, 3000); 
         })
         .catch((err) => {
           console.log(err);
@@ -123,6 +186,7 @@ console.log(product);
       <div className="wrapper flex w-full bg-blue-5 h-fit min-h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
+          <Toaster position="top-center" reverseOrder={false} />
             <div className="grid grid-cols-1 gap-8 w-full mx-52 justify-items-center  rounded-3xl min-w-72 bg-yellow-900 my-10 p-4 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.7),0_10px_20px_-2px_rgba(0,0,0,0.4)]dark:bg-neutral-7">
             <form className="w-full h-fit grid grid-cols-1 grid-rows-2 items-center justify-items-center gap-4 bg-pink-3">
               <div className="grid grid-cols-2 grid-row-1 gap-4 p-5 bg-yellow-0 w-full h-60 rounded-3xl border border-white ">
@@ -142,6 +206,7 @@ console.log(product);
                   <h4 className="text-white font- tracking-wide mb-1">
                     Supplier Name: {supplier?.businessName}
                   </h4>
+
                 </div>
                 <div className=" bg-blue-1 position-relative">
                   <div className=" flex justify-center w-full h-full items-center position-relative bg-red-2">
@@ -164,6 +229,7 @@ console.log(product);
                       type="text"
                       className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                       onChange={(e) => setName(e.target.value.trim())}
+                      value={name}
                       required
                       maxLength="35"
                     />
@@ -176,6 +242,7 @@ console.log(product);
                       type="email"
                       className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                       onChange={(e) => setEmail(e.target.value.trim())}
+                      value={email}
                       required
                       maxLength="32"
                     />
@@ -188,6 +255,7 @@ console.log(product);
                       type="text"
                       className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                       onChange={(e) => setAddress(e.target.value.trim())}
+                    value={address}
                       required
                       maxLength="12"
                     />
@@ -198,7 +266,8 @@ console.log(product);
                 </div>
               </div>
               <button
-              onClick={createOrder}
+              // onClick={createOrder}
+              onClick={paystackpay}
                 type="submit"
                 className="inline-block w-64 rounded-3xl h-12 mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 "
               >

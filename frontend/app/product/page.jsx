@@ -86,10 +86,6 @@ export default function ProductUpdate() {
     }
   };
 
-  // console.log("mobile number", mobileNumber);
-  //   console.log("password", password);
-  //   console.log("confirmPassword", confirmPassword);
-
   return (
     <>
       <div className="wrapper flex w-full bg-blue-5 h-screen">
