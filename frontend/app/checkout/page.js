@@ -267,6 +267,7 @@ console.log(product);
               </div>
               <button
               // onClick={createOrder}
+              //this
               onClick={paystackpay}
                 type="submit"
                 className="inline-block w-64 rounded-3xl h-12 mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 "
