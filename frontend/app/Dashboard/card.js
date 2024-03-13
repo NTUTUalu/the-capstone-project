@@ -18,13 +18,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
           }),
       });
       refreshOrders()
-      if (res.ok) {
-          console.log(res.json());
-         //execute if user fails
-          
-      } else {
-          console.log("user registration failed.");
-      }
+     
     } catch (error) {
       console.log("error during registration: ", error);
     }
@@ -47,13 +41,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
       });
       refreshOrders()
       toast.success("Order Declined!");
-      if (res.ok) {
-          console.log(res.json());
-       
-          
-      } else {
-          console.log("user registration failed.");
-      }
+  
     } catch (error) {
       console.log("error during registration: ", error);
     }
@@ -76,13 +64,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
           }),
       });
       refreshOrders()
-      if (res.ok) {
-          console.log(res.json());
-       
-          
-      } else {
-          console.log("user registration failed.");
-      }
+    
     } catch (error) {
       console.log("error during registration: ", error);
     }
@@ -105,13 +87,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
       });
       refreshOrders()
 
-      if (res.ok) {
-          console.log(res.json());
-       
-          
-      } else {
-          console.log("user registration failed.");
-      }
+    
     } catch (error) {
       console.log("error during registration: ", error);
     }
@@ -134,13 +110,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
       });
       refreshOrders()
       toast.success("Order Successful!");
-      if (res.ok) {
-          console.log(res.json());
-       
-          
-      } else {
-          console.log("user registration failed.");
-      }
+     
     } catch (error) {
       console.log("error during registration: ", error);
     }

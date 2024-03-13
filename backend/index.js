@@ -525,12 +525,16 @@ app.post("/orders/update/:orderId", verifyToken, async (request, response) => {
 
     //MESSAGING api
     const msg = {
-      to: request.body.clientName,
+      to: updateOrder.clientEmail,
       //we have to find the email of the supplier from the DB
-      from: 'enter supplier ID',
-      subject: `Order status: ${request.body.status}`,
+      from: {
+        email: "motlokoasekonyela100@gmail.com",
+        name: "PoultryPlus",
+
+      },
+      subject: `Your order has been updated to status: ${request.body.status}`,
       text: `Hi, your order status from the supplier is in ${request.body.status} status`,
-      html: `Thank you for trusting us!`,
+     replyTo: "motlokoasekonyela100@gmail.com"
     };
 
     sgMail
@@ -540,7 +544,7 @@ app.post("/orders/update/:orderId", verifyToken, async (request, response) => {
         console.log(response[0].headers);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error.response.data);
       });
 
     return response.status(200).json(updateOrder);
