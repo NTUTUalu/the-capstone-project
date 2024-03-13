@@ -1,4 +1,5 @@
 import {BASE_API_URL} from "../../constants"
+import toast, { Toaster } from "react-hot-toast";
 
 function OrderComponent({ clientAddress, clientEmail, productName, clientName, totalAmount,orderId, orderStatus, refreshOrders }) {
   const handleAccept = async (e) => {
@@ -45,6 +46,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
           }),
       });
       refreshOrders()
+      toast.success("Order Declined!");
       if (res.ok) {
           console.log(res.json());
        
@@ -102,6 +104,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
           }),
       });
       refreshOrders()
+
       if (res.ok) {
           console.log(res.json());
        
@@ -130,6 +133,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
           }),
       });
       refreshOrders()
+      toast.success("Order Successful!");
       if (res.ok) {
           console.log(res.json());
        
@@ -148,8 +152,8 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
   return (
     <div className="transition-opacity duration-150 ease-linear" id="tabs-profile03" role="tabpanel" aria-labelledby="tabs-profile-tab03">
       <div className="h-full w-full">
-       
-        <div className={`${orderStatus === "remove order" ? 'hidden' : ''} grid grid-cols-1 gap-8 w-full mt-8 justify-items-center mx-20 rounded-3xl min-w-72 max-w-xl bg-yellow-900 p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.7),0_10px_20px_-2px_rgba(0,0,0,0.4)]dark:bg-neutral-7`}>
+      <Toaster position="top-center" reverseOrder={false} />
+        <div className={`${ (orderStatus === "remove order" || orderStatus === "declined") ? 'hidden' : ''} grid grid-cols-1 gap-8 w-full mt-8 justify-items-center mx-20 rounded-3xl min-w-72 max-w-xl bg-yellow-900 p-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.7),0_10px_20px_-2px_rgba(0,0,0,0.4)]dark:bg-neutral-7`}>
           <form className="w-fit grid grid-cols-1 grid-rows-1 items-center justify-items-center gap-4 bg-pink-3">
             <div className="grid grid-cols-2 grid-row-1 gap-4 p-5 bg-yellow-0 w-full h-60 rounded-3xl border border-white">
               <div className="flex flex-col tracking-wide p-4 bg-pink-1 border-r-2 border-white">

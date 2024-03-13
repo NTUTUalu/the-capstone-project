@@ -117,7 +117,7 @@ export default function Checkout() {
           console.log(json)
           setTimeout(() => {
             router.push("/success"); // Navigate to the success page after the toast disappears
-          }, 3000); 
+          }, 2000); 
         })
         .catch((err) => {
           console.log(err);
