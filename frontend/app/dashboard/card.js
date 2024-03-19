@@ -5,6 +5,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
   const handleAccept = async (e) => {
     e.preventDefault();
     // Handle accept logic
+    //comment
     
     try {
       const res = await fetch(`${BASE_API_URL}/orders/update/`+ orderId, {
