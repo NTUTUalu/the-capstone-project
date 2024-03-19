@@ -524,28 +524,31 @@ app.post("/orders/update/:orderId", verifyToken, async (request, response) => {
     );
 
     //MESSAGING api
-    const msg = {
-      to: updateOrder.clientEmail,
-      //we have to find the email of the supplier from the DB
-      from: {
-        email: "motlokoasekonyela100@gmail.com",
-        name: "PoultryPlus",
-
-      },
-      subject: `Your order has been updated to status: ${request.body.status}`,
-      text: `Hi, your order status from the supplier is in ${request.body.status} status`,
-     replyTo: "motlokoasekonyela100@gmail.com"
-    };
-
-    sgMail
-      .send(msg)
-      .then((response) => {
-        console.log(response[0].statusCode);
-        console.log(response[0].headers);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    if (request.body.status !== "remove order"){
+      //MESSAGING api
+      const msg = {
+       to: updateOrder.clientEmail,
+       //we have to find the email of the supplier from the DB
+       from: {
+         email: "motlokoasekonyela100@gmail.com",
+         name: "PoultryPlus",
+ 
+       },
+       subject: `Your order has been updated to status: ${request.body.status}`,
+       text: `Hi, your order status from the supplier is in ${request.body.status} status`,
+      replyTo: "motlokoasekonyela100@gmail.com"
+     };
+ 
+     sgMail
+       .send(msg)
+       .then((response) => {
+         console.log(response[0].statusCode);
+         console.log(response[0].headers);
+       })
+       .catch((error) => {
+         console.log(error.response.data);
+       });
+    }
 
     return response.status(200).json(updateOrder);
   } catch (error) {
