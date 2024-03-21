@@ -54,7 +54,7 @@ function OrderComponent({ clientAddress, clientEmail, productName, clientName, t
     // Handle decline logic
 
     try {
-      const res = await fetch(`${BASE_API_URL}/orders/update/`+ orderId, {
+      const res = await fetch(`${BASE_API_URL}/orders/update/${orderId}`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",

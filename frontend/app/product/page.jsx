@@ -22,7 +22,7 @@ export default function ProductUpdate() {
     if (error) {
       const timeoutId = setTimeout(() => {
         setError("");
-      }, 6000);
+      }, 3000);
 
       return () => clearTimeout(timeoutId); // Cleanup function
     }

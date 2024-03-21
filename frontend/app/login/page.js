@@ -41,12 +41,12 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
+    // if (password.length < 8 ) {
+    //   setError("password should be atleast 8 characters");
 
-    if (!mobileNumber || !password) {
-      setError("All fields must be filled!");
-
-      return;
-    }
+    //   return;
+    // }
 
     if (isNaN(mobileNumber)) {
       setError("Mobile number should have digits only!");
@@ -54,11 +54,11 @@ export default function Login() {
       return;
     }
 
-    // if (mobileNumber.length !== 10) {
-    //   setError("Your Rwandan number should be 9 digits long");
+    if (mobileNumber.length !== 10) {
+      setError("Your Rwandan number should be 10 digits long");
 
-    //   return;
-    // }
+      return;
+    }
 
     try {
       fetch(`${BASE_API_URL}/login`, {

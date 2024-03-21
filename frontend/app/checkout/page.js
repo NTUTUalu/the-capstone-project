@@ -50,7 +50,7 @@ export default function Checkout() {
   };
 
   
-
+ 
   
 
   // you can call this function anything
@@ -61,7 +61,7 @@ export default function Checkout() {
     if (error) {
       const timeoutId = setTimeout(() => {
         setError("");
-      }, 6000);
+      }, 3000);
 
       return () => clearTimeout(timeoutId); // Cleanup function
     }
@@ -86,9 +86,7 @@ export default function Checkout() {
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
-          setAddress("");
-    setEmail("");
-    setName("");
+        
           toast.success("order placed successfully!")
             router.push("/success"); // Navigate to the success page after the toast disappears
          
@@ -165,6 +163,7 @@ export default function Checkout() {
                   //this
                   onClick={(e) => {
                     e.preventDefault()
+                   
                     initializePayment(successPayment, onClose);
                   }}
                   type="submit"
@@ -253,12 +252,17 @@ export default function Checkout() {
                         onChange={(e) => setAddress(e.target.value.trim())}
                         value={address}
                         required
-                        maxLength="12"
+                        maxLength="42"
                       />
                       <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-white">
                         Address
                       </label>
                     </div>
+                    {error && (
+                  <div className="bg-red-500 flex text-wrap text-white w-full max-w-60 tracking-wider text-xs py-1 px-3 rounded-md mt-2">
+                    {error}
+                  </div>
+                )}
                   </div>
                 </div>
                <Paystack/>

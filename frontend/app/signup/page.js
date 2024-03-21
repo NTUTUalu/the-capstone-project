@@ -19,12 +19,7 @@ export default function SignUp() {
 
   //we will use router to go to another page after successful signup
   const router = useRouter();
-  // var spaceCount = (name.match(/ /g) || []).length;
-
-  // if (spaceCount > 1) {
-  //     nameError.innerHTML = "Include only first and last name";
-  //     return false;
-  // }
+  
 
   useEffect(() => {
     //check the local storage for token
@@ -45,7 +40,7 @@ export default function SignUp() {
     if (error) {
       const timeoutId = setTimeout(() => {
         setError("");
-      }, 6000);
+      }, 3000);
 
       return () => clearTimeout(timeoutId); // Cleanup function
     }
@@ -67,10 +62,17 @@ export default function SignUp() {
     }
 
     if (mobileNumber.length > 10) {
-      setError("Your Rwandan number should be 9 characters long");
+      setError("Your Rwandan number should be 10 characters long");
 
       return;
     }
+
+    var spaceCount = (name.match(/ /g) || []).length;
+
+if (spaceCount !== 1) {
+    setError("Please enter your first and last name separated by a single space");
+    return false;
+}
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
@@ -78,8 +80,14 @@ export default function SignUp() {
       return;
     }
 
-    if (mobileNumber.length < 9 && mobileNumber.length > 7) {
-      setError("Enter full Rwandan Number");
+    if (mobileNumber.length !== 10) {
+      setError("Your Rwandan number should be 10 digits long");
+
+      return;
+    }
+
+    if (password.length < 8 ) {
+      setError("password should be atleast 8 characters");
 
       return;
     }
@@ -138,9 +146,9 @@ export default function SignUp() {
                   <input
                     type="text"
                     className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value.trim())}
                     required
-                    maxLength="35"
+                    maxLength="30"
                   />
                   <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal  tracking-wider opacity-40 transition-all duration-200 ease-out -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
                     Names
@@ -151,7 +159,7 @@ export default function SignUp() {
                     type="text"
                     className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="mobileNumber"
-                    onChange={(e) => setMobileNumber(e.target.value)}
+                    onChange={(e) => setMobileNumber(e.target.value.trim())}
                     required
                     maxLength="12"
                   />
@@ -165,8 +173,8 @@ export default function SignUp() {
                     type="text"
                     className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     id="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    maxLength="15"
+                    onChange={(e) => setPassword(e.target.value.trim())}
+                    maxLength="35"
                   />
                   <label className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white font-normal text-sm tracking-wider opacity-40 transition-all duration-200 ease-out  -translate-y-[0.9rem] peer-focus:scale-[0.9]  peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-white">
                     Password

@@ -301,22 +301,6 @@ export default function RegisterInterest() {
                   </div>
                 </div>
 
-                {/* <select
-                  value={bankName}
-                  onChange={(e) => setBankName(e.target.value.trim())}
-                  default=""
-                  className=" flex mb-6 p-1  w-56 bg-slate-200 opacity-40 text-sm ml-3 rounded-md"
-                >
-                  <option value="">Select Bank Name</option>
-
-                  <option value="Equity">Equity</option>
-                  <option value="I & M">I & M </option>
-                  <option value="Bank of Kigali">Bank of Kigali</option>
-                  <option value="KCB">KCB</option>
-                  <option value="Eco Bank">Eco Bank</option>
-                  <option value="Access Bank">Access Bank</option>
-                </select> */}
-
                 <div className="relative mb-6 w-60 text-sm">
                   <input
                     type="text"
@@ -337,15 +321,8 @@ export default function RegisterInterest() {
                 >
                   <option value="">Select Location</option>
 
-                  <option value="Kigali">Kigali </option>
-                  <option value="Nyagatare">Nyagatare </option>
-                  <option value="Bugesera">Bugesera</option>
-                  <option value="Kibuye">Kibuye</option>
-                  <option value="Nyarugenge">Nyarugenge</option>
-                  <option value="Ngoma">Ngoma</option>
-                  <option value="Eastern Province">Eastern Province</option>
-                  <option value="Southern Province">Southern Province</option>
-                  <option value="Western Province">Western Province</option>
+                  <option value="Gasabo">Gasabo </option>
+                  <option value="Nyarugenge">Nyarugenge </option>
                   <option value="Kicukiro">Kicukiro</option>
                 </select>
                 <button

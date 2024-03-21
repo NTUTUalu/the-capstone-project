@@ -440,17 +440,11 @@ useEffect(() => {
                   onChange={(e) => setDeliveryProvince(e.target.value)}
                   className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm rounded-md"
                 >
-                  <option value="">Delivery Provinces</option>
-                  <option value="Kigali">Kigali </option>
-                  <option value="Nyagatare">Nyagatare </option>
-                  <option value="Bugesera">Bugesera</option>
-                  <option value="Kibuye">Kibuye</option>
-                  <option value="Nyarugenge">Nyarugenge</option>
-                  <option value="Ngoma">Ngoma</option>
-                  <option value="Eastern Province">Eastern Province</option>
-                  <option value="Southern Province">Southern Province</option>
-                  <option value="Western Province">Western Province</option>
+                  <option value="">Delivery Districts</option>
+                  <option value="Gasabo">Gasabo </option>
+                  <option value="Nyarugenge">Nyarugenge </option>
                   <option value="Kicukiro">Kicukiro</option>
+                  
                 </select>
                 <select
                   value={transportType}
