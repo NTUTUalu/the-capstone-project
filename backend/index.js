@@ -238,9 +238,9 @@ app.post("/become-transporter", verifyToken, async (request, response) => {
 //FETCHING ALL TRANSPORTERS
 app.get("/get-transporters", async (request, response) => {
   try {
-    const transporters = await Transport.find();
+    const transporters = await Transport.find().populate('userId', 'name mobileNumber');
 
-    return response.status(201).json(transporters);
+    return response.status(200).json(transporters);
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });

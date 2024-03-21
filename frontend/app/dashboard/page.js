@@ -18,6 +18,7 @@ export default function Dashboard2() {
   const [availabilityStatus, setAvailabilityStatus] = useState("");
   const [error, setError] = useState("");
   const [transporters, setTransporters] = useState([]);
+  const [userDataMap, setUserDataMap] = useState({});
 
   const router = useRouter();
 
@@ -273,6 +274,7 @@ useEffect(() => {
   }, []);
 
 
+
   return (
     <>
       <div className="wrapper flex w-full bg-pink-4 min-h-screen ">
@@ -520,15 +522,16 @@ useEffect(() => {
                       /> */}
                         {transporters.map((transporter) => (
         <TransporterCard
-          key={transporter._id} // Assuming each transporter has a unique identifier
-          names={transporter.names} // Assuming names is a property of each transporter
-          mobileNumber={transporter.mobileNumber} // Assuming mobileNumber is a property of each transporter
-          transportType={transporter.transportType} // Assuming transportType is a property of each transporter
-          availabilityStatus={transporter.availabilityStatus} // Assuming availabilityStatus is a property of each transporter
-          deliveryProvince={transporter.deliveryProvince} // Assuming deliveryProvince is a property of each transporter
-          transporterId={transporter._id} // Assuming _id is the unique identifier of each transporter
+          key={transporter?._id} // Assuming each transporter has a unique identifier
+          names={transporter.userId?.name} // Assuming names is a property of each transporter
+          mobileNumber={transporter.userId?.mobileNumber} // Assuming mobileNumber is a property of each transporter
+          transportType={transporter?.transportType} // Assuming transportType is a property of each transporter
+          availabilityStatus={transporter?.availabilityStatus} // Assuming availabilityStatus is a property of each transporter
+          deliveryProvince={transporter?.deliveryProvince} // Assuming deliveryProvince is a property of each transporter
+          transporterId={transporter?._id} // Assuming _id is the unique identifier of each transporter
         />
       ))}
+
                     </div>
                   </div>
                 </div>
