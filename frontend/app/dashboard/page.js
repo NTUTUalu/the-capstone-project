@@ -8,10 +8,16 @@ import Card from "./card";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {BASE_API_URL} from "../../constants"
+import TransporterCard from "./transporterCard"
 
 export default function Dashboard2() {
   const [order, setOrder] = useState([]);
   const [activeTab, setActiveTab] = useState("");
+  const [deliveryProvince, setDeliveryProvince] = useState("");
+  const [transportType, setTransportType] = useState("");
+  const [availabilityStatus, setAvailabilityStatus] = useState("");
+  const [error, setError] = useState("");
+  const [transporters, setTransporters] = useState([]);
 
   const router = useRouter();
 
@@ -156,6 +162,117 @@ export default function Dashboard2() {
     fetchOrders();
   }, []); // Empty dependency array to run the effect only once
 
+
+//using useEffect to display error for limited time
+useEffect(() => {
+  if (error) {
+    const timeoutId = setTimeout(() => {
+      setError("");
+    }, 2000);
+
+    return () => clearTimeout(timeoutId); // Cleanup function
+  }
+}, [error]);
+
+  //using useEffect to display error for limited time
+  const fetchTransporterData = async () => {
+    try {
+      const transporterId = localStorage.getItem("transporterId");
+      if (!transporterId) return;
+  
+      const response = await fetch(`${BASE_API_URL}/transporter/${transporterId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+  
+      if (!response.ok) {
+        const errorMessage = await response.text(); // Extract error message from response
+        throw new Error(`Failed to fetch transporter data: ${errorMessage}`);
+      }
+  
+      const data = await response.json();
+  
+      // Set the transporter's data to state variables
+      setDeliveryProvince(data.deliveryProvince);
+      setTransportType(data.transportType);
+      setAvailabilityStatus(data.availabilityStatus);
+    } catch (error) {
+      console.error("Error fetching transporter data:", error);
+    }
+  };
+  
+ 
+
+  // Modify the handleSubmit function to update the transporter's data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    // Check if all required fields are filled
+    if (!deliveryProvince || !transportType || !availabilityStatus) {
+      setError("One of the drop-down options is not selected!");
+      return;
+    }
+  
+    try {
+      const transporterId = localStorage.getItem("transporterId");
+      const response = await fetch(`${BASE_API_URL}/transporter/update/${transporterId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          deliveryProvince,
+          transportType,
+          availabilityStatus,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to update transporter data");
+      }
+  
+      const json = await response.json();
+      console.log(json);
+  
+      // Reset the form and show success message
+      const form = e.target;
+      form.reset();
+      toast.success("Update successful!");
+      
+    } catch (error) {
+      console.error("Error updating transporter data:", error);
+      // Handle the error gracefully, e.g., display an error message to the user
+    }
+  };
+
+  useEffect(() => {
+    const fetchTransporters = async () => {
+      try {
+        const response = await fetch(`${BASE_API_URL}/get-transporters`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch transporters");
+        }
+
+        const data = await response.json();
+        setTransporters(data);
+      } catch (error) {
+        console.error("Error fetching transporters:", error);
+      }
+    };
+
+    fetchTransporters();
+  }, []);
+
+
   return (
     <>
       <div className="wrapper flex w-full bg-pink-4 min-h-screen ">
@@ -299,7 +416,83 @@ export default function Dashboard2() {
                     <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">
                       Transporter Profile
                     </div>
-                    <p>sfsdfdsfdsssssssssssssssssssssssssssssssssssssdfsddfsfsfsdfsf</p>
+                  
+                    <div className=" middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
+            <Toaster position="top-center" reverseOrder={false} />
+            <div className=" block w-80 h-fit rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 my-10 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
+              <form
+                className="flex flex-col  "
+                autoComplete="off"
+                onSubmit={handleSubmit}
+              >
+                <h3 className="w-full bg-gray-3 text-center mb-6 font-semibold tracking-wide text-white text-2xl">
+                  Update Transport
+                </h3>
+
+                <p className="text-sm text-left mb-8 text-slate-200 tracking-wider mt-4 ">
+                  Provide transport information below:
+                </p>
+
+                <select
+                  value={deliveryProvince}
+                  onChange={(e) => setDeliveryProvince(e.target.value)}
+                  className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm rounded-md"
+                >
+                  <option value="">Delivery Provinces</option>
+                  <option value="Kigali">Kigali </option>
+                  <option value="Nyagatare">Nyagatare </option>
+                  <option value="Bugesera">Bugesera</option>
+                  <option value="Kibuye">Kibuye</option>
+                  <option value="Nyarugenge">Nyarugenge</option>
+                  <option value="Ngoma">Ngoma</option>
+                  <option value="Eastern Province">Eastern Province</option>
+                  <option value="Southern Province">Southern Province</option>
+                  <option value="Western Province">Western Province</option>
+                  <option value="Kicukiro">Kicukiro</option>
+                </select>
+                <select
+                  value={transportType}
+                  onChange={(e) => setTransportType(e.target.value)}
+                 
+                  className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 text-sm  rounded-md"
+                >
+                  <option value="">Transport Type</option>
+
+                  <option value="Tuk-Tuk">Tuk-Tuk</option>
+                  <option value="Motor">Motor </option>
+                  <option value="Pick-up Truck">Pick-up Truck</option>
+                </select>
+
+                <select
+                  value={availabilityStatus}
+                 
+                  onChange={(e) => setAvailabilityStatus(e.target.value)}
+                  placeholder="delivery status"
+                  className=" flex mb-6 p-1  w-60 bg-slate-200 opacity-40 rounded-md text-sm"
+                >
+                  <option value="">Availability Status</option>
+
+                  <option value="Available">Available</option>
+                  <option value="Unavailable">Unavailable</option>
+                </select>
+                <button
+                  type="submit"
+                  className="inline-block w-full rounded-3xl mb-2 bg-amber-400 px-6 pb-2 pt-2.5 text-sm tracking-wider uppercase leading-normal text-yellow-800 font-semibold transition duration-150 ease-in-out hover:bg-amber-400 mx-auto"
+                >
+                  Update
+                </button>
+                {error && (
+                  <div className="bg-red-500 flex text-wrap text-white w-full max-w-80 tracking-wider text-xs py-1 px-3 rounded-md mt-2">
+                    {error}
+                  </div>
+                )}
+
+                <div className="mb-6 flex items-center justify-between">
+               
+                </div>
+              </form>
+            </div>
+          </div>
                   </div>
                 </div>
               )}
@@ -316,15 +509,26 @@ export default function Dashboard2() {
                       Find Transport
                     </div>
                     <div className=" bg-amber-8 flex flex-col w-full px-20">
-                      <h1 className="w-full bg-blue-3 text-center my-8 text-lg tracking-wide font-semibold">
+                      <h1 className="w-full bg-blue-3 text-center my-2 text-lg tracking-wide font-semibold">
                         Find Suitable Transportation
                       </h1>
-                      <Table
+                      {/* <Table
                         className="w-full"
                         columns={columns}
                         dataSource={data}
                         onChange={onChange}
-                      />
+                      /> */}
+                        {transporters.map((transporter) => (
+        <TransporterCard
+          key={transporter._id} // Assuming each transporter has a unique identifier
+          names={transporter.names} // Assuming names is a property of each transporter
+          mobileNumber={transporter.mobileNumber} // Assuming mobileNumber is a property of each transporter
+          transportType={transporter.transportType} // Assuming transportType is a property of each transporter
+          availabilityStatus={transporter.availabilityStatus} // Assuming availabilityStatus is a property of each transporter
+          deliveryProvince={transporter.deliveryProvince} // Assuming deliveryProvince is a property of each transporter
+          transporterId={transporter._id} // Assuming _id is the unique identifier of each transporter
+        />
+      ))}
                     </div>
                   </div>
                 </div>
