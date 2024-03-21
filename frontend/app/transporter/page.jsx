@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
 import OnboardingFooter from "../components/second-Footer/second-Footer";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {BASE_API_URL} from "../../constants"
+import { BASE_API_URL } from "../../constants";
 
 export default function MotorSignup() {
- 
   const [deliveryProvince, setDeliveryProvince] = useState("");
   const [transportType, setTransportType] = useState("");
   const [availabilityStatus, setAvailabilityStatus] = useState("");
@@ -30,49 +29,44 @@ export default function MotorSignup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     if (!deliveryProvince || !transportType || !availabilityStatus) {
       setError("One of the drop-down options is not selected!");
 
       return;
     }
 
-
-
     try {
       fetch(`${BASE_API_URL}/become-transporter`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer "+ localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify({
-       
           deliveryProvince,
           transportType,
           availabilityStatus,
         }),
-      }).then((response) => response.json())
-      .then((json) => {
-        console.log(json)
-        if (json) {
-          const form = e.target;
+      })
+        .then((response) => response.json())
+        .then((json) => {
           console.log(json);
-          localStorage.setItem("transporterId", json._id);
-          form.reset();
-          toast.success("Registration successful!");
+          if (json) {
+            const form = e.target;
+            console.log(json);
+            localStorage.setItem("transporterId", json._id);
+            form.reset();
+            toast.success("Registration successful!");
             setTimeout(() => {
               router.push("/success-register"); // Navigate to the success page after the toast disappears
-            }, 3000); 
-          
-        } else {
-          console.log("user registration failed.");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-     
+            }, 3000);
+          } else {
+            console.log("user registration failed.");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
       console.log("error during registration: ", error);
     }
@@ -87,10 +81,7 @@ export default function MotorSignup() {
       <div className="wrapper flex w-full bg-blue-5 h-screen">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
-          <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+            <Toaster position="top-center" reverseOrder={false} />
             <div className="block w-80 h-fit rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 my-10 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">
               <form
                 className="flex flex-col  "
@@ -100,10 +91,10 @@ export default function MotorSignup() {
                 <h3 className="w-full bg-gray-3 text-center mb-6 font-semibold tracking-wide text-white text-2xl">
                   Register Transport
                 </h3>
-                
+
                 <p className="text-sm text-left mb-8 text-slate-200 tracking-wider mt-4 ">
-                    Provide transport information below:                   
-                  </p>
+                  Provide transport information below:
+                </p>
 
                 <select
                   value={deliveryProvince}

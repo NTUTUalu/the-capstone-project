@@ -89,7 +89,7 @@ export default function Checkout() {
           setAddress("");
     setEmail("");
     setName("");
-          toast.success("order paced successfully!")
+          toast.success("order placed successfully!")
             router.push("/success"); // Navigate to the success page after the toast disappears
          
         })

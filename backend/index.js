@@ -188,6 +188,7 @@ const createPaystackAccount = async (body) => {
   }
 };
 
+//get supplier
 app.get("/get-suppliers", async (request, response) => {
   try {
     const suppliers = await Supplier.find();
@@ -233,6 +234,57 @@ app.post("/become-transporter", verifyToken, async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+//FETCHING ALL TRANSPORTERS
+app.get("/get-transporters", async (request, response) => {
+  try {
+    const transporters = await Transport.find();
+
+    return response.status(201).json(transporters);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+//updating profiles for transporters
+app.post(
+  "/transporter/update/:transporterId",
+  verifyToken,
+  async (request, response) => {
+    try {
+      const { transporterId } = request.params; // Retrieve transporterId from request params
+      const { deliveryProvince, transportType, availabilityStatus } = request.body; // Retrieve updated data from request body
+
+      // Define the updated data object
+      const updatedData = {
+        deliveryProvince,
+        transportType,
+        availabilityStatus,
+        // Add other fields here
+      };
+
+      // Assuming transporterId is the unique identifier for transporters
+      const result = await Transport.findOneAndUpdate(
+        { _id: transporterId }, // Use _id instead of userId
+        updatedData,
+        { new: true }
+      );
+
+      if (!result) {
+        return response.status(404).json({ message: "Transporter not found" });
+      }
+
+      return response.status(200).send({
+        message: "Transporter updated successfully",
+        updatedTransporter: result,
+      });
+    } catch (error) {
+      console.log(error.message);
+      response.status(500).send({ message: error.message });
+    }
+  }
+);
 
 //create product
 app.post("/CreateProduct", async (request, response) => {
@@ -524,30 +576,29 @@ app.post("/orders/update/:orderId", verifyToken, async (request, response) => {
     );
 
     //MESSAGING api
-    if (request.body.status !== "remove order"){
+    if (request.body.status !== "remove order") {
       //MESSAGING api
       const msg = {
-       to: updateOrder.clientEmail,
-       //we have to find the email of the supplier from the DB
-       from: {
-         email: "motlokoasekonyela100@gmail.com",
-         name: "PoultryPlus",
- 
-       },
-       subject: `Your order has been updated to status: ${request.body.status}`,
-       text: `Hi, your order status from the supplier is in ${request.body.status} status`,
-      replyTo: "motlokoasekonyela100@gmail.com"
-     };
- 
-     sgMail
-       .send(msg)
-       .then((response) => {
-         console.log(response[0].statusCode);
-         console.log(response[0].headers);
-       })
-       .catch((error) => {
-         console.log(error.response.data);
-       });
+        to: updateOrder.clientEmail,
+        //we have to find the email of the supplier from the DB
+        from: {
+          email: "motlokoasekonyela100@gmail.com",
+          name: "PoultryPlus",
+        },
+        subject: `Your order has been updated to status: ${request.body.status}`,
+        text: `Hi, your order status from the supplier is in ${request.body.status} status`,
+        replyTo: "motlokoasekonyela100@gmail.com",
+      };
+
+      sgMail
+        .send(msg)
+        .then((response) => {
+          console.log(response[0].statusCode);
+          console.log(response[0].headers);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
     }
 
     return response.status(200).json(updateOrder);
