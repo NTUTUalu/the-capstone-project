@@ -194,7 +194,7 @@ useEffect(() => {
       }
   
       const data = await response.json();
-  
+  console.log(data);
       // Set the transporter's data to state variables
       setDeliveryProvince(data.deliveryProvince);
       setTransportType(data.transportType);
@@ -203,6 +203,11 @@ useEffect(() => {
       console.error("Error fetching transporter data:", error);
     }
   };
+
+  useEffect(() => {
+    fetchTransporterData();
+  }, []); // Empty dependency array to run the effect only once
+
   
  
 

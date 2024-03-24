@@ -152,7 +152,8 @@ export default function Checkout() {
     }
   }, []);
 
-  const Paystack = () => {
+  const Paystack = (props) => {
+
     const initializePayment = usePaystackPayment(config);
     return (
       <div>
@@ -162,7 +163,12 @@ export default function Checkout() {
                   //this
                   onClick={(e) => {
                     e.preventDefault()
-                   
+                    if (!props.email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+                      //we are saying the first character must be an alphabet, there will be a space, then any character from A-z
+                      setError("  Invalid email!");
+                
+                      return;
+                    }
                     initializePayment(successPayment, onClose);
                   }}
                   type="submit"
@@ -264,7 +270,7 @@ export default function Checkout() {
                 )}
                   </div>
                 </div>
-               <Paystack/>
+               <Paystack email={email}/>
               </form>
             </div>
           </div>

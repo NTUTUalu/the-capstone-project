@@ -39,6 +39,13 @@ export default function RegisterInterest() {
 
       return;
     }
+
+    if (accountNumber.length < 8) {
+      setError("Account number should be atleast 8 digits!");
+
+      return;
+    }
+
     if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
       //we are saying the first character must be an alphabet, there will be a space, then any character from A-z
       setError("  Invalid email!");

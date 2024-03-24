@@ -250,6 +250,20 @@ app.get("/get-transporters", async (request, response) => {
   }
 });
 
+app.get("/transporter/:transporterId", async (request, response) => {
+  try {
+    const { transporterId } = request.params;
+    const transporters = await Transport.find({
+      _id: new mongoose.Types.ObjectId(transporterId),
+    });
+
+    return response.status(200).json(transporters[0]);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 //updating profiles for transporters
 app.post(
   "/transporter/update/:transporterId",

@@ -42,11 +42,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
    
-    // if (password.length < 8 ) {
-    //   setError("password should be atleast 8 characters");
-
-    //   return;
-    // }
+   
 
     if (isNaN(mobileNumber)) {
       setError("Mobile number should have digits only!");
@@ -126,7 +122,7 @@ export default function Login() {
 
                 <div className="relative mb-6 text-sm">
                   <input
-                    type="text"
+                    type="password"
                     className="peer block min-h-[auto] w-full rounded text-amber-500 border-0 bg-transparent px-3 pt-3 leading-[1.6] tracking-wider outline-none transition-all duration-200 border-b border-amber-500 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     onChange={(e) => setPassword(e.target.value.trim())}
                     maxLength="35"
