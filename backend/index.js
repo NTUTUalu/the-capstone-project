@@ -13,8 +13,9 @@ import cors from "cors";
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 import sgMail from "@sendgrid/mail";
-// sgMail.setApiKey(process.env.SENDGRID_API);
-sgMail.setApiKey("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");
+sgMail.setApiKey(process.env.SENDGRID_API);
+
+// sgMail.setApiKey("");
 
 // import "dotenv/config";
 // import 'dotenv';

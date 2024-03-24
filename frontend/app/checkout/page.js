@@ -6,7 +6,6 @@ import { BASE_API_URL } from "../../constants";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-
 import { usePaystackPayment } from "react-paystack";
 
 export default function Checkout() {
