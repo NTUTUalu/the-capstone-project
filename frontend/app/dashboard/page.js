@@ -282,7 +282,7 @@ useEffect(() => {
 
   return (
     <>
-      <div className="wrapper flex w-full bg-pink-4 min-h-screen ">
+      <div className="wrapper flex w-full bg-pink-4 min-h-screen animate-slide-in  ">
         <div className="left min-h-screen h-full w-48 bg-yellow-900 flex flex-col justify-between">
           <Toaster position="top-center" reverseOrder={false} />
           <div className=" h-full w-full flex flex-col pt-4 bg-pink-3">
@@ -413,7 +413,7 @@ useEffect(() => {
             <div className="my-2 bg-blue-4 px-4 h-full">
               {activeTab === "transporter" && (
                 <div
-                  className="h-full bg-green-4 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+                  className="h-full bg-green-4 transition-opacity duration-150 ease-linear data-[te-tab-active]:block fade-in"
                   id="tabs-home03"
                   role="tabpanel"
                   aria-labelledby="tabs-home-tab03"
@@ -499,7 +499,7 @@ useEffect(() => {
               )}
               {activeTab === "transport" && (
                 <div
-                  className="h-full bg-green-4 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+                  className="h-full bg-green-4 transition-opacity duration-150 ease-linear data-[te-tab-active]:block fade-in"
                   id="tabs-home03"
                   role="tabpanel"
                   aria-labelledby="tabs-home-tab03"
@@ -537,7 +537,7 @@ useEffect(() => {
               )}
               {activeTab === "opportunities" && (
                 <div
-                  className=" transition-opacity duration-150 ease-linear "
+                  className=" transition-opacity duration-150 ease-linear fade-in"
                   id="tabs-profile03"
                   role="tabpanel"
                   aria-labelledby="tabs-profile-tab03"
@@ -602,7 +602,7 @@ useEffect(() => {
               )}
               {activeTab === "orders" && (
                 <>
-                  <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider">
+                  <div className="h-fit w-full bg-pink-3 text-amber-500 font-semibold tracking-wider fade-in">
                     Orders
                   </div>
                   {order &&

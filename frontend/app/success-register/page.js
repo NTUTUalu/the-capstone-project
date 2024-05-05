@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Decision() {
   return (
     <>
-      <div className="wrapper flex w-full bg-blue-5 h-screen">
+      <div className="wrapper flex w-full bg-blue-5 h-screen fade-in">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full px-20 w-full bg-pink-8">
             <div className="w-fit flex justify-center items-center  h-96 bg-slate-3">

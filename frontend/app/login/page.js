@@ -99,7 +99,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="wrapper flex w-full bg-blue-5 h-screen">
+      <div className="wrapper flex w-full bg-blue-5 h-screen animate-slide-in">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
             <div className="block max-w-sm rounded-3xl min-w-72 bg-yellow-900 px-6 pt-3 pb-10 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-7">

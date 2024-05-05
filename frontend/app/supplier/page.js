@@ -134,7 +134,7 @@ export default function RegisterInterest() {
 
   return (
     <>
-      <div className="wrapper flex w-full bg-blue-5 min-h-screen">
+      <div className="wrapper flex w-full bg-blue-5 min-h-screen fade-in">
         <div className="right flex flex-col h-full bg-amber-2 bg-pink-6 w-full">
           <div className="middle flex justify-center items-center bg-amber-4 h-full  w-full bg-pink-8">
             <Toaster position="top-center" reverseOrder={false} />

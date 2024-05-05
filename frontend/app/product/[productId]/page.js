@@ -98,7 +98,7 @@ export default function Productdescription() {
     <>
       <Navigation />
       {product && (
-        <div className="flex flex-col w-full min-h-screen">
+        <div className="flex flex-col w-full min-h-screen fade-in">
           <div className="wrapper  flex w-full mt-10 h-fit px-20 pt-10 pb-10 bg max-md:px-10 max-md:h-fit max-md:my-40 max-sm:flex-col max-sm:px-1  max-sm:items-center">
             <div className="left flex flex-col  w-80   justify-center  max-md:justify-start max-md:mt-0 max-sm:w-4/6 mr-6">
               <div className="flex justify-center bg-pink- w-full h-full ">
